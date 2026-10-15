@@ -112,7 +112,7 @@ main{max-width:1280px;margin:0 auto}
 .flag img,.flag svg{width:100%;height:100%;display:block;object-fit:cover}
 .num{font-family:var(--display);font-weight:900;font-size:3.6cqw;line-height:1;color:var(--num);text-align:center;font-variant-numeric:tabular-nums}
 .info{min-width:0;line-height:1.12}
-.bname{font-family:var(--heavy);font-weight:900;font-size:1.95cqw;line-height:1.1;color:var(--c-name);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.01em}
+.bname{font-family:var(--heavy);font-weight:900;font-size:1.8cqw;line-height:1.05;color:var(--c-name);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
 .bmeta{font-family:var(--heavy);font-weight:700;font-size:1.3cqw;color:var(--c-meta)}
 .bdesc{font-family:var(--cond);font-weight:500;font-size:1.35cqw;line-height:1.1;color:var(--c-desc);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
@@ -121,6 +121,7 @@ main{max-width:1280px;margin:0 auto}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
 .hhtag.off{background:var(--gold);color:var(--ink)}
 .tap.empty .bname{color:var(--muted)}
+.info.two .bdesc{-webkit-line-clamp:1}
 .s-foot{display:flex;justify-content:space-between;gap:2cqw;font-family:var(--heavy);font-weight:700;font-size:1.05cqw;color:var(--muted);margin-top:.6cqw;letter-spacing:.02em}
 .s-foot .hl{color:var(--gold)}
 .screen-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
@@ -552,12 +553,11 @@ function renderScreen(){
   requestAnimationFrame(fitNames);
 }
 
-/* les noms trop longs rétrécissent jusqu'à tenir sur une ligne (taille minimale 1,25cqw) */
+/* tous les noms ont la même taille ; un nom trop long passe sur 2 lignes et sa description se limite alors à 1 ligne */
 function fitNames(){
-  const scr=document.getElementById("screen"),w=scr.clientWidth/100;if(!w)return;
-  scr.querySelectorAll(".bname").forEach(el=>{
-    let size=1.95;el.style.fontSize=size+"cqw";
-    while(el.scrollWidth>el.clientWidth+1&&size>1.25){size=+(size-.05).toFixed(2);el.style.fontSize=size+"cqw";}
+  document.querySelectorAll("#screen .bname").forEach(el=>{
+    const lh=parseFloat(getComputedStyle(el).lineHeight)||el.clientHeight;
+    el.parentElement.classList.toggle("two",el.scrollHeight>lh*1.5);
   });
 }
 addEventListener("resize",()=>requestAnimationFrame(fitNames));
