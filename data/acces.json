@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "login": "staff",
+      "salt": "e4hRb/Un+u3CpE9ZTm5kwA==",
+      "iter": 310000,
+      "check": {
+        "iv": "SnKC9weFOVMZmJAi",
+        "ct": "62iQObwURESf2t0/f7dy28bMtSQt98RgzMCJhg=="
+      },
+      "token": null
+    }
+  ]
+}

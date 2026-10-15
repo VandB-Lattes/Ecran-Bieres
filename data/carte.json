@@ -1,0 +1,162 @@
+{
+  "title": "Bières pression",
+  "subtitle": "Possibilité de prendre des crafts en bouteille",
+  "hhStart": "17:00",
+  "hhEnd": "19:00",
+  "taps": [
+    {
+      "name": "Paulaner Oktoberfest Bier",
+      "country": "DE",
+      "style": "Blonde",
+      "abv": 6,
+      "desc": "Notes maltées, miellées, touches herbacées",
+      "p33": 4.5,
+      "p50": 5.5,
+      "hh": true,
+      "hh33": 3.5,
+      "hh50": 4.5
+    },
+    {
+      "name": "Hacker-Pschorr Oktoberfest Bier",
+      "country": "DE",
+      "style": "Blonde",
+      "abv": 6,
+      "desc": "Arômes riches de malt, de caramel",
+      "p33": 4.5,
+      "p50": 5.5,
+      "hh": true,
+      "hh33": 3.5,
+      "hh50": 4.5
+    },
+    {
+      "name": "Delirium Tremens",
+      "country": "BE",
+      "style": "Triple",
+      "abv": 8.5,
+      "desc": "Puissante et chaleureuse, riche, épicée",
+      "p33": 6,
+      "p50": 9,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Le Coup de Cloche Blanche",
+      "country": "BE",
+      "style": "Blanche",
+      "abv": 5.4,
+      "desc": "Douce, onctueuse, saveurs d'agrumes, blé",
+      "p33": 4,
+      "p50": 5,
+      "hh": true,
+      "hh33": 3,
+      "hh50": 4
+    },
+    {
+      "name": "Vault City – Monsieur Froid",
+      "country": "SCT",
+      "style": "Modern Sour à la framboise",
+      "abv": 5,
+      "desc": "Sour douce et facile à boire, brassée pour les 25 ans de V and B",
+      "p33": 9,
+      "p50": 11,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Bush de Noël",
+      "country": "BE",
+      "style": "Brune",
+      "abv": 12,
+      "desc": "Onctueuse, peu amère : caramel, chocolat praliné et malt grillé",
+      "p33": 7,
+      "p50": 9,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Les Intenables – Mama Whipa",
+      "country": "FR",
+      "style": "White IPA",
+      "abv": 6,
+      "desc": "Touches de pamplemousse et de fruits exotiques",
+      "p33": 8,
+      "p50": 10,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Fauve – Mariage à Vegas",
+      "country": "FR",
+      "style": "Double NEIPA",
+      "abv": 8,
+      "desc": "Notes intenses de fruits tropicaux et d'agrumes",
+      "p33": 8,
+      "p50": 10,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Mont Hardi West Coast IPA",
+      "country": "FR",
+      "style": "IPA",
+      "abv": 5.5,
+      "desc": "Légère et désaltérante",
+      "p33": 6,
+      "p50": 8,
+      "hh": true,
+      "hh33": 5,
+      "hh50": 7
+    },
+    {
+      "name": "La Débauche – NEIPA",
+      "country": "FR",
+      "style": "NEIPA",
+      "abv": 6,
+      "desc": "Fruits tropicaux et pêche, tout en rondeur",
+      "p33": 5,
+      "p50": 7,
+      "hh": true,
+      "hh33": 4,
+      "hh50": 6
+    },
+    {
+      "name": "Chouffe Cherry",
+      "country": "BE",
+      "style": "Aromatisée",
+      "abv": 8,
+      "desc": "Douce, gourmande : cerise, caramel, légère acidité",
+      "p33": 6,
+      "p50": 8,
+      "hh": false,
+      "hh33": "",
+      "hh50": ""
+    },
+    {
+      "name": "Cidre – Dan Kelly's Draught Cider",
+      "country": "IE",
+      "style": "Cidre",
+      "abv": 4.5,
+      "desc": "Frais et rafraîchissant, savoir-faire artisanal irlandais",
+      "p33": 5,
+      "p50": 7,
+      "hh": true,
+      "hh33": 4,
+      "hh50": 6
+    }
+  ],
+  "hhDiscount": 1,
+  "hhDays": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    0
+  ]
+}
