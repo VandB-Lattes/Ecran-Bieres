@@ -22,6 +22,10 @@
   --orange:#e8582a;       /* orange V and B */
   --hh:#e8582a;           /* happy hour = orange */
   --ok:#3a8f8b;
+  --num:#e8582a;          /* couleurs réglables dans la Gestion : numéros, nom, style/degré, description */
+  --c-name:#ffffff;
+  --c-meta:#7cc8f0;
+  --c-desc:#f6c11e;
   --display:Alegreya, Georgia, serif;
   --heavy:Lato, "Segoe UI", Arial, sans-serif;
   --cond:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
@@ -79,12 +83,12 @@ main{max-width:1280px;margin:0 auto}
 @keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.6;transform:scale(1)}}
 @keyframes slide{to{background-position:28cqw 0}}
 
-.s-head{display:flex;align-items:center;justify-content:space-between;gap:2cqw;margin-bottom:1.2cqw}
-.s-left{display:flex;align-items:center;gap:2cqw;min-width:0}
-.logo{flex:none;width:10.5cqw;display:grid;justify-items:center;gap:.3cqw;transform:rotate(-2deg)}
+.s-head{display:flex;align-items:center;justify-content:space-between;gap:2cqw;margin-bottom:.6cqw}
+.s-left{display:flex;align-items:center;gap:1.4cqw;min-width:0}
+.logo{flex:none;width:6.8cqw;display:grid;justify-items:center;gap:.3cqw;transform:rotate(-2deg)}
 .logo img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 .14cqw var(--chalk)) drop-shadow(0 .4cqw .6cqw rgba(0,0,0,.5))}
-.logo small{white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:.8cqw;letter-spacing:.14em;color:var(--chalk)}
-.s-title{font-family:var(--heavy);font-weight:900;font-size:4.6cqw;line-height:.9;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;margin:0}
+.logo small{white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:.58cqw;letter-spacing:.14em;color:var(--chalk)}
+.s-title{font-family:var(--heavy);font-weight:900;font-size:2.9cqw;line-height:.9;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;margin:0}
 .s-right{text-align:right;display:grid;justify-items:end;gap:.4cqw}
 .s-sub{font-family:var(--heavy);font-weight:700;font-size:1.25cqw;color:var(--chalk);letter-spacing:.06em;text-transform:uppercase;max-width:40cqw}
 .hh-banner{display:inline-flex;align-items:center;gap:.8cqw;background:var(--orange);color:var(--chalk);font-family:var(--heavy);font-weight:900;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;padding:.5cqw 1.6cqw;clip-path:polygon(3% 0,100% 0,97% 100%,0 100%)}
@@ -96,6 +100,7 @@ main{max-width:1280px;margin:0 auto}
 .s-col{display:grid;grid-template-rows:auto repeat(6,1fr);min-height:0}
 .s-colhead{display:grid;grid-template-columns:1fr 7cqw 7cqw;gap:0 .9cqw;font-family:var(--heavy);font-weight:900;font-size:1.2cqw;color:var(--teal);letter-spacing:.08em;border-bottom:.15cqw solid var(--teal);padding-bottom:.3cqw}
 .s-colhead b{text-align:right}
+.s-colhead .hhcol{color:var(--orange);letter-spacing:.12em}
 .tap{display:grid;grid-template-columns:4.8cqw 3.2cqw 1fr 7cqw 7cqw;align-items:center;gap:0 .9cqw;border-bottom:1px solid rgba(251,238,221,.08);min-height:0}
 .tap:last-child{border-bottom:0}
 .wflag{display:flex;width:4.6cqw;aspect-ratio:3/2;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.5))}
@@ -105,12 +110,12 @@ main{max-width:1280px;margin:0 auto}
 @keyframes wave{0%,100%{transform:translateY(-.32cqw);filter:brightness(1.08)}50%{transform:translateY(.32cqw);filter:brightness(.78)}}
 .flag{width:3.4cqw;height:3.4cqw;border-radius:50%;overflow:hidden;background:#555}
 .flag img,.flag svg{width:100%;height:100%;display:block;object-fit:cover}
-.num{font-family:var(--display);font-weight:900;font-size:3.6cqw;line-height:1;color:var(--teal);text-align:center;font-variant-numeric:tabular-nums}
+.num{font-family:var(--display);font-weight:900;font-size:3.6cqw;line-height:1;color:var(--num);text-align:center;font-variant-numeric:tabular-nums}
 .info{min-width:0;line-height:1.12}
-.bname{font-family:var(--heavy);font-weight:900;font-size:1.55cqw;color:var(--chalk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.01em}
-.bmeta{font-family:var(--heavy);font-weight:700;font-size:1.2cqw;color:var(--teal-l)}
-.bdesc{font-family:var(--cond);font-weight:500;font-size:1.3cqw;color:var(--gold);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:1.75cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
+.bname{font-family:var(--heavy);font-weight:900;font-size:1.95cqw;line-height:1.1;color:var(--c-name);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.01em}
+.bmeta{font-family:var(--heavy);font-weight:700;font-size:1.3cqw;color:var(--c-meta)}
+.bdesc{font-family:var(--cond);font-weight:500;font-size:1.35cqw;line-height:1.1;color:var(--c-desc);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
 .tap.is-hh .price{color:var(--orange)}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
@@ -200,6 +205,7 @@ details.panel[open]>summary::after{content:" –"}
 .login p{margin:0;text-align:center}
 .login input{font-size:17px;padding:12px 14px}
 .login .btn{padding:12px 14px;font-size:17px}
+.pwrow{display:flex;gap:8px}.pwrow input{flex:1;min-width:0}.pwrow .btn{padding:0 14px;font-size:15px}
 .remember{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;cursor:pointer}
 .remember input{width:18px;height:18px;accent-color:var(--gold)}
 .err{color:var(--orange);font-weight:700;text-align:center;margin:0}
@@ -207,6 +213,19 @@ details.panel[open]>summary::after{content:" –"}
 .cat-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .cat-row .hint{flex:1;min-width:200px}
 .cat-row a{color:var(--gold)}
+.swatch{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.swatch[aria-pressed="true"]{border-color:var(--chalk);box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--chalk)}
+.colors{display:grid;gap:10px}
+.crow{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px 14px;align-items:center}
+.crow .lbl{margin:0}
+.cpick{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cprev{margin-left:8px;padding:4px 10px;border-radius:6px;background:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.cprev.num{font-family:var(--display);font-weight:900;font-size:28px;line-height:1}
+.cprev.name{font-family:var(--heavy);font-weight:900;text-transform:uppercase}
+.cprev.meta{font-family:var(--heavy);font-weight:700;font-size:14px}
+.cprev.desc{font-family:var(--cond);font-weight:500;font-size:15px}
+@media (max-width:520px){.crow{grid-template-columns:1fr}}
+input[type=color]{width:44px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--ink);cursor:pointer}
 @media (max-width:520px){.preset{grid-template-columns:1fr 1fr}.grow{grid-template-columns:26px minmax(0,1fr)}.grow select{grid-column:1/-1;width:100%}}
 @media (max-width:520px){.row.r3,.row.r4{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}}
 [hidden]{display:none!important}
@@ -248,7 +267,7 @@ body{margin:0}
       <h2>Espace staff</h2>
       <p class="hint">Connectez-vous pour gérer les tireuses.</p>
       <div class="field"><label for="lgUser">Identifiant</label><input type="text" id="lgUser" name="username" autocomplete="username" autocapitalize="none" required></div>
-      <div class="field"><label for="lgPass">Mot de passe</label><input type="password" id="lgPass" name="password" autocomplete="current-password" required></div>
+      <div class="field"><label for="lgPass">Mot de passe</label><div class="pwrow"><input type="password" id="lgPass" name="password" autocomplete="current-password" required><button type="button" class="btn" id="lgShow" aria-pressed="false">Afficher</button></div></div>
       <label class="remember" for="lgRemember"><input type="checkbox" id="lgRemember" checked>Rester connecté sur cet appareil</label>
       <p class="err" id="lgErr" hidden></p>
       <button class="btn primary" type="submit" id="lgBtn">Se connecter</button>
@@ -266,12 +285,14 @@ body{margin:0}
       <button class="btn" id="logoutBtn">Se déconnecter</button>
     </div>
     <div class="panel">
-      <h2>Textes de l'écran</h2>
+      <h2>Écran</h2>
       <div class="inline">
         <div class="field" style="flex:1 1 220px"><label for="setTitle">Titre (en haut à gauche)</label><input type="text" id="setTitle" maxlength="40"></div>
         <div class="field" style="flex:2 1 320px"><label for="setSub">Phrase en haut à droite</label><input type="text" id="setSub" maxlength="90" placeholder="Ex. : Possibilité de prendre des crafts en bouteille"></div>
       </div>
-      <p class="hint">Laissez la phrase vide pour ne rien afficher. Cliquez « Enregistrer et afficher » pour l'envoyer à la TV.</p>
+      <div class="colors" id="colors"></div>
+      <div class="inline"><button class="btn" id="resetColors" type="button">Couleurs par défaut</button></div>
+      <p class="hint">Laissez la phrase vide pour ne rien afficher. Cliquez « Enregistrer et afficher » pour envoyer les changements à la TV.</p>
     </div>
     <div class="panel">
       <h2>Rechercher une bière</h2>
@@ -463,8 +484,15 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const euro=v=>{if(v===""||v==null||isNaN(+v))return"";const n=+v;return(Number.isInteger(n)?n:n.toFixed(1).replace(".",","))+"€"};
 const toMin=t=>{const[h,m]=(t||"0:0").split(":").map(Number);return h*60+(m||0)};
 const fmtH=t=>{const[h,m]=(t||"").split(":");return m&&m!=="00"?`${+h}h${m}`:`${+h}h`};
+const COLOR_FIELDS=[
+  {k:"numColor",v:"--num",label:"Numéros de tireuse",def:"#e8582a",cls:"num",prev:"12"},
+  {k:"nameColor",v:"--c-name",label:"Nom de la bière",def:"#ffffff",cls:"name",prev:"Paulaner Oktoberfest"},
+  {k:"metaColor",v:"--c-meta",label:"Style et degré",def:"#7cc8f0",cls:"meta",prev:"Blonde, Alc. 6%"},
+  {k:"descColor",v:"--c-desc",label:"Description",def:"#f6c11e",cls:"desc",prev:"Notes maltées, miellées"},
+];
+const PALETTE=[["#ffffff","Blanc"],["#fbeedd","Crème"],["#f6c11e","Jaune"],["#e8582a","Orange"],["#d6336c","Framboise"],["#7cc8f0","Bleu ciel"],["#3a8f8b","Sarcelle"]];
 function normalize(d){
-  const o={title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],
+  const o={title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
     hhDiscount:d?.hhDiscount??1,presets:Array.isArray(d?.presets)&&d.presets.length?d.presets:clone(DEFAULT_PRESETS),taps:[]};
   for(let i=0;i<12;i++)o.taps.push({...blankTap(),...(d?.taps?.[i]||{})});
   return o;
@@ -509,13 +537,32 @@ function renderScreen(){
       <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
       <div class="price">${p(t.p33,t.hh33)}</div><div class="price">${p(t.p50,t.hh50)}</div></div>`;
   };
-  const col=a=>`<div class="s-col"><div class="s-colhead"><span></span><b>33CL</b><b>50CL</b></div>${a}</div>`;
-  const taps=cfg.taps.map(tapHTML);
+  const col=(a,label="")=>`<div class="s-col"><div class="s-colhead">${label?`<span class="hhcol">${label}</span>`:"<span></span>"}<b>33CL</b><b>50CL</b></div>${a}</div>`;
+  // pendant le happy hour, les bières en happy hour passent dans la colonne de gauche (numéros de tireuse conservés)
+  let order=cfg.taps.map((t,i)=>i);
+  const hhIdx=order.filter(i=>cfg.taps[i].hh&&cfg.taps[i].name);
+  if(active&&hhIdx.length)order=[...hhIdx,...order.filter(i=>!hhIdx.includes(i))];
+  const taps=order.map(i=>tapHTML(cfg.taps[i],i));
+  const leftLabel=active&&hhIdx.length?"HAPPY HOUR":"";
+  COLOR_FIELDS.forEach(f=>document.getElementById("screen").style.setProperty(f.v,cfg[f.k]));
   el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">${esc(cfg.title)}</h1></div>
     <div class="s-right">${active?`<div class="hh-banner">Happy hour <span>jusqu'à ${fmtH(cfg.hhEnd)}</span></div>`:(cfg.hhDays.length?`<div class="s-sub">Happy hour · ${fmtH(cfg.hhStart)} / ${fmtH(cfg.hhEnd)}</div>`:"")}${cfg.subtitle?`<div class="s-sub" style="font-weight:400;text-transform:none;letter-spacing:.01em;color:var(--muted)">${esc(cfg.subtitle)}</div>`:""}</div></div>
-    <div class="s-cols">${col(taps.slice(0,6).join(""))}${col(taps.slice(6).join(""))}</div>
+    <div class="s-cols">${col(taps.slice(0,6).join(""),leftLabel)}${col(taps.slice(6).join(""))}</div>
     <div class="s-foot"><span>${active?`<span class="hl">Prix happy hour en orange</span>`:(cfg.hhDays.length?`<span class="hl">Happy hour</span> ${hhText(cfg)} sur les bières signalées`:"")}</span><span>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</span></div>`;
+  requestAnimationFrame(fitNames);
 }
+
+/* les noms trop longs rétrécissent jusqu'à tenir sur une ligne (taille minimale 1,25cqw) */
+function fitNames(){
+  const scr=document.getElementById("screen"),w=scr.clientWidth/100;if(!w)return;
+  scr.querySelectorAll(".bname").forEach(el=>{
+    let size=1.95;el.style.fontSize=size+"cqw";
+    while(el.scrollWidth>el.clientWidth+1&&size>1.25){size=+(size-.05).toFixed(2);el.style.fontSize=size+"cqw";}
+  });
+}
+addEventListener("resize",()=>requestAnimationFrame(fitNames));
+document.addEventListener("fullscreenchange",()=>setTimeout(fitNames,100));
+document.fonts?.ready?.then(()=>fitNames());
 
 /* ===== Rendu gestion ===== */
 function hhCount(){return draft?draft.taps.filter(t=>t.hh).length:0}
@@ -538,11 +585,21 @@ function renderDays(){
   document.getElementById("hhDays").innerHTML=DAYS.map(([v,short,long])=>`<button type="button" class="chip${draft.hhDays.includes(v)?" on":""}" data-day="${v}" aria-pressed="${draft.hhDays.includes(v)}" aria-label="${long}">${short}</button>`).join("");
   document.getElementById("hhSummary").textContent=`Happy hour ${hhText(draft)}, sur ${hhCount()} bière${hhCount()>1?"s":""} (6 au maximum).`;
 }
+function renderColors(){
+  document.getElementById("colors").innerHTML=COLOR_FIELDS.map(f=>{
+    const c=String(draft[f.k]).toLowerCase();
+    return`<div class="crow" data-ck="${f.k}"><span class="lbl" id="cl-${f.k}">${f.label}</span>
+      <div class="cpick" role="group" aria-labelledby="cl-${f.k}">${PALETTE.map(([v,n])=>`<button type="button" class="swatch" style="background:${v}" data-col="${v}" aria-pressed="${v===c}" aria-label="${n}" title="${n}"></button>`).join("")}
+      <input type="color" value="${c}" aria-label="Autre couleur pour ${f.label.toLowerCase()}">
+      <span class="cprev ${f.cls}" style="color:${c}">${f.prev}</span></div></div>`;
+  }).join("");
+}
 function renderAdmin(){
   const host=document.getElementById("tapsHost");
   if(!draft){host.innerHTML=`<div class="empty-state"><h2>Chargement…</h2></div>`;return;}
   document.getElementById("setTitle").value=draft.title;
   document.getElementById("setSub").value=draft.subtitle;
+  renderColors();
   document.getElementById("setStart").value=draft.hhStart;
   document.getElementById("setEnd").value=draft.hhEnd;
   document.getElementById("setDisc").value=draft.hhDiscount;
@@ -692,6 +749,13 @@ presetsEl.addEventListener("click",e=>{
   if(!e.target.matches("[data-pdel]"))return;draft.presets.splice(+e.target.closest(".preset").dataset.k,1);rerender();
 });
 document.getElementById("addPreset").onclick=()=>{draft.presets.push({label:"Nouvelle grille",p33:5,p50:7});rerender();};
+const colorsEl=document.getElementById("colors");
+function setColor(k,v){if(!draft)return;draft[k]=v;const row=colorsEl.querySelector(`[data-ck="${k}"]`);
+  row.querySelectorAll("[data-col]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.col===v.toLowerCase()));
+  row.querySelector(".cprev").style.color=v;row.querySelector("input[type=color]").value=v.toLowerCase();refreshBar();}
+colorsEl.addEventListener("click",e=>{const b=e.target.closest("[data-col]");if(b)setColor(b.closest(".crow").dataset.ck,b.dataset.col);});
+colorsEl.addEventListener("input",e=>{if(e.target.type==="color")setColor(e.target.closest(".crow").dataset.ck,e.target.value);});
+document.getElementById("resetColors").onclick=()=>{if(!draft)return;COLOR_FIELDS.forEach(f=>draft[f.k]=f.def);renderColors();refreshBar();};
 document.getElementById("hhDays").addEventListener("click",e=>{
   const b=e.target.closest("[data-day]");if(!b)return;const v=+b.dataset.day;
   draft.hhDays=draft.hhDays.includes(v)?draft.hhDays.filter(x=>x!==v):[...draft.hhDays,v];
@@ -824,7 +888,7 @@ const toB64=u=>{let x="";new Uint8Array(u).forEach(c=>x+=String.fromCharCode(c))
 const fromB64=v=>Uint8Array.from(atob(v),c=>c.charCodeAt(0));
 const normLogin=l=>String(l||"").trim().toLowerCase();
 async function keyFor(login,pw,salt,iter){
-  const base=await crypto.subtle.importKey("raw",te.encode(normLogin(login)+":"+pw),"PBKDF2",false,["deriveKey"]);
+  const base=await crypto.subtle.importKey("raw",te.encode(normLogin(login)+":"+String(pw).trim()),"PBKDF2",false,["deriveKey"]);
   return crypto.subtle.deriveKey({name:"PBKDF2",salt:fromB64(salt),iterations:iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
 }
 async function seal(key,text){const iv=crypto.getRandomValues(new Uint8Array(12));return{iv:toB64(iv),ct:toB64(await crypto.subtle.encrypt({name:"AES-GCM",iv},key,te.encode(text)))};}
@@ -859,6 +923,10 @@ function refreshAuthUI(){
   document.getElementById("accState").textContent=gh.token?"Jeton GitHub actif sur cet appareil.":"Aucun jeton GitHub : la carte ne peut pas encore être envoyée à la TV.";
   updateStatus();
 }
+document.getElementById("lgShow").onclick=e=>{
+  const i=document.getElementById("lgPass"),show=i.type==="password";
+  i.type=show?"text":"password";e.currentTarget.textContent=show?"Masquer":"Afficher";e.currentTarget.setAttribute("aria-pressed",show);i.focus();
+};
 document.getElementById("loginForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const btn=document.getElementById("lgBtn"),err=document.getElementById("lgErr");
@@ -868,7 +936,7 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
     const access=await loadAccess();
     if(!access){err.textContent="Fichier d'accès introuvable (data/acces.json).";err.hidden=false;return;}
     const res=await verify(access,document.getElementById("lgUser").value,document.getElementById("lgPass").value);
-    if(!res){err.textContent="Identifiant ou mot de passe incorrect.";err.hidden=false;document.getElementById("lgPass").select();return;}
+    if(!res){err.textContent="Identifiant ou mot de passe incorrect. Cliquez « Afficher » pour vérifier la saisie (majuscules, tirets).";err.hidden=false;document.getElementById("lgPass").select();return;}
     auth={login:res.user.login,token:res.token||(gh.token||"")};
     gh.token=auth.token;
     storeAuth(document.getElementById("lgRemember").checked);

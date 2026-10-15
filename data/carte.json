@@ -158,5 +158,9 @@
     5,
     6,
     0
-  ]
+  ],
+  "numColor": "#e8582a",
+  "nameColor": "#ffffff",
+  "metaColor": "#7cc8f0",
+  "descColor": "#f6c11e"
 }
