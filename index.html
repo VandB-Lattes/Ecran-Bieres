@@ -26,6 +26,8 @@
   --c-name:#ffffff;
   --c-meta:#7cc8f0;
   --c-desc:#f6c11e;
+  --c-head:#3a8f8b;
+  --c-line:#3a8f8b;
   --display:Alegreya, Georgia, serif;
   --heavy:Lato, "Segoe UI", Arial, sans-serif;
   --cond:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
@@ -98,7 +100,7 @@ main{max-width:1280px;margin:0 auto}
 
 .s-cols{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:0 2.6cqw;min-height:0}
 .s-col{display:grid;grid-template-rows:auto repeat(6,1fr);min-height:0}
-.s-colhead{display:grid;grid-template-columns:1fr 7cqw 7cqw;gap:0 .9cqw;font-family:var(--heavy);font-weight:900;font-size:1.2cqw;color:var(--teal);letter-spacing:.08em;border-bottom:.15cqw solid var(--teal);padding-bottom:.3cqw}
+.s-colhead{display:grid;grid-template-columns:1fr 7cqw 7cqw;gap:0 .9cqw;font-family:var(--heavy);font-weight:900;font-size:1.2cqw;color:var(--c-head);letter-spacing:.08em;border-bottom:.15cqw solid var(--c-line);padding-bottom:.3cqw}
 .s-colhead b{text-align:right}
 .s-colhead .hhcol{color:var(--orange);letter-spacing:.12em}
 .tap{display:grid;grid-template-columns:4.8cqw 3.2cqw 1fr 7cqw 7cqw;align-items:center;gap:0 .9cqw;border-bottom:1px solid rgba(251,238,221,.08);min-height:0}
@@ -112,16 +114,15 @@ main{max-width:1280px;margin:0 auto}
 .flag img,.flag svg{width:100%;height:100%;display:block;object-fit:cover}
 .num{font-family:var(--display);font-weight:900;font-size:3.6cqw;line-height:1;color:var(--num);text-align:center;font-variant-numeric:tabular-nums}
 .info{min-width:0;line-height:1.12}
-.bname{font-family:var(--heavy);font-weight:900;font-size:1.8cqw;line-height:1.05;color:var(--c-name);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
-.bmeta{font-family:var(--heavy);font-weight:700;font-size:1.3cqw;color:var(--c-meta)}
-.bdesc{font-family:var(--cond);font-weight:500;font-size:1.35cqw;line-height:1.1;color:var(--c-desc);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bname{font-family:var(--heavy);font-weight:900;font-size:calc(1.8cqw*var(--ts,1));line-height:1.05;color:var(--c-name);overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
+.bmeta{font-family:var(--heavy);font-weight:700;font-size:calc(1.3cqw*var(--ts,1));color:var(--c-meta)}
+.bdesc{font-family:var(--cond);font-weight:500;font-size:calc(1.35cqw*var(--ts,1));line-height:1.1;color:var(--c-desc);overflow-wrap:anywhere}
 .price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
 .tap.is-hh .price{color:var(--orange)}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
 .hhtag.off{background:var(--gold);color:var(--ink)}
 .tap.empty .bname{color:var(--muted)}
-.info.two .bdesc{-webkit-line-clamp:1}
 .s-foot{display:flex;justify-content:space-between;gap:2cqw;font-family:var(--heavy);font-weight:700;font-size:1.05cqw;color:var(--muted);margin-top:.6cqw;letter-spacing:.02em}
 .s-foot .hl{color:var(--gold)}
 .screen-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
@@ -224,6 +225,8 @@ details.panel[open]>summary::after{content:" –"}
 .cprev.num{font-family:var(--display);font-weight:900;font-size:28px;line-height:1}
 .cprev.name{font-family:var(--heavy);font-weight:900;text-transform:uppercase}
 .cprev.meta{font-family:var(--heavy);font-weight:700;font-size:14px}
+.cprev.head{font-family:var(--heavy);font-weight:900;font-size:14px;letter-spacing:.08em}
+.cprev.line{width:140px;height:26px;border-bottom:3px solid currentColor;border-radius:0}
 .cprev.desc{font-family:var(--cond);font-weight:500;font-size:15px}
 @media (max-width:520px){.crow{grid-template-columns:1fr}}
 .tcolors{border-top:1px solid var(--line);padding-top:8px}
@@ -500,6 +503,8 @@ const COLOR_FIELDS=[
   {k:"nameColor",v:"--c-name",label:"Nom de la bière",def:"#ffffff",cls:"name",prev:"Paulaner Oktoberfest"},
   {k:"metaColor",v:"--c-meta",label:"Style et degré",def:"#7cc8f0",cls:"meta",prev:"Blonde, Alc. 6%"},
   {k:"descColor",v:"--c-desc",label:"Description",def:"#f6c11e",cls:"desc",prev:"Notes maltées, miellées"},
+  {k:"headColor",v:"--c-head",label:"33cl / 50cl",def:"#3a8f8b",cls:"head",prev:"33CL&nbsp;&nbsp;50CL"},
+  {k:"lineColor",v:"--c-line",label:"Ligne sous 33cl",def:"#3a8f8b",cls:"line",prev:""},
 ];
 const PALETTE=[["#ffffff","Blanc"],["#fbeedd","Crème"],["#f6c11e","Jaune"],["#e8582a","Orange"],["#d6336c","Framboise"],["#7cc8f0","Bleu ciel"],["#3a8f8b","Sarcelle"]];
 function normalize(d){
@@ -563,12 +568,14 @@ function renderScreen(){
   requestAnimationFrame(fitNames);
 }
 
-/* tous les noms ont la même taille ; un nom trop long passe sur 2 lignes et sa description se limite alors à 1 ligne */
+/* noms et descriptions s'affichent en entier, avec retour à la ligne, à la même taille pour toutes les bières.
+   Si une tireuse manque de place, tout le texte de l'écran est réduit ensemble (jamais une seule bière). */
 function fitNames(){
-  document.querySelectorAll("#screen .bname").forEach(el=>{
-    const lh=parseFloat(getComputedStyle(el).lineHeight)||el.clientHeight;
-    el.parentElement.classList.toggle("two",el.scrollHeight>lh*1.5);
-  });
+  const scr=document.getElementById("screen");if(!scr.clientWidth)return;
+  const infos=[...scr.querySelectorAll(".tap .info")];
+  const over=()=>infos.some(e=>e.scrollHeight>e.parentElement.clientHeight+1);
+  let ts=1;scr.style.setProperty("--ts",ts);
+  while(over()&&ts>0.6){ts=+(ts-0.03).toFixed(2);scr.style.setProperty("--ts",ts);}
 }
 addEventListener("resize",()=>requestAnimationFrame(fitNames));
 document.addEventListener("fullscreenchange",()=>setTimeout(fitNames,100));

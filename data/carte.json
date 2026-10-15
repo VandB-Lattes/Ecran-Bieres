@@ -162,5 +162,7 @@
   "numColor": "#e8582a",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
-  "descColor": "#f6c11e"
+  "descColor": "#f6c11e",
+  "headColor": "#3a8f8b",
+  "lineColor": "#3a8f8b"
 }
