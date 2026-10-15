@@ -226,6 +226,13 @@ details.panel[open]>summary::after{content:" –"}
 .cprev.meta{font-family:var(--heavy);font-weight:700;font-size:14px}
 .cprev.desc{font-family:var(--cond);font-weight:500;font-size:15px}
 @media (max-width:520px){.crow{grid-template-columns:1fr}}
+.tcolors{border-top:1px solid var(--line);padding-top:8px}
+.tcolors summary{cursor:pointer;font-family:var(--cond);font-weight:600;font-size:15px;color:var(--muted)}
+.tcolors[open] summary{margin-bottom:8px}
+.trow{display:grid;grid-template-columns:90px minmax(0,1fr);gap:6px 10px;align-items:center;margin-bottom:6px}
+.swatch.sm{width:24px;height:24px}
+input[type=color].sm{width:34px;height:26px}
+.trow .chip{font-size:13px;padding:3px 9px}
 input[type=color]{width:44px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--ink);cursor:pointer}
 @media (max-width:520px){.preset{grid-template-columns:1fr 1fr}.grow{grid-template-columns:26px minmax(0,1fr)}.grow select{grid-column:1/-1;width:100%}}
 @media (max-width:520px){.row.r3,.row.r4{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}}
@@ -479,7 +486,10 @@ let saved=null;    // dernière version enregistrée
 let draft=null;    // version en cours d'édition
 let hhPreview="auto";
 
-const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:""});
+const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:"",numColor:"",nameColor:"",descColor:""});
+const TAP_COLORS=[["numColor","--num","Numéro"],["nameColor","--c-name","Nom"],["descColor","--c-desc","Description"]];
+const okColor=v=>/^#[0-9a-f]{6}$/i.test(v||"");
+const tapVars=t=>TAP_COLORS.filter(([k])=>okColor(t[k])).map(([k,v])=>`${v}:${t[k]}`).join(";");
 const clone=o=>JSON.parse(JSON.stringify(o));
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const euro=v=>{if(v===""||v==null||isNaN(+v))return"";const n=+v;return(Number.isInteger(n)?n:n.toFixed(1).replace(".",","))+"€"};
@@ -533,7 +543,7 @@ function renderScreen(){
     const p=(a,b)=>isHH&&b!==""?`${a!==""?`<s>${euro(a)}</s>`:""}<span>${euro(b)}</span>`:euro(a);
     if(!t.name)return`<div class="tap empty"><div class="wflag none"></div><div class="num">${i+1}</div><div class="info"><div class="bname">Bientôt</div><div class="bdesc">Nouvelle bière en préparation</div></div><div></div><div></div></div>`;
     const meta=[t.style,t.abv!==""?`Alc. ${String(t.abv).replace(".",",")}%`:""].filter(Boolean).join(", ");
-    return`<div class="tap${isHH?" is-hh":""}">${flagWave(t.country,i)}<div class="num">${i+1}</div>
+    return`<div class="tap${isHH?" is-hh":""}"${tapVars(t)?` style="${tapVars(t)}"`:""}>${flagWave(t.country,i)}<div class="num">${i+1}</div>
       <div class="info"><div class="bname">${esc(t.name)}</div>
       <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
       <div class="price">${p(t.p33,t.hh33)}</div><div class="price">${p(t.p50,t.hh50)}</div></div>`;
@@ -594,6 +604,27 @@ function renderColors(){
       <span class="cprev ${f.cls}" style="color:${c}">${f.prev}</span></div></div>`;
   }).join("");
 }
+function tapColorsHTML(t,i){
+  const custom=TAP_COLORS.some(([k])=>okColor(t[k]));
+  return`<details class="tcolors"${custom?" open":""}><summary>Couleurs de cette tireuse${custom?" (personnalisées)":""}</summary>
+    ${TAP_COLORS.map(([k,,label])=>{const own=okColor(t[k]),c=(own?t[k]:draft[k]).toLowerCase();
+      return`<div class="trow" data-tk="${k}"><span class="lbl">${label}</span><div class="cpick">
+        ${PALETTE.map(([v,n])=>`<button type="button" class="swatch sm" style="background:${v}" data-tcol="${v}" aria-pressed="${own&&v===c}" aria-label="${label} ${n}" title="${n}"></button>`).join("")}
+        <input type="color" class="sm" data-tc value="${c}" aria-label="Autre couleur : ${label.toLowerCase()}, tireuse ${i+1}">
+        <button type="button" class="chip${own?"":" on"}" data-treset>Couleur générale</button></div></div>`;}).join("")}
+  </details>`;
+}
+function setTapColor(card,i,k,v){
+  draft.taps[i][k]=v;
+  const row=card.querySelector(`[data-tk="${k}"]`),c=(v||draft[k]).toLowerCase();
+  row.querySelectorAll("[data-tcol]").forEach(b=>b.setAttribute("aria-pressed",!!v&&b.dataset.tcol===c));
+  row.querySelector("[data-tc]").value=c;
+  row.querySelector("[data-treset]").classList.toggle("on",!v);
+  if(k==="numColor")card.querySelector(".card-head .n").style.color=c;
+  const sum=card.querySelector(".tcolors summary"),custom=TAP_COLORS.some(([kk])=>okColor(draft.taps[i][kk]));
+  sum.textContent="Couleurs de cette tireuse"+(custom?" (personnalisées)":"");
+  refreshBar();
+}
 function renderAdmin(){
   const host=document.getElementById("tapsHost");
   if(!draft){host.innerHTML=`<div class="empty-state"><h2>Chargement…</h2></div>`;return;}
@@ -611,7 +642,7 @@ function renderAdmin(){
     <button class="btn" data-pdel aria-label="Supprimer la grille ${esc(p.label)}">Supprimer</button></div>`).join("");
   host.innerHTML=draft.taps.map((t,i)=>`
   <article class="card${t.hh?" is-hh":""}" data-i="${i}">
-    <div class="card-head"><span class="n">${i+1}</span><span class="flag">${flagSVG(t.country)}</span>
+    <div class="card-head"><span class="n" style="color:${okColor(t.numColor)?t.numColor:draft.numColor}">${i+1}</span><span class="flag">${flagSVG(t.country)}</span>
       <div class="t"><b>${esc(t.name)||"Tireuse libre"}</b><span>${esc([t.style,t.abv!==""?t.abv+" %":""].filter(Boolean).join(" · "))||"Choisissez une bière"}</span></div></div>
     <div class="field pick"><label for="q${i}">Changer de bière (catalogue V and B)</label>
       <input type="text" id="q${i}" data-q placeholder="Rechercher : nom, brasserie, style…" autocomplete="off"><div class="sugg" hidden></div></div>
@@ -632,6 +663,7 @@ function renderAdmin(){
       <div class="field"><label for="hp${i}">HH 33 cl €</label><input type="number" step="0.5" min="0" id="hp${i}" data-k="hh33" value="${esc(t.hh33)}"></div>
       <div class="field"><label for="hq${i}">HH 50 cl €</label><input type="number" step="0.5" min="0" id="hq${i}" data-k="hh50" value="${esc(t.hh50)}"></div>
     </div>
+    ${tapColorsHTML(t,i)}
     <div class="card-actions"><button class="link" data-clear>Vider la tireuse</button></div>
   </article>`).join("");
   refreshBar();
@@ -693,6 +725,7 @@ host.addEventListener("input",e=>{
     box.innerHTML=res.length?res.map(b=>`<button type="button" data-b="${CAT.indexOf(b)}"><span class="flag">${flagSVG(b.c)}</span><span><b>${esc(b.n)}</b><small>${beerLine(b)}</small></span></button>`).join(""):`<div style="padding:10px" class="hint">Aucune bière trouvée. Saisissez-la directement dans les champs ci-dessous.</div>`;
     box.hidden=false;return;
   }
+  if(e.target.matches("[data-tc]")){setTapColor(card,i,e.target.closest("[data-tk]").dataset.tk,e.target.value);return;}
   const k=e.target.dataset.k;if(!k)return;
   const t=draft.taps[i];
   if(k==="hh"){
@@ -712,6 +745,9 @@ host.addEventListener("click",e=>{
   if(b){applyBeer(i,CAT[+b.dataset.b]);return;}
   const pr=e.target.closest("[data-preset]");
   if(pr){applyPreset(i,draft.presets[+pr.dataset.preset]);return;}
+  const tc=e.target.closest("[data-tcol]");
+  if(tc){setTapColor(card,i,tc.closest("[data-tk]").dataset.tk,tc.dataset.tcol);return;}
+  if(e.target.closest("[data-treset]")){setTapColor(card,i,e.target.closest("[data-tk]").dataset.tk,"");return;}
   if(e.target.matches("[data-clear]")){draft.taps[i]=blankTap();const y=scrollY;renderAdmin();scrollTo(0,y);}
 });
 document.addEventListener("click",e=>{if(!e.target.closest(".pick"))document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
