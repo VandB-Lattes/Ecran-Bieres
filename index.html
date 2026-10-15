@@ -508,7 +508,7 @@ const COLOR_FIELDS=[
 ];
 const PALETTE=[["#ffffff","Blanc"],["#fbeedd","Crème"],["#f6c11e","Jaune"],["#e8582a","Orange"],["#d6336c","Framboise"],["#7cc8f0","Bleu ciel"],["#3a8f8b","Sarcelle"]];
 function normalize(d){
-  const o={title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
+  const o={updatedAt:+d?.updatedAt||0,title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
     hhDiscount:d?.hhDiscount??1,presets:Array.isArray(d?.presets)&&d.presets.length?d.presets:clone(DEFAULT_PRESETS),taps:[]};
   for(let i=0;i<12;i++)o.taps.push({...blankTap(),...(d?.taps?.[i]||{})});
   return o;
@@ -889,8 +889,11 @@ function updateStatus(){
   else if(detectRepo())setStatus("live","Lecture seule · la carte se relit chaque minute");
   else setStatus("warn","Mode local · enregistrement sur cet appareil");
 }
+// une carte n'est jamais remplacée par une version plus ancienne (copie GitHub Pages pas encore à jour, etc.)
+const stamp=d=>+d?.updatedAt||0;
 function applyIncoming(d){
   const incoming=normalize(d);
+  if(saved&&stamp(incoming)<stamp(saved))return;
   if(saved&&JSON.stringify(incoming)===JSON.stringify(saved))return;
   const editing=draft&&isDirty();
   saved=incoming;
@@ -900,7 +903,13 @@ function applyIncoming(d){
   renderScreen();
 }
 async function refresh(){
-  try{const d=await fetchCarte();lsSet(LS_CARTE,d);applyIncoming(d);updateStatus();}
+  try{
+    const remote=await fetchCarte(),local=lsGet(LS_CARTE);
+    const best=local&&stamp(local)>stamp(remote)?local:remote;   // garder la plus récente
+    if(best===remote&&remote)lsSet(LS_CARTE,remote);
+    applyIncoming(best);updateStatus();
+    if(best===local&&stamp(local)>stamp(remote)&&!canWrite())setStatus("warn","Modifications enregistrées sur cet appareil seulement : la TV ne les voit pas tant que GitHub n'est pas connecté");
+  }
   catch(e){
     const local=lsGet(LS_CARTE);
     if(!saved)applyIncoming(local);
@@ -910,11 +919,11 @@ async function refresh(){
 
 document.getElementById("saveBtn").onclick=async()=>{
   const btn=document.getElementById("saveBtn");btn.disabled=true;btn.textContent="Enregistrement…";
-  const cfg=clone(draft);
+  const cfg=clone(draft);cfg.updatedAt=Date.now();
   try{
     if(canWrite()){await pushCarte(cfg);toast("Enregistré sur GitHub : la TV se met à jour d'ici 1 à 2 minutes");}
     else toast("Enregistré sur cet appareil seulement. Connectez GitHub pour mettre la TV à jour.");
-    lsSet(LS_CARTE,cfg);saved=clone(cfg);renderScreen();
+    lsSet(LS_CARTE,cfg);saved=clone(cfg);draft.updatedAt=cfg.updatedAt;renderScreen();
   }catch(err){
     const m=String(err.message);
     toast(m.includes("401")||m.includes("403")?"Jeton GitHub refusé ou sans droit d'écriture":m.includes("409")?"La carte a changé entre-temps : rechargez la page":"Échec de l'enregistrement, réessayez");
