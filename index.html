@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="assets/logo.png">
+<title>Pression V and B Lattes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@700;800;900&family=Lato:wght@400;700;900&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: écran TV 16:9 façon affiche V and B (fond brun nuit, personnages-bouteilles animés), deux colonnes de 6 tireuses dimensionnées en cqw ; dessous, le panneau de gestion en cartes */
+:root{
+  --ink:#1c1512;          /* brun nuit des visuels V and B */
+  --slate:#2a201b;        /* surfaces */
+  --line:#45362d;
+  --chalk:#fbeedd;        /* crème */
+  --muted:#b9a593;
+  --gold:#f6c11e;         /* jaune V and B */
+  --amber:#f6c11e;
+  --teal:#3a8f8b;         /* sarcelle V and B */
+  --teal-l:#6cc6bf;
+  --orange:#e8582a;       /* orange V and B */
+  --hh:#e8582a;           /* happy hour = orange */
+  --ok:#3a8f8b;
+  --display:Alegreya, Georgia, serif;
+  --heavy:Lato, "Segoe UI", Arial, sans-serif;
+  --cond:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --body:Lato, "Segoe UI", Arial, sans-serif;
+  color-scheme:dark;
+}
+html,body{background:var(--ink);color:var(--chalk)}
+body{font-family:var(--body);font-size:15px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+*{box-sizing:border-box}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---------- barre du haut ---------- */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;max-width:1280px;margin:0 auto 16px}
+.brand{font-family:var(--display);font-size:22px;color:var(--gold);letter-spacing:.01em}
+.brand small{display:block;font-family:var(--cond);font-size:13px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.tabs{display:flex;gap:4px;background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:4px;margin-left:auto}
+.tabs button{border:0;background:none;padding:8px 16px;border-radius:7px;cursor:pointer;font-family:var(--cond);font-size:16px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--gold);color:var(--ink)}
+.status{font-family:var(--cond);font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.dot.live{background:var(--ok)}
+.dot.warn{background:var(--amber)}
+
+main{max-width:1280px;margin:0 auto}
+
+/* ---------- ÉCRAN ---------- */
+.screen-wrap{position:relative}
+.screen{position:relative;isolation:isolate;container-type:inline-size;aspect-ratio:16/9;width:100%;max-width:100%;background:var(--ink);border-radius:10px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;padding:2.2cqw 3cqw 1.6cqw}
+.screen:fullscreen{border:0;border-radius:0;width:100vw;height:100vh;aspect-ratio:auto}
+/* fond animé */
+.bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg .glow{position:absolute;width:60cqw;height:60cqw;border-radius:50%;filter:blur(8cqw);opacity:.22}
+.bg .g1{background:var(--teal);left:-20cqw;top:-25cqw}
+.bg .g2{background:var(--orange);right:-22cqw;bottom:-30cqw}
+.bg .g3{background:var(--gold);left:40cqw;top:20cqw;width:30cqw;height:30cqw;opacity:.08}
+.bg .strokes{position:absolute;inset:0;opacity:.05;background:repeating-linear-gradient(115deg,var(--chalk) 0 .15cqw,transparent .15cqw 1.4cqw)}
+.bg .char{position:absolute;bottom:-1cqw;opacity:.13;transform-origin:50% 100%}
+.bg .char svg{display:block;width:100%;height:auto}
+.bg .bub{position:absolute;bottom:-2cqw;border-radius:50%;border:.15cqw solid var(--gold);opacity:0}
+.bg .star{position:absolute;color:var(--gold);font-size:1.6cqw;opacity:.0}
+@media (prefers-reduced-motion:no-preference){
+  .bg .g1{animation:drift1 22s ease-in-out infinite alternate}
+  .bg .g2{animation:drift2 26s ease-in-out infinite alternate}
+  .bg .g3{animation:drift1 30s ease-in-out infinite alternate-reverse}
+  .bg .char{animation:bob 5s ease-in-out infinite}
+  .bg .bub{animation:rise linear infinite}
+  .bg .star{animation:twinkle 4s ease-in-out infinite}
+  .bg .strokes{animation:slide 40s linear infinite}
+}
+@keyframes drift1{to{transform:translate(18cqw,10cqw) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-16cqw,-8cqw) scale(1.1)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-1.2cqw) rotate(2deg)}}
+@keyframes rise{0%{transform:translateY(0);opacity:0}10%{opacity:.35}90%{opacity:.25}100%{transform:translateY(-58cqw);opacity:0}}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.6;transform:scale(1)}}
+@keyframes slide{to{background-position:28cqw 0}}
+
+.s-head{display:flex;align-items:center;justify-content:space-between;gap:2cqw;margin-bottom:1.2cqw}
+.s-left{display:flex;align-items:center;gap:2cqw;min-width:0}
+.logo{flex:none;width:10.5cqw;display:grid;justify-items:center;gap:.3cqw;transform:rotate(-2deg)}
+.logo img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 .14cqw var(--chalk)) drop-shadow(0 .4cqw .6cqw rgba(0,0,0,.5))}
+.logo small{font-family:var(--heavy);font-weight:900;font-size:.8cqw;letter-spacing:.14em;color:var(--chalk)}
+.s-title{font-family:var(--heavy);font-weight:900;font-size:4.6cqw;line-height:.9;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;margin:0}
+.s-right{text-align:right;display:grid;justify-items:end;gap:.4cqw}
+.s-sub{font-family:var(--heavy);font-weight:700;font-size:1.25cqw;color:var(--chalk);letter-spacing:.06em;text-transform:uppercase;max-width:40cqw}
+.hh-banner{display:inline-flex;align-items:center;gap:.8cqw;background:var(--orange);color:var(--chalk);font-family:var(--heavy);font-weight:900;font-size:1.9cqw;letter-spacing:.06em;text-transform:uppercase;padding:.5cqw 1.6cqw;clip-path:polygon(3% 0,100% 0,97% 100%,0 100%)}
+.hh-banner span{font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--gold)}
+@media (prefers-reduced-motion:no-preference){.hh-banner{animation:pulse 1.8s ease-in-out infinite}}
+@keyframes pulse{50%{transform:scale(1.05) rotate(-1deg)}}
+
+.s-cols{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:0 2.6cqw;min-height:0}
+.s-col{display:grid;grid-template-rows:auto repeat(6,1fr);min-height:0}
+.s-colhead{display:grid;grid-template-columns:1fr 7cqw 7cqw;gap:0 .9cqw;font-family:var(--heavy);font-weight:900;font-size:1.2cqw;color:var(--teal);letter-spacing:.08em;border-bottom:.15cqw solid var(--teal);padding-bottom:.3cqw}
+.s-colhead b{text-align:right}
+.tap{display:grid;grid-template-columns:4.8cqw 3.2cqw 1fr 7cqw 7cqw;align-items:center;gap:0 .9cqw;border-bottom:1px solid rgba(251,238,221,.08);min-height:0}
+.tap:last-child{border-bottom:0}
+.wflag{display:flex;width:4.6cqw;aspect-ratio:3/2;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.5))}
+.wflag i{flex:1;background-repeat:no-repeat;will-change:transform;margin-right:-.06cqw}
+.wflag.none{border:.15cqw dashed var(--line)}
+@media (prefers-reduced-motion:no-preference){.wflag i{animation:wave 2.6s ease-in-out infinite}}
+@keyframes wave{0%,100%{transform:translateY(-.32cqw);filter:brightness(1.08)}50%{transform:translateY(.32cqw);filter:brightness(.78)}}
+.flag{width:3.4cqw;height:3.4cqw;border-radius:50%;overflow:hidden;background:#555}
+.flag img,.flag svg{width:100%;height:100%;display:block;object-fit:cover}
+.num{font-family:var(--display);font-weight:900;font-size:3.6cqw;line-height:1;color:var(--teal);text-align:center;font-variant-numeric:tabular-nums}
+.info{min-width:0;line-height:1.12}
+.bname{font-family:var(--heavy);font-weight:900;font-size:1.55cqw;color:var(--chalk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.01em}
+.bmeta{font-family:var(--heavy);font-weight:700;font-size:1.2cqw;color:var(--teal-l)}
+.bdesc{font-family:var(--cond);font-weight:500;font-size:1.3cqw;color:var(--gold);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:1.75cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
+.price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
+.tap.is-hh .price{color:var(--orange)}
+.hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
+.hhtag.off{background:var(--gold);color:var(--ink)}
+.tap.empty .bname{color:var(--muted)}
+.s-foot{display:flex;justify-content:space-between;gap:2cqw;font-family:var(--heavy);font-weight:700;font-size:1.05cqw;color:var(--muted);margin-top:.6cqw;letter-spacing:.02em}
+.s-foot .hl{color:var(--gold)}
+.screen-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--slate);padding:9px 14px;border-radius:8px;cursor:pointer;font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.03em}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn.primary:disabled{opacity:.45;cursor:default}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--slate);padding:8px 12px;cursor:pointer;font-family:var(--cond);font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--line);color:var(--chalk)}
+.hint{font-size:13px;color:var(--muted)}
+
+/* ---------- GESTION ---------- */
+.admin-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:color-mix(in srgb,var(--ink) 92%,transparent);backdrop-filter:blur(6px);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.counter{font-family:var(--cond);font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+.counter .pill{background:var(--hh);color:#fff;border-radius:999px;padding:2px 10px}
+.counter .pill.full{background:var(--ok)}
+.admin-bar .spacer{flex:1}
+.dirty{font-family:var(--cond);color:var(--amber);font-size:15px}
+.settings{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end;margin-bottom:18px;background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label,.lbl{font-family:var(--cond);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=password],input[type=number],input[type=time],select,textarea{background:var(--ink);border:1px solid var(--line);border-radius:7px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:54px;line-height:1.35}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:none}
+
+.taps{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:14px}
+.card{grid-template-columns:minmax(0,1fr);background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:10px;min-width:0}
+.card.is-hh{border-color:color-mix(in srgb,var(--hh) 55%,var(--line))}
+.card-head{display:flex;align-items:center;gap:10px}
+.card-head .n{font-family:var(--display);font-weight:700;font-size:28px;color:var(--gold);width:34px;text-align:center}
+.card-head .flag{width:30px;height:30px;box-shadow:0 0 0 2px rgba(255,255,255,.7)}
+.card-head .t{flex:1;min-width:0}
+.card-head .t b{display:block;font-family:var(--cond);font-size:18px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-head .t span{font-size:12.5px;color:var(--muted)}
+.row{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.row.r3{grid-template-columns:1.3fr 1fr .7fr}
+.row.r4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.hhtoggle{display:flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:600;cursor:pointer;user-select:none}
+.hhtoggle input{width:18px;height:18px;accent-color:var(--hh)}
+.hhprices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.hhprices[hidden]{display:none!important}
+.pick{position:relative}
+.sugg{position:absolute;left:0;right:0;top:100%;z-index:10;background:var(--ink);border:1px solid var(--gold);border-radius:8px;margin-top:4px;max-height:280px;overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.sugg button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--line)}
+.sugg button:hover,.sugg button:focus{background:var(--slate);outline:none}
+.sugg .flag{width:20px;height:20px;flex:none;box-shadow:none}
+.sugg b{font-weight:600}
+.sugg small{color:var(--muted);display:block}
+.card-actions{display:flex;justify-content:space-between;gap:8px}
+.link{background:none;border:0;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;padding:0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--chalk);color:var(--ink);font-family:var(--cond);font-weight:600;padding:10px 18px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:20}
+.empty-state{border:1px dashed var(--line);border-radius:10px;padding:28px;text-align:center;color:var(--muted);display:grid;gap:12px;justify-items:center}
+.empty-state h2{font-family:var(--display);color:var(--chalk);margin:0;font-size:22px}
+.panel{background:var(--slate);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:18px;display:grid;gap:12px}
+.panel h2{margin:0;font-family:var(--heavy);font-weight:900;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.panel .hint{margin:0}
+.gsearch{position:relative}
+.gsearch input{font-size:17px;padding:12px 14px}
+.gres{display:grid;gap:6px;max-height:420px;overflow:auto}
+.gres:empty{display:none}
+.grow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.grow .flag{width:26px;height:26px}
+.grow b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grow small{color:var(--muted);font-size:12.5px}
+.grow select{width:auto;min-width:150px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chips .lbl{margin-right:2px}
+.chip{border:1px solid var(--line);background:var(--ink);border-radius:999px;padding:4px 11px;cursor:pointer;font-family:var(--cond);font-weight:600;font-size:14px;color:var(--chalk)}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.presets{display:grid;gap:8px}
+.preset{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:end}
+.inline{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+details.panel>summary{cursor:pointer;font-family:var(--heavy);font-weight:900;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);list-style:none}
+details.panel>summary::-webkit-details-marker{display:none}
+details.panel>summary::after{content:" +";color:var(--muted)}
+details.panel[open]>summary::after{content:" –"}
+.login{max-width:420px;margin:6vh auto;background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:28px 24px;display:grid;gap:14px}
+.login img{width:150px;justify-self:center;transform:rotate(-3deg);filter:drop-shadow(0 0 2px var(--chalk))}
+.login h2{margin:0;text-align:center;font-family:var(--heavy);font-weight:900;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
+.login p{margin:0;text-align:center}
+.login input{font-size:17px;padding:12px 14px}
+.login .btn{padding:12px 14px;font-size:17px}
+.remember{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;cursor:pointer}
+.remember input{width:18px;height:18px;accent-color:var(--gold)}
+.err{color:var(--orange);font-weight:700;text-align:center;margin:0}
+.who{font-family:var(--cond);font-size:15px;color:var(--muted)}
+.cat-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cat-row .hint{flex:1;min-width:200px}
+.cat-row a{color:var(--gold)}
+@media (max-width:520px){.preset{grid-template-columns:1fr 1fr}.grow{grid-template-columns:26px minmax(0,1fr)}.grow select{grid-column:1/-1;width:100%}}
+@media (max-width:520px){.row.r3,.row.r4{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Bières pression<small>V and B Lattes · 12 tireuses</small></div>
+  <div class="status" id="status"><span class="dot" id="dot"></span><span id="statusText">Connexion…</span></div>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-ecran" aria-selected="true" data-view="ecran">Écran</button>
+    <button role="tab" id="tab-gestion" aria-selected="false" data-view="gestion">Gestion</button>
+  </div>
+</header>
+
+<main>
+  <section id="view-ecran">
+    <div class="screen-wrap">
+      <div class="screen" id="screen"><div class="bg" id="bg" aria-hidden="true"></div><div id="screenBody" style="display:contents"></div></div>
+    </div>
+    <div class="screen-tools">
+      <button class="btn primary" id="fsBtn">Plein écran (TV)</button>
+      <span class="lbl" style="margin-left:6px">Aperçu happy hour</span>
+      <div class="seg" id="hhPreview">
+        <button data-v="auto" aria-pressed="true">Auto (horloge)</button>
+        <button data-v="on" aria-pressed="false">Forcer</button>
+        <button data-v="off" aria-pressed="false">Désactiver</button>
+      </div>
+      <span class="hint">Sur la TV, ouvrez ce lien puis « Plein écran ». L'écran relit la carte chaque minute.</span>
+    </div>
+  </section>
+
+  <section id="view-login" hidden>
+    <form class="login" id="loginForm" autocomplete="on">
+      <img src="assets/logo.png" alt="V and B">
+      <h2>Espace staff</h2>
+      <p class="hint">Connectez-vous pour gérer les tireuses.</p>
+      <div class="field"><label for="lgUser">Identifiant</label><input type="text" id="lgUser" name="username" autocomplete="username" autocapitalize="none" required></div>
+      <div class="field"><label for="lgPass">Mot de passe</label><input type="password" id="lgPass" name="password" autocomplete="current-password" required></div>
+      <label class="remember" for="lgRemember"><input type="checkbox" id="lgRemember" checked>Rester connecté sur cet appareil</label>
+      <p class="err" id="lgErr" hidden></p>
+      <button class="btn primary" type="submit" id="lgBtn">Se connecter</button>
+    </form>
+  </section>
+
+  <section id="view-gestion" hidden>
+    <div class="admin-bar">
+      <div class="counter">Happy hour <span class="pill" id="hhCount">0 / 6</span></div>
+      <span class="dirty" id="dirty" hidden>Modifications non enregistrées</span>
+      <span class="spacer"></span>
+      <button class="btn" id="revertBtn" hidden>Annuler</button>
+      <button class="btn primary" id="saveBtn" disabled>Enregistrer et afficher</button>
+      <span class="who" id="who"></span>
+      <button class="btn" id="logoutBtn">Se déconnecter</button>
+    </div>
+    <div class="panel">
+      <h2>Rechercher une bière</h2>
+      <div class="gsearch"><input type="text" id="gq" placeholder="Tapez le nom d'une bière : Chouffe, Paulaner, IPA…" autocomplete="off" aria-label="Rechercher une bière"></div>
+      <div class="gres" id="gres"></div>
+      <div class="cat-row">
+        <p class="hint" id="catInfo">Catalogue V and B</p>
+        <button class="btn" id="catUpdate">Mettre à jour le catalogue depuis vandb.fr</button>
+      </div>
+      <p class="hint" id="catStatus" hidden></p>
+    </div>
+    <div class="panel">
+      <h2>Prix</h2>
+      <p class="hint">Grilles de prix à appliquer en un clic sur chaque tireuse.</p>
+      <div class="presets" id="presets"></div>
+      <div class="inline">
+        <button class="btn" id="addPreset">Ajouter une grille</button>
+      </div>
+    </div>
+    <div class="panel" id="hhPanel">
+      <h2>Happy hour</h2>
+      <div class="inline">
+        <div class="field" style="width:130px"><label for="setStart">Début</label><input type="time" id="setStart" step="300"></div>
+        <div class="field" style="width:130px"><label for="setEnd">Fin</label><input type="time" id="setEnd" step="300"></div>
+        <div class="field"><span class="lbl" id="daysLbl">Jours</span><div class="chips" id="hhDays" role="group" aria-labelledby="daysLbl"></div></div>
+      </div>
+      <div class="inline">
+        <div class="field" style="width:180px"><label for="setDisc">Remise par verre €</label><input type="number" step="0.5" min="0" id="setDisc"></div>
+        <button class="btn" id="applyDisc">Appliquer la remise aux bières happy hour</button>
+      </div>
+      <p class="hint" id="hhSummary"></p>
+    </div>
+    <div class="settings">
+      <div class="field" style="flex:1 1 220px"><label for="setTitle">Titre de l'écran</label><input type="text" id="setTitle"></div>
+      <div class="field" style="flex:2 1 300px"><label for="setSub">Sous-titre</label><input type="text" id="setSub"></div>
+    </div>
+    <div id="tapsHost" class="taps"></div>
+    <details class="panel" id="ghPanel" style="margin-top:18px">
+      <summary>Accès staff et GitHub</summary>
+      <p class="hint">L'identifiant et le mot de passe ouvrent la gestion sur n'importe quel appareil. Le jeton GitHub est enregistré chiffré avec le mot de passe : le staff n'a jamais besoin de le connaître.</p>
+      <div class="inline">
+        <div class="field" style="flex:1 1 160px"><label for="accLogin">Identifiant</label><input type="text" id="accLogin" autocomplete="off" autocapitalize="none"></div>
+        <div class="field" style="flex:1 1 180px"><label for="accPw">Mot de passe actuel</label><input type="password" id="accPw" autocomplete="current-password"></div>
+        <div class="field" style="flex:1 1 180px"><label for="accNewPw">Nouveau mot de passe</label><input type="password" id="accNewPw" autocomplete="new-password" placeholder="facultatif"></div>
+        <div class="field" style="flex:1 1 180px"><label for="accNewPw2">Confirmer</label><input type="password" id="accNewPw2" autocomplete="new-password"></div>
+      </div>
+      <div class="inline">
+        <div class="field" style="flex:1 1 200px"><label for="ghRepo">Dépôt (propriétaire/nom)</label><input type="text" id="ghRepo" placeholder="moncompte/vandb-lattes-ecran"></div>
+        <div class="field" style="width:120px"><label for="ghBranch">Branche</label><input type="text" id="ghBranch" placeholder="main"></div>
+        <div class="field" style="flex:2 1 260px"><label for="ghToken">Jeton GitHub</label><input type="password" id="ghToken" placeholder="laisser vide pour garder le jeton actuel" autocomplete="off"></div>
+      </div>
+      <div class="inline">
+        <button class="btn primary" id="accSave">Enregistrer l'accès</button>
+        <span class="hint" id="accState"></span>
+      </div>
+      <div class="inline"><button class="btn" id="dlJson">Télécharger carte.json</button><span class="hint">Sans jeton : téléchargez le fichier et remplacez data/carte.json sur GitHub.</span></div>
+    </details>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ===== Drapeaux (SVG, rendus identiques sur toutes les TV) ===== */
+const V=(a,b,c)=>`<rect width="3" height="2" fill="${b}"/><rect width="1" height="2" fill="${a}"/><rect x="2" width="1" height="2" fill="${c}"/>`;
+const H=(a,b,c)=>`<rect width="3" height="2" fill="${b}"/><rect width="3" height=".667" fill="${a}"/><rect y="1.333" width="3" height=".667" fill="${c}"/>`;
+const NORDIC=(bg,c1,c2)=>`<rect width="3" height="2" fill="${bg}"/><rect x=".8" width=".5" height="2" fill="${c1}"/><rect y=".75" width="3" height=".5" fill="${c1}"/>`+(c2?`<rect x=".92" width=".26" height="2" fill="${c2}"/><rect y=".87" width="3" height=".26" fill="${c2}"/>`:"");
+const FLAGS={
+  FR:{n:"France",s:V("#002395","#fff","#ED2939")},
+  BE:{n:"Belgique",s:V("#000","#FDDA24","#EF3340")},
+  DE:{n:"Allemagne",s:H("#000","#DD0000","#FFCE00")},
+  IE:{n:"Irlande",s:V("#169B62","#fff","#FF883E")},
+  IT:{n:"Italie",s:V("#009246","#fff","#CE2B37")},
+  NL:{n:"Pays-Bas",s:H("#AE1C28","#fff","#21468B")},
+  ES:{n:"Espagne",s:`<rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/>`},
+  AT:{n:"Autriche",s:H("#ED2939","#fff","#ED2939")},
+  RS:{n:"Serbie",s:H("#C6363C","#0C4076","#fff")},
+  CZ:{n:"Tchéquie",s:`<rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#D7141A"/><path d="M0 0L1.5 1L0 2Z" fill="#11457E"/>`},
+  PL:{n:"Pologne",s:`<rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#DC143C"/>`},
+  NO:{n:"Norvège",s:NORDIC("#BA0C2F","#fff","#00205B")},
+  DK:{n:"Danemark",s:NORDIC("#C8102E","#fff")},
+  SE:{n:"Suède",s:NORDIC("#006AA7","#FECC00")},
+  SCT:{n:"Écosse",s:`<rect width="3" height="2" fill="#005EB8"/><path d="M0 0L3 2M3 0L0 2" stroke="#fff" stroke-width=".36"/>`},
+  GB:{n:"Royaume-Uni",s:`<rect width="3" height="2" fill="#012169"/><path d="M0 0L3 2M3 0L0 2" stroke="#fff" stroke-width=".4"/><path d="M0 0L3 2M3 0L0 2" stroke="#C8102E" stroke-width=".14"/><path d="M1.5 0V2M0 1H3" stroke="#fff" stroke-width=".6"/><path d="M1.5 0V2M0 1H3" stroke="#C8102E" stroke-width=".34"/>`},
+  US:{n:"États-Unis",s:`<rect width="3" height="2" fill="#fff"/>${[0,2,4,6,8,10,12].map(i=>`<rect y="${i*2/13}" width="3" height="${2/13}" fill="#B22234"/>`).join("")}<rect width="1.3" height="1.077" fill="#3C3B6E"/>`},
+  JP:{n:"Japon",s:`<rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".6" fill="#BC002D"/>`},
+  HR:{n:"Croatie",s:H("#FF0000","#fff","#171796")},
+  MX:{n:"Mexique",s:V("#006847","#fff","#CE1126")},
+  CH:{n:"Suisse",s:`<rect width="3" height="2" fill="#D52B1E"/><rect x="1.35" y=".5" width=".3" height="1" fill="#fff"/><rect x="1" y=".85" width="1" height=".3" fill="#fff"/>`},
+};
+const flagSVG=c=>{const f=FLAGS[c];return f?`<svg viewBox="0.5 0 2 2" preserveAspectRatio="xMidYMid slice" aria-label="${f.n}">${f.s}</svg>`:""};
+const _uri={};
+const flagURI=c=>_uri[c]||(_uri[c]=`url('data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" preserveAspectRatio="none">${FLAGS[c].s}</svg>`).replace(/'/g,"%27")}')`);
+/* drapeau qui flotte : 12 bandes décalées dans le temps */
+function flagWave(c,idx){
+  if(!FLAGS[c])return`<div class="wflag none"></div>`;
+  const n=12,u=flagURI(c);let h="";
+  for(let k=0;k<n;k++)h+=`<i style="background-image:${u};background-size:${n*100}% 100%;background-position:${k*100/(n-1)}% 0;animation-delay:${-(k*.11+idx*.37).toFixed(2)}s"></i>`;
+  return`<div class="wflag" role="img" aria-label="${FLAGS[c].n}">${h}</div>`;
+}
+/* personnages-bouteilles du fond, palette V and B */
+const EYE=(x,y,r=6)=>`<ellipse cx="${x}" cy="${y}" rx="${r*1.6}" ry="${r}" fill="#fbeedd"/><circle cx="${x+r*.4}" cy="${y}" r="${r*.55}" fill="#1c1512"/>`;
+const CHARS=[
+ {w:7, svg:`<svg viewBox="0 0 60 220"><path d="M22 0h16v40c14 16 18 40 18 70v110H4V110c0-30 4-54 18-70z" fill="#3a8f8b"/>${EYE(30,95,7)}</svg>`},
+ {w:9, svg:`<svg viewBox="0 0 90 170"><path d="M35 0h20v28c22 10 32 30 32 60v82H3V88c0-30 10-50 32-60z" fill="#e8582a"/>${EYE(30,80,7)}${EYE(60,80,7)}</svg>`},
+ {w:8, svg:`<svg viewBox="0 0 90 130"><rect x="8" y="22" width="62" height="108" rx="6" fill="#f6c11e"/><path d="M70 45h12a8 8 0 0 1 8 8v34a8 8 0 0 1-8 8H70" fill="none" stroke="#f6c11e" stroke-width="8"/><path d="M4 26c0-14 12-22 24-18 6-10 22-10 28 0 12-4 22 4 20 18z" fill="#fbeedd"/>${EYE(40,62,7)}<path d="M30 92q10 10 20 0" stroke="#e8582a" stroke-width="4" fill="none"/></svg>`},
+ {w:6, svg:`<svg viewBox="0 0 60 150"><path d="M8 0h44c0 40-8 62-18 70v62h16v18H10v-18h16V70C16 62 8 40 8 0z" fill="#fbeedd"/>${EYE(30,30,6)}</svg>`},
+ {w:7, svg:`<svg viewBox="0 0 70 240"><path d="M28 0h14v14h-4v40c20 18 26 50 26 80v106H6V134c0-30 6-62 26-80V14h-4z" fill="#3a8f8b"/>${EYE(35,110,7)}</svg>`},
+ {w:9, svg:`<svg viewBox="0 0 90 180"><path d="M36 0h18v36c22 6 32 26 32 50v94H4V86c0-24 10-44 32-50z" fill="#f6c11e"/><rect x="34" y="0" width="22" height="12" fill="#e8582a"/>${EYE(46,78,7)}<path d="M20 100h50v16H20z" fill="#e8582a"/></svg>`},
+];
+function buildBg(){
+  let h=`<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="strokes"></div>`;
+  const pos=[2,11,20,77,86,94];
+  CHARS.forEach((c,i)=>h+=`<div class="char" style="left:${pos[i]}%;width:${c.w}cqw;animation-delay:${-i*0.8}s;animation-duration:${4.5+i*.4}s">${c.svg}</div>`);
+  for(let i=0;i<14;i++){const sz=.6+((i*37)%10)/6;h+=`<span class="bub" style="left:${(i*71)%100}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${14+(i*13)%12}s;animation-delay:${-(i*2.3)}s"></span>`;}
+  [[8,22],[48,8],[92,40],[60,60],[30,48]].forEach(([x,y],i)=>h+=`<span class="star" style="left:${x}%;top:${y}%;animation-delay:${-i*0.9}s">✦</span>`);
+  return h;
+}
+
+/* ===== Catalogue (vandb.fr/biere + carte actuelle). n=nom, b=brasserie, c=pays, s=style, a=degré, d=description, p=[33cl,50cl] ===== */
+const CATALOGUE=[
+ {n:"Paulaner Oktoberfest Bier",b:"Paulaner",c:"DE",s:"Blonde",a:6,d:"Notes maltées, miellées, touches herbacées",p:[4.5,5.5]},
+ {n:"Hacker-Pschorr Oktoberfest Bier",b:"Hacker-Pschorr",c:"DE",s:"Blonde",a:6,d:"Arômes riches de malt, de caramel",p:[4.5,5.5]},
+ {n:"Delirium Tremens",b:"Huyghe",c:"BE",s:"Triple",a:8.5,d:"Puissante et chaleureuse, riche, épicée",p:[6,9]},
+ {n:"Le Coup de Cloche Blanche",b:"Huyghe",c:"BE",s:"Blanche",a:5.4,d:"Douce, onctueuse, saveurs d'agrumes, blé",p:[4,5]},
+ {n:"Vault City – Monsieur Froid",b:"Vault City",c:"SCT",s:"Modern Sour à la framboise",a:5,d:"Sour douce et facile à boire, brassée pour les 25 ans de V and B",p:[9,11]},
+ {n:"Bush de Noël",b:"Dubuisson",c:"BE",s:"Brune",a:12,d:"Onctueuse, peu amère : caramel, chocolat praliné et malt grillé",p:[7,9]},
+ {n:"Les Intenables – Mama Whipa",b:"Les Intenables",c:"FR",s:"White IPA",a:6,d:"Touches de pamplemousse et de fruits exotiques",p:[8,10]},
+ {n:"Fauve – Mariage à Vegas",b:"Fauve",c:"FR",s:"Double NEIPA",a:8,d:"Notes intenses de fruits tropicaux et d'agrumes",p:[8,10]},
+ {n:"Mont Hardi West Coast IPA",b:"Mont Hardi",c:"FR",s:"IPA",a:5.5,d:"Légère et désaltérante",p:[6,8]},
+ {n:"La Débauche – NEIPA",b:"La Débauche",c:"FR",s:"NEIPA",a:6,d:"Fruits tropicaux et pêche, tout en rondeur",p:[5,7]},
+ {n:"Chouffe Cherry",b:"Achouffe",c:"BE",s:"Aromatisée",a:8,d:"Douce, gourmande : cerise, caramel, légère acidité",p:[6,8]},
+ {n:"Cidre – Dan Kelly's Draught Cider",b:"Dan Kelly's",c:"IE",s:"Cidre",a:4.5,d:"Frais et rafraîchissant, savoir-faire artisanal irlandais",p:[5,7]},
+ {n:"Super 8 Rouge",b:"Haacht",c:"BE",s:"Rouge · Aromatisée-fruitée",a:7.5,d:"Fruits rouges gourmands, finale douce"},
+ {n:"Kasteel Rubus",b:"Van Honsebrouck",c:"BE",s:"Rouge · Aromatisée-fruitée",a:7,d:"Framboise intense, corps rond et sucré"},
+ {n:"Weihenstephaner Helles",b:"Weihenstephan",c:"DE",s:"Helles",a:4.8,d:"Lager bavaroise ronde, céréales et miel léger"},
+ {n:"Weihenstephaner Hefeweissbier",b:"Weihenstephan",c:"DE",s:"Weissbier",a:5.4,d:"Banane et clou de girofle, mousse généreuse"},
+ {n:"Weihenstephaner Pils",b:"Weihenstephan",c:"DE",s:"Pils",a:5.1,d:"Sèche et florale, belle amertume houblonnée"},
+ {n:"Val Dieu Blonde",b:"Val Dieu",c:"BE",s:"Belgian Pale Ale",a:6,d:"Blonde d'abbaye fruitée et légèrement épicée"},
+ {n:"Delirium Red",b:"Huyghe",c:"BE",s:"Rouge · Aromatisée-fruitée",a:8,d:"Cerise et fruits des bois, acidulée et ronde"},
+ {n:"Queue de Charrue Ambrée",b:"Queue de Charrue",c:"BE",s:"Amber Ale",a:5.5,d:"Caramel et biscuit, finale douce"},
+ {n:"Krombacher Pils",b:"Krombacher",c:"DE",s:"Pils",a:4.8,d:"Pils allemande vive, fine amertume"},
+ {n:"Pêche Mel Bush",b:"Dubuisson",c:"BE",s:"Aromatisée-fruitée",a:8.5,d:"Pêche et miel sur une base Bush généreuse"},
+ {n:"Corsendonk Agnus",b:"Corsendonk",c:"BE",s:"Triple",a:7.5,d:"Triple fine, fruitée et épicée"},
+ {n:"Paulaner Salvator",b:"Paulaner",c:"DE",s:"Doppelbock",a:7.9,d:"Malt torréfié, caramel et pain grillé"},
+ {n:"Hacker-Pschorr Münchner Hell",b:"Hacker-Pschorr",c:"DE",s:"Helles",a:5,d:"Lager munichoise douce et équilibrée"},
+ {n:"Hoppy Road – Pow Wow",b:"Hoppy Road",c:"FR",s:"West Coast IPA",a:7.1,d:"Résine et agrumes, amertume franche"},
+ {n:"Gross – Micro Sticky",b:"Gross",c:"ES",s:"West Coast IPA",a:3.3,d:"Toute la résine d'une West Coast, en version légère"},
+ {n:"Brasseurs de la Jonte – Tantaravel",b:"Brasseurs de la Jonte",c:"FR",s:"IPA",a:5.5,d:"IPA aveyronnaise fruitée, finale sèche"},
+ {n:"Brasserie du Grand Paris – Mad Mars",b:"Brasserie du Grand Paris",c:"FR",s:"Amber Ale",a:7,d:"Caramel, fruits rouges et houblons américains"},
+ {n:"Nautile – Bloody Christmas",b:"Nautile",c:"FR",s:"NEIPA",a:6,d:"Hazy IPA de saison, juteuse et ronde"},
+ {n:"Tandem – Pin Pon",b:"Brasserie Tandem",c:"FR",s:"Saison",a:7,d:"Saison sèche, poivrée et fruitée"},
+ {n:"Tandem – Poule Mouillée",b:"Brasserie Tandem",c:"FR",s:"IPA",a:6.5,d:"IPA fruitée aux notes d'agrumes"},
+ {n:"Tandem – Bonne Pioche",b:"Brasserie Tandem",c:"FR",s:"Pale Ale",a:5.5,d:"Pale ale facile, houblon frais"},
+ {n:"Tandem – Pas Cap",b:"Brasserie Tandem",c:"FR",s:"Triple",a:8,d:"Triple généreuse, fruits jaunes et épices"},
+ {n:"Prizm – Cinco Minutos",b:"Prizm Brewing",c:"FR",s:"Lager",a:4.5,d:"Lager légère et désaltérante"},
+ {n:"BBP – Delta Banzai",b:"Brussels Beer Project",c:"BE",s:"IPA",a:6.7,d:"IPA belge fruitée, amertume nette"},
+ {n:"Sainte Cru – New Soft Machine",b:"Sainte Cru",c:"FR",s:"IPA",a:6.5,d:"IPA juteuse, fruits tropicaux"},
+ {n:"Sainte Cru – Soft Power",b:"Sainte Cru",c:"FR",s:"NEIPA",a:6.5,d:"Trouble et juteuse, mangue et agrumes"},
+ {n:"Mont Hardi – Néo Nova",b:"Mont Hardi",c:"FR",s:"Session IPA",a:4.8,d:"Session IPA légère et aromatique"},
+ {n:"Mont Hardi – Okto",b:"Mont Hardi",c:"FR",s:"Helles",a:5,d:"Bière de fête façon Munich, ronde et maltée"},
+ {n:"Mont Hardi – Karaté La Bière",b:"Mont Hardi",c:"FR",s:"Helles",a:5,d:"Lager claire et croquante"},
+ {n:"Melusine – Hellfest IPA",b:"Melusine",c:"FR",s:"IPA",a:6.66,d:"IPA du festival, agrumes et résine"},
+ {n:"Melusine – Mandragore",b:"Melusine",c:"FR",s:"Pale Ale",a:4.8,d:"Pale ale légère et florale"},
+ {n:"Melusine – Red Against The Machine",b:"Melusine",c:"FR",s:"Berliner Weisse",a:3.9,d:"Acidulée et fruits rouges, très rafraîchissante"},
+ {n:"Melusine – Love and Flowers",b:"Melusine",c:"FR",s:"Witbier",a:4.2,d:"Blanche florale, agrumes et coriandre"},
+ {n:"Le Coup de Cloche Blonde",b:"Huyghe",c:"BE",s:"Belgian Pale Ale",a:6,d:"Blonde belge ronde, fruitée"},
+ {n:"Le Coup de Cloche Rousse",b:"Huyghe",c:"BE",s:"Amber Ale",a:7,d:"Caramel, malt toasté, légère douceur"},
+ {n:"Le Coup de Cloche Triple",b:"Huyghe",c:"BE",s:"Triple",a:8,d:"Triple dorée, épices et fruits mûrs"},
+ {n:"Le Coup de Cloche Rouge",b:"Huyghe",c:"BE",s:"Aromatisée-fruitée",a:7,d:"Fruits rouges, sucrée et acidulée"},
+ {n:"Fauve – Rejaillir Le Feu",b:"Fauve",c:"FR",s:"NEIPA",a:6.2,d:"Hazy IPA juteuse, fruits tropicaux"},
+ {n:"Fauve – Sève de Grenat",b:"Fauve",c:"FR",s:"Sour",a:8,d:"Sour rouge intense, fruits et acidité vive"},
+ {n:"Piggy Brewing – Calibre 8",b:"The Piggy Brewing Company",c:"FR",s:"Double IPA",a:8,d:"Double IPA puissante, agrumes et résine"},
+ {n:"Piggy Brewing – Lupulin Diktat",b:"The Piggy Brewing Company",c:"FR",s:"Double NEIPA",a:8,d:"Double NEIPA dense, explosion de houblon"},
+ {n:"Brasserie du Grand Paris – Burning Clouds",b:"Brasserie du Grand Paris",c:"FR",s:"NEIPA",a:6.5,d:"Trouble, fruitée, amertume douce"},
+ {n:"Saison Dupont",b:"Dupont",c:"BE",s:"Saison",a:6.5,d:"La saison de référence : sèche, poivrée, rustique"},
+ {n:"Bon Secours Blonde",b:"Caulier",c:"BE",s:"Ale",a:6.5,d:"Blonde belge souple et fruitée"},
+ {n:"Rothaus Weizenzäpfle",b:"Rothaus",c:"DE",s:"Weissbier",a:5.4,d:"Blanche de Forêt-Noire, banane et levure"},
+ {n:"Chimay Jaune",b:"Chimay",c:"BE",s:"Belgian Pale Ale",a:6.5,d:"Trappiste dorée, fraîche et légèrement épicée"},
+ {n:"Ocean Beer",b:"",c:"FR",s:"Lager",a:4.7,d:"Lager légère et iodée"},
+];
+
+/* ===== État ===== */
+const MAX_HH=6;
+const DEFAULT_PRESETS=[{label:"Classique",p33:4.5,p50:5.5},{label:"Belge",p33:6,p50:8},{label:"Craft",p33:8,p50:10},{label:"Spéciale",p33:9,p50:11}];
+let CAT=CATALOGUE.slice();
+let saved=null;    // dernière version enregistrée
+let draft=null;    // version en cours d'édition
+let hhPreview="auto";
+
+const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:""});
+const clone=o=>JSON.parse(JSON.stringify(o));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const euro=v=>{if(v===""||v==null||isNaN(+v))return"";const n=+v;return(Number.isInteger(n)?n:n.toFixed(1).replace(".",","))+"€"};
+const toMin=t=>{const[h,m]=(t||"0:0").split(":").map(Number);return h*60+(m||0)};
+const fmtH=t=>{const[h,m]=(t||"").split(":");return m&&m!=="00"?`${+h}h${m}`:`${+h}h`};
+function normalize(d){
+  const o={title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],
+    hhDiscount:d?.hhDiscount??1,presets:Array.isArray(d?.presets)&&d.presets.length?d.presets:clone(DEFAULT_PRESETS),taps:[]};
+  for(let i=0;i<12;i++)o.taps.push({...blankTap(),...(d?.taps?.[i]||{})});
+  return o;
+}
+function hhActive(cfg){
+  if(hhPreview==="on")return true;
+  if(hhPreview==="off")return false;
+  const now=new Date(),m=now.getHours()*60+now.getMinutes(),a=toMin(cfg.hhStart),b=toMin(cfg.hhEnd);
+  if(a===b)return false;
+  // un happy hour qui passe minuit compte pour le jour où il a commencé
+  if(a<b)return cfg.hhDays.includes(now.getDay())&&m>=a&&m<b;
+  if(m>=a)return cfg.hhDays.includes(now.getDay());
+  return m<b&&cfg.hhDays.includes((now.getDay()+6)%7);
+}
+const DAYS=[[1,"Lun","lundi"],[2,"Mar","mardi"],[3,"Mer","mercredi"],[4,"Jeu","jeudi"],[5,"Ven","vendredi"],[6,"Sam","samedi"],[0,"Dim","dimanche"]];
+function daysText(days){
+  const on=DAYS.filter(d=>days.includes(d[0]));
+  if(on.length===7)return"tous les jours";
+  if(!on.length)return"aucun jour";
+  const idx=on.map(d=>DAYS.indexOf(d));
+  const contiguous=idx.every((v,k)=>k===0||v===idx[k-1]+1);
+  if(contiguous&&on.length>2)return`du ${on[0][2]} au ${on[on.length-1][2]}`;
+  return(on.length===1?"le ":"les ")+on.map(d=>d[2]+(on.length>1?"s":"")).join(", ").replace(/, ([^,]*)$/," et $1");
+}
+const hhText=c=>`${daysText(c.hhDays)} de ${fmtH(c.hhStart)} à ${fmtH(c.hhEnd)}`;
+
+/* ===== Rendu écran ===== */
+const LOGO_SRC="assets/logo.png";
+const LOGO=`<div class="logo"><img src="${LOGO_SRC}" alt="V and B"><small>MONTPELLIER LATTES</small></div>`;
+function renderScreen(){
+  const el=document.getElementById("screenBody");
+  const cfg=saved;
+  if(!cfg){el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">Bières pression</h1></div></div><div class="s-sub" style="text-align:left">Chargement de la carte…</div>`;return;}
+  const active=hhActive(cfg);
+  const tapHTML=(t,i)=>{
+    const isHH=t.hh&&active;
+    const p=(a,b)=>isHH&&b!==""?`${a!==""?`<s>${euro(a)}</s>`:""}<span>${euro(b)}</span>`:euro(a);
+    if(!t.name)return`<div class="tap empty"><div class="wflag none"></div><div class="num">${i+1}</div><div class="info"><div class="bname">Bientôt</div><div class="bdesc">Nouvelle bière en préparation</div></div><div></div><div></div></div>`;
+    const meta=[t.style,t.abv!==""?`Alc. ${String(t.abv).replace(".",",")}%`:""].filter(Boolean).join(", ");
+    return`<div class="tap${isHH?" is-hh":""}">${flagWave(t.country,i)}<div class="num">${i+1}</div>
+      <div class="info"><div class="bname">${esc(t.name)}</div>
+      <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
+      <div class="price">${p(t.p33,t.hh33)}</div><div class="price">${p(t.p50,t.hh50)}</div></div>`;
+  };
+  const col=a=>`<div class="s-col"><div class="s-colhead"><span></span><b>33CL</b><b>50CL</b></div>${a}</div>`;
+  const taps=cfg.taps.map(tapHTML);
+  el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">${esc(cfg.title)}</h1></div>
+    <div class="s-right">${active?`<div class="hh-banner">Happy hour <span>jusqu'à ${fmtH(cfg.hhEnd)}</span></div>`:(cfg.hhDays.length?`<div class="s-sub">Happy hour · ${fmtH(cfg.hhStart)} / ${fmtH(cfg.hhEnd)}</div>`:"")}${cfg.subtitle?`<div class="s-sub" style="font-weight:400;text-transform:none;letter-spacing:.01em;color:var(--muted)">${esc(cfg.subtitle)}</div>`:""}</div></div>
+    <div class="s-cols">${col(taps.slice(0,6).join(""))}${col(taps.slice(6).join(""))}</div>
+    <div class="s-foot"><span>${active?`<span class="hl">Prix happy hour en orange</span>`:(cfg.hhDays.length?`<span class="hl">Happy hour</span> ${hhText(cfg)} sur les bières signalées`:"")}</span><span>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</span></div>`;
+}
+
+/* ===== Rendu gestion ===== */
+function hhCount(){return draft?draft.taps.filter(t=>t.hh).length:0}
+function isDirty(){return JSON.stringify(draft)!==JSON.stringify(saved)}
+function refreshBar(){
+  const n=hhCount(),pill=document.getElementById("hhCount");
+  pill.textContent=`${n} / ${MAX_HH}`;pill.classList.toggle("full",n===MAX_HH);
+  const sum=document.getElementById("hhSummary");if(sum&&draft)sum.textContent=`Happy hour ${hhText(draft)}, sur ${n} bière${n>1?"s":""} (6 au maximum).`;
+  const d=isDirty();
+  document.getElementById("dirty").hidden=!d;
+  document.getElementById("revertBtn").hidden=!d;
+  document.getElementById("saveBtn").disabled=!d;
+  document.querySelectorAll(".card").forEach((c,i)=>{
+    const cb=c.querySelector("[data-k=hh]");
+    cb.disabled=!draft.taps[i].hh&&n>=MAX_HH;
+  });
+}
+function countryOptions(sel){return Object.entries(FLAGS).map(([k,v])=>`<option value="${k}"${k===sel?" selected":""}>${v.n}</option>`).join("")}
+function renderDays(){
+  document.getElementById("hhDays").innerHTML=DAYS.map(([v,short,long])=>`<button type="button" class="chip${draft.hhDays.includes(v)?" on":""}" data-day="${v}" aria-pressed="${draft.hhDays.includes(v)}" aria-label="${long}">${short}</button>`).join("");
+  document.getElementById("hhSummary").textContent=`Happy hour ${hhText(draft)}, sur ${hhCount()} bière${hhCount()>1?"s":""} (6 au maximum).`;
+}
+function renderAdmin(){
+  const host=document.getElementById("tapsHost");
+  if(!draft){host.innerHTML=`<div class="empty-state"><h2>Chargement…</h2></div>`;return;}
+  document.getElementById("setTitle").value=draft.title;
+  document.getElementById("setSub").value=draft.subtitle;
+  document.getElementById("setStart").value=draft.hhStart;
+  document.getElementById("setEnd").value=draft.hhEnd;
+  document.getElementById("setDisc").value=draft.hhDiscount;
+  renderDays();
+  document.getElementById("presets").innerHTML=draft.presets.map((p,k)=>`<div class="preset" data-k="${k}">
+    <div class="field"><label for="pl${k}">Nom de la grille</label><input type="text" id="pl${k}" data-pk="label" value="${esc(p.label)}"></div>
+    <div class="field"><label for="pa${k}">33 cl €</label><input type="number" step="0.5" min="0" id="pa${k}" data-pk="p33" value="${esc(p.p33)}"></div>
+    <div class="field"><label for="pb${k}">50 cl €</label><input type="number" step="0.5" min="0" id="pb${k}" data-pk="p50" value="${esc(p.p50)}"></div>
+    <button class="btn" data-pdel aria-label="Supprimer la grille ${esc(p.label)}">Supprimer</button></div>`).join("");
+  host.innerHTML=draft.taps.map((t,i)=>`
+  <article class="card${t.hh?" is-hh":""}" data-i="${i}">
+    <div class="card-head"><span class="n">${i+1}</span><span class="flag">${flagSVG(t.country)}</span>
+      <div class="t"><b>${esc(t.name)||"Tireuse libre"}</b><span>${esc([t.style,t.abv!==""?t.abv+" %":""].filter(Boolean).join(" · "))||"Choisissez une bière"}</span></div></div>
+    <div class="field pick"><label for="q${i}">Changer de bière (catalogue V and B)</label>
+      <input type="text" id="q${i}" data-q placeholder="Rechercher : nom, brasserie, style…" autocomplete="off"><div class="sugg" hidden></div></div>
+    <div class="row r3">
+      <div class="field"><label for="n${i}">Nom affiché</label><input type="text" id="n${i}" data-k="name" value="${esc(t.name)}"></div>
+      <div class="field"><label for="s${i}">Style</label><input type="text" id="s${i}" data-k="style" value="${esc(t.style)}"></div>
+      <div class="field"><label for="a${i}">Degré %</label><input type="number" step="0.1" min="0" id="a${i}" data-k="abv" value="${esc(t.abv)}"></div>
+    </div>
+    <div class="field"><label for="d${i}">Description (sous le nom)</label><textarea id="d${i}" data-k="desc" rows="2">${esc(t.desc)}</textarea></div>
+    <div class="row r4">
+      <div class="field"><label for="c${i}">Pays</label><select id="c${i}" data-k="country">${countryOptions(t.country)}</select></div>
+      <div class="field"><label for="p${i}">33 cl €</label><input type="number" step="0.5" min="0" id="p${i}" data-k="p33" value="${esc(t.p33)}"></div>
+      <div class="field"><label for="q50${i}">50 cl €</label><input type="number" step="0.5" min="0" id="q50${i}" data-k="p50" value="${esc(t.p50)}"></div>
+      <div class="field" style="justify-content:end"><label class="hhtoggle" for="h${i}"><input type="checkbox" id="h${i}" data-k="hh"${t.hh?" checked":""}>Happy hour</label></div>
+    </div>
+    <div class="chips"><span class="lbl">Appliquer</span>${draft.presets.map((p,k)=>`<button type="button" class="chip${+t.p33===+p.p33&&+t.p50===+p.p50?" on":""}" data-preset="${k}">${esc(p.label)} ${euro(p.p33)} / ${euro(p.p50)}</button>`).join("")}</div>
+    <div class="hhprices"${t.hh?"":" hidden"}>
+      <div class="field"><label for="hp${i}">HH 33 cl €</label><input type="number" step="0.5" min="0" id="hp${i}" data-k="hh33" value="${esc(t.hh33)}"></div>
+      <div class="field"><label for="hq${i}">HH 50 cl €</label><input type="number" step="0.5" min="0" id="hq${i}" data-k="hh50" value="${esc(t.hh50)}"></div>
+    </div>
+    <div class="card-actions"><button class="link" data-clear>Vider la tireuse</button></div>
+  </article>`).join("");
+  refreshBar();
+}
+function updateHead(card,t){
+  card.querySelector(".card-head .flag").innerHTML=flagSVG(t.country);
+  card.querySelector(".card-head b").textContent=t.name||"Tireuse libre";
+  card.querySelector(".card-head span:not(.n):not(.flag)").textContent=[t.style,t.abv!==""?t.abv+" %":""].filter(Boolean).join(" · ")||"Choisissez une bière";
+  card.classList.toggle("is-hh",t.hh);
+}
+const disc=()=>+draft.hhDiscount||0;
+const minus=(v)=>v===""||v==null?"":Math.max(0,+v-disc());
+function setHH(t){if(t.hh){t.hh33=minus(t.p33);t.hh50=minus(t.p50);}}
+function rerender(){const y=scrollY;renderAdmin();scrollTo(0,y);}
+function applyPreset(i,p){const t=draft.taps[i];t.p33=p.p33;t.p50=p.p50;setHH(t);rerender();toast(`Tireuse ${i+1} : ${p.label} ${euro(p.p33)} / ${euro(p.p50)}`);}
+function applyBeer(i,b){
+  const t=draft.taps[i];
+  Object.assign(t,{name:b.n,country:FLAGS[b.c]?b.c:t.country,style:b.s||"",abv:b.a??"",desc:b.d||""});
+  if(b.p){t.p33=b.p[0];t.p50=b.p[1];}
+  setHH(t);
+  const y=scrollY;renderAdmin();scrollTo(0,y);
+  toast(`Tireuse ${i+1} : ${b.n}`);
+}
+const fold=x=>String(x||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9%.]+/g," ").trim();
+CAT.forEach(b=>b._k=fold(`${b.n} ${b.b} ${b.s} ${FLAGS[b.c]?.n||""}`));
+function search(q,max=20){
+  const s=fold(q);
+  if(!s)return CAT.slice(0,12);
+  const words=s.split(" ");
+  const hits=[];
+  for(const b of CAT){
+    if(!words.every(w=>b._k.includes(w)))continue;
+    const n=fold(b.n);
+    hits.push([n.startsWith(s)?0:n.includes(s)?1:2,b]);
+  }
+  return hits.sort((a,b)=>a[0]-b[0]).slice(0,max).map(h=>h[1]);
+}
+const beerLine=b=>esc([b.s,b.a!==""&&b.a!=null?b.a+" %":"",b.b].filter(Boolean).join(" · "));
+function setCatalogue(list){
+  CAT=CATALOGUE.slice();
+  const seen=new Set(CAT.map(b=>fold(b.n)));
+  for(const b of (Array.isArray(list)?list:[])){const k=fold(b.n);if(!b.n||seen.has(k))continue;seen.add(k);b._k=fold(`${b.n} ${b.b} ${b.s} ${FLAGS[b.c]?.n||""}`);CAT.push(b);}
+  document.getElementById("catInfo").textContent=`${CAT.length} bières dans le catalogue (vandb.fr). Une bière absente se saisit à la main dans la tireuse.`;
+}
+async function loadCatalogue(){
+  try{
+    const r=await fetch("data/catalogue.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok)throw 0;
+    setCatalogue(await r.json());
+  }catch(e){setCatalogue([]);}
+}
+
+/* ===== Événements gestion ===== */
+const host=document.getElementById("tapsHost");
+host.addEventListener("input",e=>{
+  const card=e.target.closest(".card");if(!card)return;const i=+card.dataset.i;
+  if(e.target.matches("[data-q]")){
+    const box=card.querySelector(".sugg"),res=search(e.target.value);
+    box.innerHTML=res.length?res.map(b=>`<button type="button" data-b="${CAT.indexOf(b)}"><span class="flag">${flagSVG(b.c)}</span><span><b>${esc(b.n)}</b><small>${beerLine(b)}</small></span></button>`).join(""):`<div style="padding:10px" class="hint">Aucune bière trouvée. Saisissez-la directement dans les champs ci-dessous.</div>`;
+    box.hidden=false;return;
+  }
+  const k=e.target.dataset.k;if(!k)return;
+  const t=draft.taps[i];
+  if(k==="hh"){
+    if(e.target.checked&&hhCount()>=MAX_HH){e.target.checked=false;toast(`${MAX_HH} bières maximum en happy hour`);return;}
+    t.hh=e.target.checked;
+    if(t.hh&&t.hh33==="")t.hh33=minus(t.p33);
+    if(t.hh&&t.hh50==="")t.hh50=minus(t.p50);
+    card.querySelector(".hhprices").hidden=!t.hh;
+    card.querySelector("[data-k=hh33]").value=t.hh33;card.querySelector("[data-k=hh50]").value=t.hh50;
+  }else t[k]=e.target.value;
+  updateHead(card,t);refreshBar();
+});
+host.addEventListener("focusin",e=>{if(e.target.matches("[data-q]"))e.target.dispatchEvent(new Event("input",{bubbles:true}))});
+host.addEventListener("click",e=>{
+  const card=e.target.closest(".card");if(!card)return;const i=+card.dataset.i;
+  const b=e.target.closest("[data-b]");
+  if(b){applyBeer(i,CAT[+b.dataset.b]);return;}
+  const pr=e.target.closest("[data-preset]");
+  if(pr){applyPreset(i,draft.presets[+pr.dataset.preset]);return;}
+  if(e.target.matches("[data-clear]")){draft.taps[i]=blankTap();const y=scrollY;renderAdmin();scrollTo(0,y);}
+});
+document.addEventListener("click",e=>{if(!e.target.closest(".pick"))document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
+[["setTitle","title"],["setSub","subtitle"],["setStart","hhStart"],["setEnd","hhEnd"]].forEach(([id,k])=>
+  document.getElementById(id).addEventListener("input",e=>{if(draft){draft[k]=e.target.value;refreshBar();}}));
+
+document.getElementById("revertBtn").onclick=()=>{draft=clone(saved);renderAdmin();};
+
+/* recherche globale */
+const gq=document.getElementById("gq"),gres=document.getElementById("gres");
+function tapOptions(){return draft.taps.map((t,i)=>`<option value="${i}">Tireuse ${i+1}${t.name?" – "+esc(t.name):" (libre)"}</option>`).join("")}
+function renderGlobal(){
+  const q=gq.value.trim();
+  if(!q||!draft){gres.innerHTML="";return;}
+  const res=search(q,25);
+  gres.innerHTML=res.length?res.map(b=>`<div class="grow"><span class="flag">${flagSVG(b.c)}</span><div style="min-width:0"><b>${esc(b.n)}</b><small>${beerLine(b)}</small></div>
+    <select data-place="${CAT.indexOf(b)}" aria-label="Mettre ${esc(b.n)} sur une tireuse"><option value="">Mettre sur…</option>${tapOptions()}</select></div>`).join("")
+    :`<p class="hint">Aucune bière ne correspond à « ${esc(q)} ». Saisissez-la directement dans une tireuse.</p>`;
+}
+gq.addEventListener("input",renderGlobal);
+gres.addEventListener("change",e=>{
+  const sel=e.target.closest("[data-place]");if(!sel||sel.value==="")return;
+  applyBeer(+sel.value,CAT[+sel.dataset.place]);gq.value="";gres.innerHTML="";
+  document.querySelector(`.card[data-i="${sel.value}"]`)?.scrollIntoView({behavior:"smooth",block:"center"});
+});
+/* grilles de prix */
+const presetsEl=document.getElementById("presets");
+presetsEl.addEventListener("input",e=>{
+  const row=e.target.closest(".preset");if(!row)return;const p=draft.presets[+row.dataset.k];
+  const k=e.target.dataset.pk;p[k]=k==="label"?e.target.value:(e.target.value===""?"":+e.target.value);refreshBar();
+});
+presetsEl.addEventListener("change",()=>rerender());
+presetsEl.addEventListener("click",e=>{
+  if(!e.target.matches("[data-pdel]"))return;draft.presets.splice(+e.target.closest(".preset").dataset.k,1);rerender();
+});
+document.getElementById("addPreset").onclick=()=>{draft.presets.push({label:"Nouvelle grille",p33:5,p50:7});rerender();};
+document.getElementById("hhDays").addEventListener("click",e=>{
+  const b=e.target.closest("[data-day]");if(!b)return;const v=+b.dataset.day;
+  draft.hhDays=draft.hhDays.includes(v)?draft.hhDays.filter(x=>x!==v):[...draft.hhDays,v];
+  renderDays();refreshBar();
+});
+["setStart","setEnd"].forEach(id=>document.getElementById(id).addEventListener("change",()=>{if(draft)renderDays();}));
+document.getElementById("setDisc").addEventListener("input",e=>{draft.hhDiscount=e.target.value===""?0:+e.target.value;refreshBar();});
+document.getElementById("applyDisc").onclick=()=>{
+  let n=0;draft.taps.forEach(t=>{if(t.hh){t.hh33=minus(t.p33);t.hh50=minus(t.p50);n++;}});
+  rerender();toast(n?`Remise de ${euro(disc())} appliquée à ${n} bières`:"Aucune bière en happy hour");
+};
+
+/* ===== Navigation, plein écran, horloge ===== */
+function show(view){
+  const locked=view==="gestion"&&!auth;
+  document.getElementById("view-ecran").hidden=view!=="ecran";
+  document.getElementById("view-gestion").hidden=view!=="gestion"||locked;
+  document.getElementById("view-login").hidden=!locked;
+  if(locked)setTimeout(()=>document.getElementById("lgUser").focus(),50);
+  if(view==="gestion"&&!locked){renderAdmin();refreshAuthUI();}
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===view));
+  if(view==="ecran")renderScreen();
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.view));
+document.querySelectorAll("#hhPreview button").forEach(b=>b.onclick=()=>{
+  hhPreview=b.dataset.v;document.querySelectorAll("#hhPreview button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderScreen();});
+let wake=null;
+document.getElementById("fsBtn").onclick=async()=>{
+  try{await document.getElementById("screen").requestFullscreen();}catch(e){toast("Plein écran indisponible ici : utilisez celui du navigateur (F11)");}
+  try{wake=await navigator.wakeLock?.request("screen");}catch(e){}
+};
+let lastState="";
+setInterval(()=>{if(!saved)return;const s=String(hhActive(saved))+JSON.stringify([saved.hhStart,saved.hhEnd,saved.hhDays]);if(s!==lastState){lastState=s;renderScreen();}},20000);
+
+let tt;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600);}
+function setStatus(kind,text){const d=document.getElementById("dot");d.className="dot "+(kind||"");document.getElementById("statusText").textContent=text;}
+
+/* ===== Stockage : GitHub (dépôt) + copie locale ===== */
+const LS_GH="vandb.github",LS_CARTE="vandb.carte";
+const lsGet=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+function detectRepo(){
+  const h=location.hostname;
+  if(!h.endsWith(".github.io"))return"";
+  const owner=h.split(".")[0],seg=location.pathname.split("/").filter(Boolean)[0];
+  return seg&&!seg.includes(".")?`${owner}/${seg}`:`${owner}/${h}`;
+}
+const LS_AUTH="vandb.staff";
+const ssGet=k=>{try{return JSON.parse(sessionStorage.getItem(k)||"null")}catch(e){return null}};
+const ssSet=(k,v)=>{try{v==null?sessionStorage.removeItem(k):sessionStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const lsDel=k=>{try{localStorage.removeItem(k)}catch(e){}};
+let auth=lsGet(LS_AUTH)||ssGet(LS_AUTH)||null;   // {login, token}
+const savedGh=lsGet(LS_GH)||{};
+let gh={repo:savedGh.repo||detectRepo(),branch:savedGh.branch||"main",token:auth?.token||savedGh.token||""};
+const API=(path="data/carte.json")=>`https://api.github.com/repos/${gh.repo}/contents/${path}`;
+const ghHead=()=>({Authorization:`Bearer ${gh.token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
+async function ghGetJson(path){
+  const r=await fetch(`${API(path)}?ref=${encodeURIComponent(gh.branch||"main")}&t=${Date.now()}`,{headers:{...ghHead(),Accept:"application/vnd.github.raw+json"},cache:"no-store"});
+  if(r.status===404)return null;
+  if(!r.ok)throw new Error("gh "+r.status);
+  return r.json();
+}
+async function pushFile(path,obj,message){
+  const branch=gh.branch||"main";let sha;
+  const g=await fetch(`${API(path)}?ref=${encodeURIComponent(branch)}&t=${Date.now()}`,{headers:ghHead(),cache:"no-store"});
+  if(g.ok)sha=(await g.json()).sha;else if(g.status!==404)throw new Error("gh "+g.status);
+  const body={message,content:b64enc(JSON.stringify(obj,null,2)+"\n"),branch};
+  if(sha)body.sha=sha;
+  const p=await fetch(API(path),{method:"PUT",headers:{...ghHead(),"Content-Type":"application/json"},body:JSON.stringify(body)});
+  if(!p.ok)throw new Error("gh "+p.status);
+}
+const b64enc=str=>btoa(unescape(encodeURIComponent(str)));
+const b64dec=b=>decodeURIComponent(escape(atob(b.replace(/\s/g,""))));
+const canWrite=()=>!!(gh.repo&&gh.token);
+
+async function fetchCarte(){
+  if(canWrite())return ghGetJson("data/carte.json");
+  const r=await fetch("data/carte.json?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok)throw new Error("http "+r.status);
+  return r.json();
+}
+async function pushCarte(cfg){
+  await pushFile("data/carte.json",cfg,`Carte pression mise à jour par ${auth?.login||"le staff"} (${new Date().toLocaleString("fr-FR")})`);
+}
+function updateStatus(){
+  if(canWrite())setStatus("live",auth?`Connecté : ${auth.login} · enregistrement vers GitHub`:`Connecté à GitHub · ${gh.repo}`);
+  else if(auth&&detectRepo())setStatus("warn",`Connecté : ${auth.login} · jeton GitHub à ajouter dans « Accès staff et GitHub »`);
+  else if(detectRepo())setStatus("live","Lecture seule · la carte se relit chaque minute");
+  else setStatus("warn","Mode local · enregistrement sur cet appareil");
+}
+function applyIncoming(d){
+  const incoming=normalize(d);
+  if(saved&&JSON.stringify(incoming)===JSON.stringify(saved))return;
+  const editing=draft&&isDirty();
+  saved=incoming;
+  if(!editing){draft=clone(saved);if(!document.getElementById("view-gestion").hidden&&!document.activeElement?.closest?.(".card,.settings,.panel"))renderAdmin();else refreshBar();}
+  else refreshBar();
+  if(document.getElementById("tapsHost").querySelector(".empty-state"))renderAdmin();
+  renderScreen();
+}
+async function refresh(){
+  try{const d=await fetchCarte();lsSet(LS_CARTE,d);applyIncoming(d);updateStatus();}
+  catch(e){
+    const local=lsGet(LS_CARTE);
+    if(!saved)applyIncoming(local);
+    setStatus("warn",String(e.message).includes("401")?"Jeton GitHub refusé : mettez-le à jour dans « Accès staff et GitHub »":"Carte injoignable, affichage de la dernière version connue");
+  }
+}
+
+document.getElementById("saveBtn").onclick=async()=>{
+  const btn=document.getElementById("saveBtn");btn.disabled=true;btn.textContent="Enregistrement…";
+  const cfg=clone(draft);
+  try{
+    if(canWrite()){await pushCarte(cfg);toast("Enregistré sur GitHub : la TV se met à jour d'ici 1 à 2 minutes");}
+    else toast("Enregistré sur cet appareil seulement. Connectez GitHub pour mettre la TV à jour.");
+    lsSet(LS_CARTE,cfg);saved=clone(cfg);renderScreen();
+  }catch(err){
+    const m=String(err.message);
+    toast(m.includes("401")||m.includes("403")?"Jeton GitHub refusé ou sans droit d'écriture":m.includes("409")?"La carte a changé entre-temps : rechargez la page":"Échec de l'enregistrement, réessayez");
+  }
+  finally{btn.textContent="Enregistrer et afficher";refreshBar();}
+};
+/* ===== Accès staff (identifiant + mot de passe) =====
+   data/acces.json contient, par identifiant, un sel et deux boîtes chiffrées AES-GCM
+   avec une clé dérivée du mot de passe (PBKDF2) : un témoin pour vérifier le mot de passe
+   et, une fois configuré, le jeton GitHub. Sans le mot de passe, le jeton est illisible. */
+const ACCESS_CHECK="vandb-lattes";
+const te=new TextEncoder(),td=new TextDecoder();
+const toB64=u=>{let x="";new Uint8Array(u).forEach(c=>x+=String.fromCharCode(c));return btoa(x)};
+const fromB64=v=>Uint8Array.from(atob(v),c=>c.charCodeAt(0));
+const normLogin=l=>String(l||"").trim().toLowerCase();
+async function keyFor(login,pw,salt,iter){
+  const base=await crypto.subtle.importKey("raw",te.encode(normLogin(login)+":"+pw),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt:fromB64(salt),iterations:iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+}
+async function seal(key,text){const iv=crypto.getRandomValues(new Uint8Array(12));return{iv:toB64(iv),ct:toB64(await crypto.subtle.encrypt({name:"AES-GCM",iv},key,te.encode(text)))};}
+async function unseal(key,box){return td.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:fromB64(box.iv)},key,fromB64(box.ct)));}
+async function makeEntry(login,pw,token){
+  const salt=toB64(crypto.getRandomValues(new Uint8Array(16))),iter=310000,key=await keyFor(login,pw,salt,iter);
+  return{login:normLogin(login),salt,iter,check:await seal(key,ACCESS_CHECK),token:token?await seal(key,token):null};
+}
+async function loadAccess(){
+  try{
+    if(canWrite()){const j=await ghGetJson("data/acces.json");if(j)return j;}
+    const r=await fetch("data/acces.json?t="+Date.now(),{cache:"no-store"});
+    return r.ok?await r.json():null;
+  }catch(e){return null}
+}
+async function verify(access,login,pw){
+  const u=access?.users?.find(x=>x.login===normLogin(login));
+  if(!u)return null;
+  const key=await keyFor(login,pw,u.salt,u.iter);
+  try{if(await unseal(key,u.check)!==ACCESS_CHECK)return null;}catch(e){return null}
+  let token="";if(u.token){try{token=await unseal(key,u.token)}catch(e){}}
+  return{user:u,token};
+}
+function storeAuth(remember){
+  if(remember){lsSet(LS_AUTH,auth);ssSet(LS_AUTH,null);}else{ssSet(LS_AUTH,auth);lsDel(LS_AUTH);}
+}
+function refreshAuthUI(){
+  document.getElementById("who").textContent=auth?`Connecté : ${auth.login}`:"";
+  document.getElementById("accLogin").value=auth?.login||"";
+  document.getElementById("ghRepo").value=gh.repo||"";
+  document.getElementById("ghBranch").value=gh.branch||"main";
+  document.getElementById("accState").textContent=gh.token?"Jeton GitHub actif sur cet appareil.":"Aucun jeton GitHub : la carte ne peut pas encore être envoyée à la TV.";
+  updateStatus();
+}
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=document.getElementById("lgBtn"),err=document.getElementById("lgErr");
+  err.hidden=true;btn.disabled=true;btn.textContent="Vérification…";
+  try{
+    if(!crypto?.subtle)throw new Error("crypto");
+    const access=await loadAccess();
+    if(!access){err.textContent="Fichier d'accès introuvable (data/acces.json).";err.hidden=false;return;}
+    const res=await verify(access,document.getElementById("lgUser").value,document.getElementById("lgPass").value);
+    if(!res){err.textContent="Identifiant ou mot de passe incorrect.";err.hidden=false;document.getElementById("lgPass").select();return;}
+    auth={login:res.user.login,token:res.token||(gh.token||"")};
+    gh.token=auth.token;
+    storeAuth(document.getElementById("lgRemember").checked);
+    document.getElementById("lgPass").value="";
+    show("gestion");refresh();
+    toast(`Bienvenue, ${auth.login}`);
+  }catch(ex){err.textContent=String(ex.message)==="crypto"?"Ce navigateur ne permet pas la connexion sécurisée : ouvrez le site en https.":"Connexion impossible, réessayez.";err.hidden=false;}
+  finally{btn.disabled=false;btn.textContent="Se connecter";}
+});
+document.getElementById("logoutBtn").onclick=()=>{
+  if(draft&&isDirty()){draft=clone(saved);}
+  auth=null;lsDel(LS_AUTH);ssSet(LS_AUTH,null);
+  gh.token=savedGh.token||"";
+  show("gestion");updateStatus();toast("Déconnecté");
+};
+document.getElementById("accSave").onclick=async()=>{
+  const st=document.getElementById("accState");
+  const login=normLogin(document.getElementById("accLogin").value)||auth.login;
+  const pw=document.getElementById("accPw").value;
+  const np=document.getElementById("accNewPw").value,np2=document.getElementById("accNewPw2").value;
+  const tokIn=document.getElementById("ghToken").value.trim();
+  gh.repo=document.getElementById("ghRepo").value.trim().replace(/^https?:\/\/github\.com\//,"").replace(/\/$/,"")||gh.repo;
+  gh.branch=document.getElementById("ghBranch").value.trim()||"main";
+  lsSet(LS_GH,{repo:gh.repo,branch:gh.branch,token:savedGh.token||""});
+  if(!pw){st.textContent="Saisissez le mot de passe actuel.";return;}
+  if(np&&np.length<8){st.textContent="Le nouveau mot de passe doit faire au moins 8 caractères.";return;}
+  if(np!==np2){st.textContent="Les deux nouveaux mots de passe ne correspondent pas.";return;}
+  st.textContent="Vérification…";
+  const access=await loadAccess();
+  const res=await verify(access,auth.login,pw);
+  if(!res){st.textContent="Mot de passe actuel incorrect.";return;}
+  const token=tokIn||res.token||gh.token;
+  if(!token){st.textContent="Collez un jeton GitHub pour pouvoir enregistrer l'accès sur le dépôt.";return;}
+  if(!gh.repo){st.textContent="Indiquez le dépôt GitHub (propriétaire/nom).";return;}
+  try{
+    st.textContent="Enregistrement…";
+    gh.token=token;
+    const entry=await makeEntry(login,np||pw,token);
+    const users=(access?.users||[]).filter(u=>u.login!==auth.login&&u.login!==login).concat(entry);
+    await pushFile("data/acces.json",{users},`Accès staff mis à jour (${login})`);
+    auth={login,token};storeAuth(!!lsGet(LS_AUTH));
+    ["accPw","accNewPw","accNewPw2","ghToken"].forEach(id=>document.getElementById(id).value="");
+    refreshAuthUI();
+    st.textContent=`Accès enregistré. Identifiant : ${login}${np?", nouveau mot de passe actif":""}. Le changement est visible sur les autres appareils d'ici 1 à 2 minutes.`;
+    refresh();
+  }catch(ex){
+    const m=String(ex.message);
+    st.textContent=m.includes("401")||m.includes("403")||m.includes("404")?"Le jeton GitHub est refusé ou n'a pas accès à ce dépôt (droit « Contents : Read and write »).":"Échec de l'enregistrement, réessayez.";
+  }
+};
+
+/* ===== Mise à jour du catalogue depuis vandb.fr (via l'action GitHub) ===== */
+const WORKFLOW="catalogue.yml";
+function catMsg(html){const el=document.getElementById("catStatus");el.innerHTML=html;el.hidden=!html;}
+document.getElementById("catUpdate").onclick=async()=>{
+  const btn=document.getElementById("catUpdate");
+  if(!canWrite()){catMsg("Pour lancer la mise à jour, il faut un jeton GitHub enregistré dans « Accès staff et GitHub » (en bas de la page).");return;}
+  btn.disabled=true;
+  const t0=Date.now()-60000;
+  try{
+    const d=await fetch(`https://api.github.com/repos/${gh.repo}/actions/workflows/${WORKFLOW}/dispatches`,{method:"POST",headers:{...ghHead(),"Content-Type":"application/json"},body:JSON.stringify({ref:gh.branch||"main"})});
+    if(d.status===403||d.status===404){catMsg("Le jeton GitHub n'a pas le droit de lancer l'action. Ajoutez la permission « Actions : Read and write » au jeton.");btn.disabled=false;return;}
+    if(!d.ok)throw new Error("gh "+d.status);
+    catMsg("Lecture des 50 pages de www.vandb.fr/biere en cours… (2 à 4 minutes, vous pouvez continuer à travailler)");
+    for(let i=0;i<60;i++){
+      await new Promise(r=>setTimeout(r,10000));
+      const r=await fetch(`https://api.github.com/repos/${gh.repo}/actions/workflows/${WORKFLOW}/runs?event=workflow_dispatch&per_page=5&t=${Date.now()}`,{headers:ghHead(),cache:"no-store"});
+      if(!r.ok)continue;
+      const run=(await r.json()).workflow_runs?.find(x=>Date.parse(x.created_at)>=t0);
+      if(!run){continue;}
+      if(run.status!=="completed"){catMsg(`Lecture de vandb.fr en cours… (${Math.round((Date.now()-t0-60000)/1000)} s)`);continue;}
+      if(run.conclusion==="success"){
+        const list=await ghGetJson("data/catalogue.json");
+        setCatalogue(list);renderGlobal();
+        catMsg(`Catalogue mis à jour depuis vandb.fr le ${new Date().toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})} : ${CAT.length} bières.`);
+      }else{
+        catMsg(`La mise à jour a échoué. <a href="${esc(run.html_url)}" target="_blank" rel="noopener">Voir le détail sur GitHub</a>`);
+      }
+      btn.disabled=false;return;
+    }
+    catMsg("La mise à jour prend plus de temps que prévu. Le catalogue sera rechargé à la prochaine ouverture de la page.");
+  }catch(ex){catMsg("Impossible de lancer la mise à jour, réessayez.");}
+  btn.disabled=false;
+};
+
+document.getElementById("dlJson").onclick=()=>{
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(draft,null,2)+"\n"],{type:"application/json"}));a.download="carte.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+};
+
+/* ===== Démarrage ===== */
+document.getElementById("bg").innerHTML=buildBg();
+renderScreen();renderAdmin();
+loadCatalogue();
+if(location.hash==="#gestion")show("gestion");
+refreshAuthUI();
+refresh();
+setInterval(refresh,60000);
+</script>
+</body>
+</html>
