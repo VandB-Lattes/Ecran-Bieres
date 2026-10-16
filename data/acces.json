@@ -2,13 +2,16 @@
   "users": [
     {
       "login": "staff",
-      "salt": "e4hRb/Un+u3CpE9ZTm5kwA==",
+      "salt": "G/8ynswe7DbcG5JVPafl3w==",
       "iter": 310000,
       "check": {
-        "iv": "SnKC9weFOVMZmJAi",
-        "ct": "62iQObwURESf2t0/f7dy28bMtSQt98RgzMCJhg=="
+        "iv": "Nu2/mXTcENCYEYRf",
+        "ct": "hmWYRHVRoQiCIu7H9aG/ZOJN2BLRE4qSe+FbBg=="
       },
-      "token": null
+      "token": {
+        "iv": "C8kxzRE8hPstJUeH",
+        "ct": "q5CakXgX75wcI88GKInESC0ppFzj4miAZo1OGQae63ARpVDDCagBn20PqcAj6yDF80SWsgyy6it9xt2gcf7WLge2xF+J6/zrHmi3M1GX4QgO74gbzoN2/6msrh48se3LdTUqKFGUjsP/VytyBA=="
+      }
     }
   ]
 }
