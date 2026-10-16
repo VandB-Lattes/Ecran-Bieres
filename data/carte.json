@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1792132217092,
+  "updatedAt": 1792132657063,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts en bouteille",
   "hhStart": "17:00",
@@ -13,7 +13,7 @@
     6,
     0
   ],
-  "numColor": "#7cc8f0",
+  "numColor": "#ff00ff",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
   "descColor": "#f6c11e",
