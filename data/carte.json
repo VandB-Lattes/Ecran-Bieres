@@ -1,7 +1,7 @@
 {
-  "updatedAt": 1792151077279,
+  "updatedAt": 1792153832193,
   "title": "Bières pression",
-  "subtitle": "Possibilité de prendre des crafts en bouteille",
+  "subtitle": "Possibilité de prendre des crafts côté magasin (droit de bouchon de 2€)",
   "bgAnim": "default",
   "hhStart": "17:00",
   "hhEnd": "19:00",
@@ -14,7 +14,7 @@
     6,
     0
   ],
-  "numColor": "#80ffff",
+  "numColor": "#ffffff",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
   "descColor": "#f6c11e",
