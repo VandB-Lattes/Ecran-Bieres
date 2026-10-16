@@ -1119,7 +1119,23 @@ document.getElementById("loginLogo").src=LOGO_SRC;
 document.getElementById("bg").innerHTML=buildBg();
 renderScreen();renderAdmin();
 loadCatalogue();
-if(location.hash==="#gestion")show("gestion");
+// 1. Affiche la gestion par défaut sur ordi/téléphone (sauf si on précise #ecran pour la TV)
+if(location.hash !== "#ecran") {
+    show("gestion");
+}
+
+// 2. Sur la TV (lien terminant par #ecran), active le plein écran au premier clic
+if(location.hash === "#ecran") {
+    document.body.addEventListener('click', async () => {
+        if (!document.fullscreenElement && document.getElementById("view-ecran").hidden === false) {
+            try {
+                await document.getElementById("screen").requestFullscreen();
+                await navigator.wakeLock?.request("screen");
+            } catch(e) {}
+        }
+    }, { once: true });
+}
+
 refreshAuthUI();
 refresh();
 setInterval(refresh,5000);
