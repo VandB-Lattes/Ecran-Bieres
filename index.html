@@ -323,18 +323,22 @@ body{margin:0}
         <button class="btn" id="addPreset">Ajouter une grille</button>
       </div>
     </div>
-    <div class="panel" id="hhPanel">
-      <h2>Happy hour</h2>
-      <div class="inline">
-        <div class="field" style="width:130px"><label for="setStart">Début</label><input type="time" id="setStart" step="300"></div>
-        <div class="field" style="width:130px"><label for="setEnd">Fin</label><input type="time" id="setEnd" step="300"></div>
-        <div class="field"><span class="lbl" id="daysLbl">Jours</span><div class="chips" id="hhDays" role="group" aria-labelledby="daysLbl"></div></div>
-      </div>
-      <div class="inline">
-        <div class="field" style="width:180px"><label for="setDisc">Remise par verre €</label><input type="number" step="0.5" min="0" id="setDisc"></div>
-        <button class="btn" id="applyDisc">Appliquer la remise aux bières happy hour</button>
-      </div>
-      <p class="hint" id="hhSummary"></p>
+  <div class="panel" id="hhPanel">
+    <h2>Happy hour</h2>
+    <div class="inline">
+      <div class="field" style="width:130px"><label for="setStart">Début</label><input type="time" id="setStart" step="300"></div>
+      <div class="field" style="width:130px"><label for="setEnd">Fin</label><input type="time" id="setEnd" step="300"></div>
+      <div class="field"><span class="lbl" id="daysLbl">Jours</span><div class="chips" id="hhDays" role="group" aria-labelledby="daysLbl"></div></div>
+    </div>
+    <div class="inline">
+      <div class="field" style="width:180px"><label for="setDisc">Remise par verre €</label><input type="number" step="0.5" min="0" id="setDisc"></div>
+      <div class="field" style="width:180px"><label for="setHHColor">Couleur des prix HH</label><input type="color" id="setHHColor" value="#e8582a"></div>
+      <button class="btn" id="applyDisc">Appliquer la remise aux bières happy hour</button>
+    </div>
+  <p class="hint" id="hhSummary"></p>
+</div>
+    <p class="hint" id="hhSummary"></p>
+  </div>
     </div>
     <div id="tapsHost" class="taps"></div>
     <details class="panel" id="ghPanel" style="margin-top:18px">
