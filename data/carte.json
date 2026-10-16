@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1792133287244,
+  "updatedAt": 1792133470554,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts en bouteille",
   "hhPriceColor": "#e8582a",
@@ -14,7 +14,7 @@
     6,
     0
   ],
-  "numColor": "#f6c11e",
+  "numColor": "#7cc8f0",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
   "descColor": "#f6c11e",
@@ -195,11 +195,11 @@
       "descColor": ""
     },
     {
-      "name": "Chouffe Cherry",
+      "name": "Levrette aromatisée cerise",
       "country": "BE",
-      "style": "Aromatisée",
-      "abv": 8,
-      "desc": "Douce, gourmande : cerise, caramel, légère acidité",
+      "style": "Aromatisée-fruitée",
+      "abv": 3.5,
+      "desc": "Bière rouge · brasserie Haacht",
       "p33": 6,
       "p50": 8,
       "hh": false,
