@@ -1,8 +1,8 @@
 {
-  "updatedAt": 1792149978927,
+  "updatedAt": 1792150000589,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts en bouteille",
-  "bgAnim": "waves",
+  "bgAnim": "default",
   "hhStart": "17:00",
   "hhEnd": "19:00",
   "hhDays": [
