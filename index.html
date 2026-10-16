@@ -495,8 +495,8 @@ let saved=null;    // dernière version enregistrée
 let draft=null;    // version en cours d'édition
 let hhPreview="auto";
 
-const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:"",numColor:"",nameColor:"",descColor:""});
-const TAP_COLORS=[["numColor","--num","Numéro"],["nameColor","--c-name","Nom"],["descColor","--c-desc","Description"]];
+const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:"",numColor:"",nameColor:"",descColor:"",priceColor:"",hhPriceColor:""});
+const TAP_COLORS=[["numColor","--num","Numéro"],["nameColor","--c-name","Nom"],["descColor","--c-desc","Description"],["priceColor","--c-price","Prix"],["hhPriceColor","--c-hhprice","Prix HH"]];
 const okColor=v=>/^#[0-9a-f]{6}$/i.test(v||"");
 const tapVars=t=>TAP_COLORS.filter(([k])=>okColor(t[k])).map(([k,v])=>`${v}:${t[k]}`).join(";");
 const clone=o=>JSON.parse(JSON.stringify(o));
