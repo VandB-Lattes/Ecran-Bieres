@@ -13,6 +13,18 @@
     6,
     0
   ],
+
+const COLOR_FIELDS=[
+  {k:"numColor",v:"--num",label:"Numéros de tireuse",def:"#e8582a",cls:"num",prev:"12"},
+  {k:"nameColor",v:"--c-name",label:"Nom de la bière",def:"#ffffff",cls:"name",prev:"Paulaner Oktoberfest"},
+  {k:"metaColor",v:"--c-meta",label:"Style et degré",def:"#7cc8f0",cls:"meta",prev:"Blonde, Alc. 6%"},
+  {k:"descColor",v:"--c-desc",label:"Description",def:"#f6c11e",cls:"desc",prev:"Notes maltées, miellées"},
+  {k:"headColor",v:"--c-head",label:"33cl / 50cl",def:"#3a8f8b",cls:"head",prev:"33CL&nbsp;&nbsp;50CL"},
+  {k:"lineColor",v:"--c-line",label:"Ligne sous 33cl",def:"#3a8f8b",cls:"line",prev:""},
+  {k:"priceColor",v:"--c-price",label:"Couleur des prix",def:"#fbeedd",cls:"num",prev:"5,50€"},
+  {k:"hhPriceColor",v:"--c-hhprice",label:"Couleur prix HH",def:"#e8582a",cls:"num",prev:"4,00€"}
+];
+
   "numColor": "#f6c11e",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
