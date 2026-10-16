@@ -117,9 +117,9 @@ main{max-width:1280px;margin:0 auto}
 .bname{font-family:var(--heavy);font-weight:900;font-size:calc(1.8cqw*var(--ts,1));line-height:1.05;color:var(--c-name);overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
 .bmeta{font-family:var(--heavy);font-weight:700;font-size:calc(1.3cqw*var(--ts,1));color:var(--c-meta)}
 .bdesc{font-family:var(--cond);font-weight:500;font-size:calc(1.35cqw*var(--ts,1));line-height:1.1;color:var(--c-desc);overflow-wrap:anywhere}
-.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--chalk)}
+.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
-.tap.is-hh .price{color:var(--orange)}
+.tap.is-hh .price{color:var(--c-hhprice, var(--orange))}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
 .hhtag.off{background:var(--gold);color:var(--ink)}
 .tap.empty .bname{color:var(--muted)}
@@ -134,6 +134,8 @@ main{max-width:1280px;margin:0 auto}
 .seg button{border:0;background:var(--slate);padding:8px 12px;cursor:pointer;font-family:var(--cond);font-size:14px;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--line);color:var(--chalk)}
 .hint{font-size:13px;color:var(--muted)}
+.s-foot .price{color:var(--price-color, var(--chalk))}
+.s-foot .price-hh{color:var(--happy-price-color, var(--gold))}
 
 /* ---------- GESTION ---------- */
 .admin-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:color-mix(in srgb,var(--ink) 92%,transparent);backdrop-filter:blur(6px);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}

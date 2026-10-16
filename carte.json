@@ -2,7 +2,6 @@
   "updatedAt": 1792133287244,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts en bouteille",
-  "hhPriceColor": "#e8582a",
   "hhStart": "17:00",
   "hhEnd": "19:00",
   "hhDays": [
@@ -18,6 +17,8 @@
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
   "descColor": "#f6c11e",
+  "priceColor": "#fbeedd",
+  "hhPriceColor": "#e8582a",
   "headColor": "#3a8f8b",
   "lineColor": "#3a8f8b",
   "hhDiscount": 1,
