@@ -1123,6 +1123,21 @@ if(location.hash==="#gestion")show("gestion");
 refreshAuthUI();
 refresh();
 setInterval(refresh,5000);
+
+// 1. Redirection automatique vers la gestion sur téléphone (écran < 800px)
+if (window.innerWidth <= 800 && location.hash !== "#ecran") {
+    show("gestion");
+}
+
+// 2. Plein écran automatique au premier clic n'importe où sur la TV
+document.body.addEventListener('click', async () => {
+    if (!document.fullscreenElement && document.getElementById("view-ecran").hidden === false) {
+        try {
+            await document.getElementById("screen").requestFullscreen();
+            await navigator.wakeLock?.request("screen");
+        } catch(e) {}
+    }
+}, { once: true }); // Le { once: true } permet de ne déclencher ceci qu'une seule fois
 </script>
 </body>
 </html>
