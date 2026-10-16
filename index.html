@@ -117,7 +117,9 @@ main{max-width:1280px;margin:0 auto}
 .bname{font-family:var(--heavy);font-weight:900;font-size:calc(1.8cqw*var(--ts,1));line-height:1.05;color:var(--c-name);overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
 .bmeta{font-family:var(--heavy);font-weight:700;font-size:calc(1.3cqw*var(--ts,1));color:var(--c-meta)}
 .bdesc{font-family:var(--cond);font-weight:500;font-size:calc(1.35cqw*var(--ts,1));line-height:1.1;color:var(--c-desc);overflow-wrap:anywhere}
-.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
+.price{display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:.15cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
+.price .clbadge{font-size:.95cqw;font-weight:700;letter-spacing:.04em;color:var(--gold);line-height:1;opacity:.95}
+.price .clbadge.std{display:none}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
 .tap.is-hh .price{color:var(--c-hhprice, var(--orange))}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
@@ -586,10 +588,13 @@ function renderScreen(){
     const p=(a,b)=>isHH&&b!==""?`${a!==""?`<s>${euro(a)}</s>`:""}<span>${euro(b)}</span>`:euro(a);
     if(!t.name)return`<div class="tap empty"><div class="wflag none"></div><div class="num">${i+1}</div><div class="info"><div class="bname">Bientôt</div><div class="bdesc">Nouvelle bière en préparation</div></div><div></div><div></div></div>`;
     const meta=[t.style,t.abv!==""?`Alc. ${String(t.abv).replace(".",",")}%`:""].filter(Boolean).join(", ");
+    const cl1=+t.cl33||33, cl2=+t.cl50||50;
+    // badge volume au-dessus du prix si différent de 33 / 50
+    const badge=(cl,std)=>`<span class="clbadge${cl===std?" std":""}">${cl}CL</span>`;
     return`<div class="tap${isHH?" is-hh":""}"${tapVars(t)?` style="${tapVars(t)}"`:""}>${flagWave(t.country,i)}<div class="num">${i+1}</div>
       <div class="info"><div class="bname">${esc(t.name)}</div>
       <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
-      <div class="price">${p(t.p33,t.hh33)}</div><div class="price">${p(t.p50,t.hh50)}</div></div>`;
+      <div class="price">${badge(cl1,33)}${p(t.p33,t.hh33)}</div><div class="price">${badge(cl2,50)}${p(t.p50,t.hh50)}</div></div>`;
   };
   const col=(a,label="",cl1=33,cl2=50)=>`<div class="s-col"><div class="s-colhead">${label?`<span class="hhcol">${label}</span>`:"<span></span>"}<b>${cl1}CL</b><b>${cl2}CL</b></div>${a}</div>`;
   // pendant le happy hour, les bières en happy hour passent dans la colonne de gauche (numéros de tireuse conservés)
