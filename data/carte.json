@@ -1,8 +1,47 @@
 {
+  "updatedAt": 1792132657063,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts en bouteille",
   "hhStart": "17:00",
   "hhEnd": "19:00",
+  "hhDays": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    0
+  ],
+  "numColor": "#ff00ff",
+  "nameColor": "#ffffff",
+  "metaColor": "#7cc8f0",
+  "descColor": "#f6c11e",
+  "headColor": "#3a8f8b",
+  "lineColor": "#3a8f8b",
+  "hhDiscount": 1,
+  "presets": [
+    {
+      "label": "Classique",
+      "p33": 4.5,
+      "p50": 5.5
+    },
+    {
+      "label": "Belge",
+      "p33": 6,
+      "p50": 8
+    },
+    {
+      "label": "Craft",
+      "p33": 8,
+      "p50": 10
+    },
+    {
+      "label": "Spéciale",
+      "p33": 9,
+      "p50": 11
+    }
+  ],
   "taps": [
     {
       "name": "Paulaner Oktoberfest Bier",
@@ -14,7 +53,10 @@
       "p50": 5.5,
       "hh": true,
       "hh33": 3.5,
-      "hh50": 4.5
+      "hh50": 4.5,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Hacker-Pschorr Oktoberfest Bier",
@@ -26,7 +68,10 @@
       "p50": 5.5,
       "hh": true,
       "hh33": 3.5,
-      "hh50": 4.5
+      "hh50": 4.5,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Delirium Tremens",
@@ -38,7 +83,10 @@
       "p50": 9,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Le Coup de Cloche Blanche",
@@ -50,7 +98,10 @@
       "p50": 5,
       "hh": true,
       "hh33": 3,
-      "hh50": 4
+      "hh50": 4,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Vault City – Monsieur Froid",
@@ -62,7 +113,10 @@
       "p50": 11,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Bush de Noël",
@@ -74,7 +128,10 @@
       "p50": 9,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Les Intenables – Mama Whipa",
@@ -86,7 +143,10 @@
       "p50": 10,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Fauve – Mariage à Vegas",
@@ -98,7 +158,10 @@
       "p50": 10,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Mont Hardi West Coast IPA",
@@ -110,7 +173,10 @@
       "p50": 8,
       "hh": true,
       "hh33": 5,
-      "hh50": 7
+      "hh50": 7,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "La Débauche – NEIPA",
@@ -122,7 +188,10 @@
       "p50": 7,
       "hh": true,
       "hh33": 4,
-      "hh50": 6
+      "hh50": 6,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Chouffe Cherry",
@@ -134,7 +203,10 @@
       "p50": 8,
       "hh": false,
       "hh33": "",
-      "hh50": ""
+      "hh50": "",
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     },
     {
       "name": "Cidre – Dan Kelly's Draught Cider",
@@ -146,23 +218,10 @@
       "p50": 7,
       "hh": true,
       "hh33": 4,
-      "hh50": 6
+      "hh50": 6,
+      "numColor": "",
+      "nameColor": "",
+      "descColor": ""
     }
-  ],
-  "hhDiscount": 1,
-  "hhDays": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    0
-  ],
-  "numColor": "#e8582a",
-  "nameColor": "#ffffff",
-  "metaColor": "#7cc8f0",
-  "descColor": "#f6c11e",
-  "headColor": "#3a8f8b",
-  "lineColor": "#3a8f8b"
+  ]
 }
