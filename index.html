@@ -831,7 +831,7 @@ document.getElementById("fsBtn").onclick=async()=>{
   try{wake=await navigator.wakeLock?.request("screen");}catch(e){}
 };
 let lastState="";
-setInterval(()=>{if(!saved)return;const s=String(hhActive(saved))+JSON.stringify([saved.hhStart,saved.hhEnd,saved.hhDays]);if(s!==lastState){lastState=s;renderScreen();}},10000);
+setInterval(()=>{if(!saved)return;const s=String(hhActive(saved))+JSON.stringify([saved.hhStart,saved.hhEnd,saved.hhDays]);if(s!==lastState){lastState=s;renderScreen();}},5000);
 
 let tt;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600);}
 function setStatus(kind,text){const d=document.getElementById("dot");d.className="dot "+(kind||"");document.getElementById("statusText").textContent=text;}
@@ -1086,7 +1086,7 @@ loadCatalogue();
 if(location.hash==="#gestion")show("gestion");
 refreshAuthUI();
 refresh();
-setInterval(refresh,10000);
+setInterval(refresh,5000);
 </script>
 </body>
 </html>
