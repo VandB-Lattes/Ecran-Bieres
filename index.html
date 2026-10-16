@@ -244,6 +244,15 @@ input[type=color]{width:44px;height:34px;padding:0;border:1px solid var(--line);
 [hidden]{display:none!important}
 img{max-width:100%}
 body{margin:0}
+.bg-disco { position:absolute; inset:0; z-index:-1; background: linear-gradient(135deg, var(--ink), #3a8f8b, #e8582a, var(--ink)); background-size: 400% 400%; animation: gradShift 15s ease infinite; opacity: 0.15; }
+@keyframes gradShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+.bg-bubbles-only { position:absolute; inset:0; z-index:-1; overflow:hidden; }
+.bg-bubbles-only .bub { position:absolute; bottom:-5cqw; border-radius:50%; background:var(--gold); opacity:0.2; animation: riseUp linear infinite; }
+@keyframes riseUp { to { transform: translateY(-110vh); } }
+.bg-stars-only { position:absolute; inset:0; z-index:-1; background: var(--ink); }
+.bg-stars-only .s { position:absolute; background:#fff; border-radius:50%; animation: twinkle 3s infinite; }
+.bg-waves { position:absolute; bottom:0; left:0; right:0; height:30cqw; z-index:-1; background: repeating-radial-gradient(circle at 50% 100%, transparent, var(--teal) 10cqw, transparent 20cqw); opacity:0.1; animation: waveBob 8s ease-in-out infinite alternate;}
+@keyframes waveBob { to { transform: scaleY(1.2) translateY(-2cqw); } }
 </style>
 </head>
 <body>
@@ -302,6 +311,7 @@ body{margin:0}
       <div class="inline">
         <div class="field" style="flex:1 1 220px"><label for="setTitle">Titre (en haut à gauche)</label><input type="text" id="setTitle" maxlength="40"></div>
         <div class="field" style="flex:2 1 320px"><label for="setSub">Phrase en haut à droite</label><input type="text" id="setSub" maxlength="90" placeholder="Ex. : Possibilité de prendre des crafts en bouteille"></div>
+<div class="field" style="flex:1 1 180px"><label for="setBg">Animation de fond</label><select id="setBg"><option value="default">Classique (Personnages)</option><option value="disco">Disco</option><option value="bubbles">Pluie de bulles</option><option value="stars">Nuit étoilée</option><option value="waves">Vagues</option><option value="random">Aléatoire (change auto)</option></select></div>
       </div>
       <div class="colors" id="colors"></div>
       <div class="inline"><button class="btn" id="resetColors" type="button">Couleurs par défaut</button></div>
@@ -415,7 +425,23 @@ const CHARS=[
  {w:7, svg:`<svg viewBox="0 0 70 240"><path d="M28 0h14v14h-4v40c20 18 26 50 26 80v106H6V134c0-30 6-62 26-80V14h-4z" fill="#3a8f8b"/>${EYE(35,110,7)}</svg>`},
  {w:9, svg:`<svg viewBox="0 0 90 180"><path d="M36 0h18v36c22 6 32 26 32 50v94H4V86c0-24 10-44 32-50z" fill="#f6c11e"/><rect x="34" y="0" width="22" height="12" fill="#e8582a"/>${EYE(46,78,7)}<path d="M20 100h50v16H20z" fill="#e8582a"/></svg>`},
 ];
-function buildBg(){
+function buildBg(theme){
+  if(!theme || theme === 'random') {
+    const themes = ['default', 'disco', 'bubbles', 'stars', 'waves'];
+    theme = themes[Math.floor(Math.random() * themes.length)];
+  }
+  if (theme === 'disco') return `<div class="bg-disco"></div>`;
+  if (theme === 'waves') return `<div class="bg-waves"></div>`;
+  if (theme === 'bubbles') {
+    let h = '<div class="bg-bubbles-only">';
+    for(let i=0; i<30; i++) { const sz = 0.5 + Math.random()*2; h += `<span class="bub" style="left:${Math.random()*100}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${5+Math.random()*10}s;animation-delay:-${Math.random()*10}s"></span>`; }
+    return h + '</div>';
+  }
+  if (theme === 'stars') {
+    let h = '<div class="bg-stars-only">';
+    for(let i=0; i<60; i++) { const sz = 0.1 + Math.random()*0.3; h += `<span class="s" style="left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${2+Math.random()*4}s;animation-delay:-${Math.random()*5}s"></span>`; }
+    return h + '</div>';
+  }
   let h=`<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="strokes"></div>`;
   const pos=[2,11,20,77,86,94];
   CHARS.forEach((c,i)=>h+=`<div class="char" style="left:${pos[i]}%;width:${c.w}cqw;animation-delay:${-i*0.8}s;animation-duration:${4.5+i*.4}s">${c.svg}</div>`);
@@ -516,7 +542,7 @@ const COLOR_FIELDS=[
 ];
 const PALETTE=[["#ffffff","Blanc"],["#fbeedd","Crème"],["#f6c11e","Jaune"],["#e8582a","Orange"],["#d6336c","Framboise"],["#7cc8f0","Bleu ciel"],["#3a8f8b","Sarcelle"]];
 function normalize(d){
-  const o={updatedAt:+d?.updatedAt||0,title:d?.title||"Bières pression",subtitle:d?.subtitle??"",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
+  const o={updatedAt:+d?.updatedAt||0,title:d?.title||"Bières pression",subtitle:d?.subtitle??"",bgAnim:d?.bgAnim||"default",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
     hhDiscount:d?.hhDiscount??1,presets:Array.isArray(d?.presets)&&d.presets.length?d.presets:clone(DEFAULT_PRESETS),taps:[]};
   for(let i=0;i<12;i++)o.taps.push({...blankTap(),...(d?.taps?.[i]||{})});
   return o;
@@ -569,6 +595,7 @@ function renderScreen(){
   const taps=order.map(i=>tapHTML(cfg.taps[i],i));
   const leftLabel=active&&hhIdx.length?"HAPPY HOUR":"";
   COLOR_FIELDS.forEach(f=>document.getElementById("screen").style.setProperty(f.v,cfg[f.k]));
+  document.getElementById("bg").innerHTML = buildBg(cfg.bgAnim);
   el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">${esc(cfg.title)}</h1></div>
     <div class="s-right">${active?`<div class="hh-banner">Happy hour <span>jusqu'à ${fmtH(cfg.hhEnd)}</span></div>`:(cfg.hhDays.length?`<div class="s-sub">Happy hour · ${fmtH(cfg.hhStart)} / ${fmtH(cfg.hhEnd)}</div>`:"")}${cfg.subtitle?`<div class="s-sub" style="font-weight:400;text-transform:none;letter-spacing:.01em;color:var(--muted)">${esc(cfg.subtitle)}</div>`:""}</div></div>
     <div class="s-cols">${col(taps.slice(0,6).join(""),leftLabel)}${col(taps.slice(6).join(""))}</div>
@@ -645,6 +672,7 @@ function renderAdmin(){
   if(!draft){host.innerHTML=`<div class="empty-state"><h2>Chargement…</h2></div>`;return;}
   document.getElementById("setTitle").value=draft.title;
   document.getElementById("setSub").value=draft.subtitle;
+  document.getElementById("setBg").value=draft.bgAnim;
   renderColors();
   document.getElementById("setStart").value=draft.hhStart;
   document.getElementById("setEnd").value=draft.hhEnd;
@@ -767,7 +795,7 @@ host.addEventListener("click",e=>{
 });
 document.addEventListener("click",e=>{if(!e.target.closest(".pick"))document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
-[["setTitle","title"],["setSub","subtitle"],["setStart","hhStart"],["setEnd","hhEnd"]].forEach(([id,k])=>
+[["setTitle","title"],["setSub","subtitle"],["setBg","bgAnim"],["setStart","hhStart"],["setEnd","hhEnd"]].forEach(([id,k])=>
   document.getElementById(id).addEventListener("input",e=>{if(draft){draft[k]=e.target.value;refreshBar();}}));
 
 document.getElementById("revertBtn").onclick=()=>{draft=clone(saved);renderAdmin();};
