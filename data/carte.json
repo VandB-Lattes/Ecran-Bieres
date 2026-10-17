@@ -1,8 +1,8 @@
 {
-  "updatedAt": 1792215955490,
+  "updatedAt": 1792215967996,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts côté magasin (droit de bouchon de 2€)",
-  "bgAnim": "bubbles",
+  "bgAnim": "waves",
   "bgEvery": 10,
   "bgFest": true,
   "hhStart": "17:00",
