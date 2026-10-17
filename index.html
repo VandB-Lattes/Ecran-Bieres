@@ -119,7 +119,10 @@ main{max-width:1280px;margin:0 auto}
 .bdesc{font-family:var(--cond);font-weight:500;font-size:calc(1.35cqw*var(--ts,1));line-height:1.1;color:var(--c-desc);overflow-wrap:anywhere}
 .price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
-.tap.is-hh .price{color:var(--c-hhprice, var(--orange))}
+.price.cv{flex-direction:column;align-items:flex-end;justify-content:center;gap:.25cqw}
+.price .vlab{font-size:1.2cqw;font-weight:900;letter-spacing:.06em;color:var(--ink);background:var(--c-head);padding:.15cqw .5cqw;border-radius:.3cqw;line-height:1.15}
+.price .pv{display:flex;align-items:baseline;gap:.35cqw}
+.price.hhp{color:var(--c-hhprice, var(--orange))}
 .hhtag{display:inline-block;font-size:.8cqw;filter:none;font-weight:900;letter-spacing:.06em;background:var(--orange);color:var(--chalk);padding:.1cqw .5cqw;margin-left:.6cqw;vertical-align:.25cqw;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%)}
 .hhtag.off{background:var(--gold);color:var(--ink)}
 .tap.empty .bname{color:var(--muted)}
@@ -134,8 +137,6 @@ main{max-width:1280px;margin:0 auto}
 .seg button{border:0;background:var(--slate);padding:8px 12px;cursor:pointer;font-family:var(--cond);font-size:14px;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--line);color:var(--chalk)}
 .hint{font-size:13px;color:var(--muted)}
-.s-foot .price{color:var(--price-color, var(--chalk))}
-.s-foot .price-hh{color:var(--happy-price-color, var(--gold))}
 
 /* ---------- GESTION ---------- */
 .admin-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:color-mix(in srgb,var(--ink) 92%,transparent);backdrop-filter:blur(6px);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}
@@ -163,6 +164,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:none}
 .row{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
 .row.r3{grid-template-columns:1.3fr 1fr .7fr}
 .row.r4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.row.vols .hint{font-size:12.5px}
 .hhtoggle{display:flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:600;cursor:pointer;user-select:none}
 .hhtoggle input{width:18px;height:18px;accent-color:var(--hh)}
 .hhprices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -229,12 +231,13 @@ details.panel[open]>summary::after{content:" –"}
 .cprev.meta{font-family:var(--heavy);font-weight:700;font-size:14px}
 .cprev.head{font-family:var(--heavy);font-weight:900;font-size:14px;letter-spacing:.08em}
 .cprev.line{width:140px;height:26px;border-bottom:3px solid currentColor;border-radius:0}
+.cprev.price{font-family:var(--heavy);font-weight:900;font-size:22px;line-height:1}
 .cprev.desc{font-family:var(--cond);font-weight:500;font-size:15px}
 @media (max-width:520px){.crow{grid-template-columns:1fr}}
 .tcolors{border-top:1px solid var(--line);padding-top:8px}
 .tcolors summary{cursor:pointer;font-family:var(--cond);font-weight:600;font-size:15px;color:var(--muted)}
 .tcolors[open] summary{margin-bottom:8px}
-.trow{display:grid;grid-template-columns:90px minmax(0,1fr);gap:6px 10px;align-items:center;margin-bottom:6px}
+.trow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 10px;align-items:center;margin-bottom:6px}
 .swatch.sm{width:24px;height:24px}
 input[type=color].sm{width:34px;height:26px}
 .trow .chip{font-size:13px;padding:3px 9px}
@@ -244,15 +247,80 @@ input[type=color]{width:44px;height:34px;padding:0;border:1px solid var(--line);
 [hidden]{display:none!important}
 img{max-width:100%}
 body{margin:0}
-.bg-disco { position:absolute; inset:0; z-index:-1; background: linear-gradient(135deg, var(--ink), #3a8f8b, #e8582a, var(--ink)); background-size: 400% 400%; animation: gradShift 15s ease infinite; opacity: 0.15; }
-@keyframes gradShift { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
-.bg-bubbles-only { position:absolute; inset:0; z-index:-1; overflow:hidden; }
-.bg-bubbles-only .bub { position:absolute; bottom:-5cqw; border-radius:50%; background:var(--gold); opacity:0.2; animation: riseUp linear infinite; }
-@keyframes riseUp { to { transform: translateY(-110vh); } }
-.bg-stars-only { position:absolute; inset:0; z-index:-1; background: var(--ink); }
-.bg-stars-only .s { position:absolute; background:#fff; border-radius:50%; animation: twinkle 3s infinite; }
-.bg-waves { position:absolute; bottom:0; left:0; right:0; height:30cqw; z-index:-1; background: repeating-radial-gradient(circle at 50% 100%, transparent, var(--teal) 10cqw, transparent 20cqw); opacity:0.1; animation: waveBob 8s ease-in-out infinite alternate;}
-@keyframes waveBob { to { transform: scaleY(1.2) translateY(-2cqw); } }
+.bg-layer{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.bg-layer.on{opacity:1}
+/* --- Soirée disco : faisceaux qui tournent, spots colorés, reflets de boule à facettes --- */
+.bg .beams{position:absolute;left:50%;top:-40cqw;width:140cqw;height:140cqw;margin-left:-70cqw;border-radius:50%;opacity:.12;
+  background:conic-gradient(from 0deg,var(--teal) 0 6deg,transparent 6deg 30deg,var(--orange) 30deg 36deg,transparent 36deg 60deg,var(--gold) 60deg 66deg,transparent 66deg 90deg,#d6336c 90deg 96deg,transparent 96deg 120deg,var(--teal) 120deg 126deg,transparent 126deg 150deg,var(--orange) 150deg 156deg,transparent 156deg 180deg,var(--gold) 180deg 186deg,transparent 186deg 210deg,#d6336c 210deg 216deg,transparent 216deg 240deg,var(--teal) 240deg 246deg,transparent 246deg 270deg,var(--orange) 270deg 276deg,transparent 276deg 300deg,var(--gold) 300deg 306deg,transparent 306deg 330deg,#d6336c 330deg 336deg,transparent 336deg)}
+.bg .spot{position:absolute;width:26cqw;height:26cqw;border-radius:50%;filter:blur(6cqw);opacity:.22}
+.bg .ball{position:absolute;left:50%;top:-4cqw;width:9cqw;height:9cqw;margin-left:-4.5cqw;border-radius:50%;opacity:.35;
+  background:radial-gradient(circle at 35% 35%,#fff 0 6%,transparent 7%),repeating-conic-gradient(#9aa7ae 0 10deg,#e6e9ec 10deg 20deg);box-shadow:0 0 4cqw rgba(255,255,255,.25)}
+.bg .glint{position:absolute;width:.5cqw;height:.5cqw;border-radius:50%;background:#fff;box-shadow:0 0 1cqw #fff;opacity:0}
+/* --- Mousse : bulles de bière qui montent, lueur ambrée, mousse en bas --- */
+.bg .amber{position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(to top,rgba(246,193,30,.16),transparent)}
+.bg .fbub{position:absolute;bottom:-3cqw;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.55),rgba(246,193,30,.25) 60%,rgba(246,193,30,.05));opacity:0}
+.bg .foam{position:absolute;left:-10%;right:-10%;bottom:-2cqw;height:7cqw;opacity:.12;
+  background:radial-gradient(circle at 10% 60%,#fff 0 2.6cqw,transparent 2.7cqw),radial-gradient(circle at 25% 40%,#fff 0 3.2cqw,transparent 3.3cqw),radial-gradient(circle at 42% 65%,#fff 0 2.4cqw,transparent 2.5cqw),radial-gradient(circle at 58% 45%,#fff 0 3.4cqw,transparent 3.5cqw),radial-gradient(circle at 75% 60%,#fff 0 2.8cqw,transparent 2.9cqw),radial-gradient(circle at 90% 45%,#fff 0 3cqw,transparent 3.1cqw);background-color:transparent}
+/* --- Nuit étoilée : étoiles qui scintillent, étoiles filantes, lune --- */
+.bg .sky{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 110%,rgba(58,143,139,.18),transparent 60%)}
+.bg .moon{position:absolute;right:7cqw;top:4cqw;width:7cqw;height:7cqw;border-radius:50%;opacity:.16;box-shadow:inset -1.6cqw -.6cqw 0 0 var(--chalk);filter:drop-shadow(0 0 2cqw rgba(251,238,221,.5))}
+.bg .dot{position:absolute;border-radius:50%;background:var(--chalk);opacity:.15}
+.bg .shoot{position:absolute;width:12cqw;height:.15cqw;background:linear-gradient(90deg,rgba(251,238,221,.8),transparent);opacity:0;transform:rotate(-20deg)}
+/* --- Vagues de Lattes : vagues superposées sarcelle / orange / jaune --- */
+.bg .wave{position:absolute;left:0;bottom:0;width:200%;height:14cqw;background-repeat:repeat-x;background-size:50% 100%}
+.bg .w1{opacity:.18;bottom:6cqw}
+.bg .w2{opacity:.16;bottom:3cqw}
+.bg .w3{opacity:.16;bottom:0}
+.bg .sun{position:absolute;left:50%;bottom:8cqw;width:16cqw;height:16cqw;margin-left:-8cqw;border-radius:50%;background:radial-gradient(circle,rgba(246,193,30,.35),rgba(232,88,42,.15) 55%,transparent 70%)}
+@media (prefers-reduced-motion:no-preference){
+  .bg .beams{animation:spin 50s linear infinite}
+  .bg .spot{animation:roam 14s ease-in-out infinite alternate}
+  .bg .ball{animation:spin 12s linear infinite}
+  .bg .glint{animation:twinkle 2.6s ease-in-out infinite}
+  .bg .fbub{animation:fizz linear infinite}
+  .bg .foam{animation:foam 9s ease-in-out infinite alternate}
+  .bg .dot{animation:twinkleDot 4s ease-in-out infinite}
+  .bg .shoot{animation:shoot 9s ease-in infinite}
+  .bg .wave{animation:waveX linear infinite}
+  .bg .w1{animation-duration:38s}
+  .bg .w2{animation-duration:26s;animation-direction:reverse}
+  .bg .w3{animation-duration:18s}
+  .bg .sun{animation:sunPulse 8s ease-in-out infinite alternate}
+}
+/* --- Fêtes : particules SVG --- */
+.bg .ft{position:absolute;inset:0}
+.bg .fp{position:absolute;top:0;opacity:.5;will-change:transform}
+.bg .fp svg,.bg .fh svg{display:block;width:100%;height:100%;overflow:visible}
+.bg .fh{position:absolute;bottom:-1cqw;opacity:.28;transform-origin:50% 100%}
+.bg .fw{position:absolute;opacity:0}
+.bg .eq{position:absolute;left:0;right:0;bottom:0;height:9cqw;display:flex;align-items:flex-end;gap:.6cqw;padding:0 2cqw;opacity:.16}
+.bg .eq i{flex:1;background:linear-gradient(to top,var(--orange),var(--gold));border-radius:.3cqw .3cqw 0 0;transform-origin:50% 100%}
+.bg .pat{position:absolute;inset:0}
+@media (prefers-reduced-motion:no-preference){
+  .bg .fp.m-fall{animation:pFall linear infinite}
+  .bg .fp.m-rise{animation:pRise linear infinite}
+  .bg .fp.m-swim{animation:pSwim linear infinite}
+  .bg .fp.m-float{animation:pFloat ease-in-out infinite alternate}
+  .bg .fh{animation:bob 5s ease-in-out infinite}
+  .bg .fw{animation:fwBurst ease-out infinite}
+  .bg .eq i{animation:eq .9s ease-in-out infinite alternate}
+  .bg .pat.slide{animation:patSlide 60s linear infinite}
+}
+@keyframes pFall{0%{transform:translate(0,-12cqw) rotate(0)}50%{transform:translate(var(--sx,2cqw),26cqw) rotate(calc(var(--rt,180deg)/2))}100%{transform:translate(0,64cqw) rotate(var(--rt,180deg))}}
+@keyframes pRise{0%{transform:translate(0,62cqw) rotate(0);opacity:0}10%{opacity:.45}50%{transform:translate(var(--sx,2cqw),30cqw) rotate(calc(var(--rt,30deg)/2))}90%{opacity:.4}100%{transform:translate(0,-12cqw) rotate(var(--rt,30deg));opacity:0}}
+@keyframes pSwim{0%{transform:translate(-14cqw,0)}25%{transform:translate(25cqw,var(--sy,-2cqw))}50%{transform:translate(55cqw,0)}75%{transform:translate(85cqw,var(--sy,-2cqw))}100%{transform:translate(114cqw,0)}}
+@keyframes pFloat{0%{transform:translate(0,0) rotate(-8deg)}100%{transform:translate(var(--sx,3cqw),var(--sy,-3cqw)) rotate(8deg)}}
+@keyframes fwBurst{0%,8%{transform:scale(.05);opacity:0}12%{opacity:.75}38%{transform:scale(1);opacity:.55}55%,100%{transform:scale(1.15);opacity:0}}
+@keyframes eq{0%{transform:scaleY(.15)}100%{transform:scaleY(1)}}
+@keyframes patSlide{to{background-position:20cqw 10cqw}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes roam{0%{transform:translate(0,0)}50%{transform:translate(18cqw,-8cqw)}100%{transform:translate(-14cqw,10cqw)}}
+@keyframes fizz{0%{transform:translate(0,0);opacity:0}8%{opacity:.8}50%{transform:translate(.8cqw,-30cqw)}92%{opacity:.6}100%{transform:translate(-.6cqw,-62cqw);opacity:0}}
+@keyframes foam{to{transform:translateX(4%) translateY(-.6cqw)}}
+@keyframes twinkleDot{0%,100%{opacity:.08;transform:scale(.7)}50%{opacity:.5;transform:scale(1)}}
+@keyframes shoot{0%,82%{opacity:0;transform:translate(0,0) rotate(-20deg)}85%{opacity:.7}100%{opacity:0;transform:translate(-40cqw,15cqw) rotate(-20deg)}}
+@keyframes waveX{to{transform:translateX(-50%)}}
+@keyframes sunPulse{to{transform:scale(1.12);opacity:.8}}
 </style>
 </head>
 <body>
@@ -311,8 +379,24 @@ body{margin:0}
       <div class="inline">
         <div class="field" style="flex:1 1 220px"><label for="setTitle">Titre (en haut à gauche)</label><input type="text" id="setTitle" maxlength="40"></div>
         <div class="field" style="flex:2 1 320px"><label for="setSub">Phrase en haut à droite</label><input type="text" id="setSub" maxlength="90" placeholder="Ex. : Possibilité de prendre des crafts en bouteille"></div>
-<div class="field" style="flex:1 1 180px"><label for="setBg">Animation de fond</label><select id="setBg"><option value="default">Classique (Personnages)</option><option value="disco">Disco</option><option value="bubbles">Pluie de bulles</option><option value="stars">Nuit étoilée</option><option value="waves">Vagues</option><option value="random">Aléatoire (change auto)</option></select></div>
+
       </div>
+      <div class="inline">
+        <div class="field" style="flex:1 1 220px"><label for="setBg">Fond animé</label>
+          <select id="setBg">
+            <option value="default">Classique (personnages V and B)</option>
+            <option value="disco">Soirée disco</option>
+            <option value="bubbles">Mousse (bulles de bière)</option>
+            <option value="stars">Nuit étoilée</option>
+            <option value="waves">Vagues de Lattes</option>
+            <option value="random">Aléatoire (change tout seul)</option>
+            <optgroup label="Fêtes" id="festOpts"></optgroup>
+          </select></div>
+        <div class="field" style="width:200px" id="bgEveryWrap"><label for="setBgEvery">Changer toutes les (minutes)</label><input type="number" id="setBgEvery" min="1" max="120" step="1"></div>
+        <button class="btn" type="button" id="bgPreview">Voir ce fond sur l'écran</button>
+      </div>
+      <label class="hhtoggle" for="setBgFest"><input type="checkbox" id="setBgFest">Passer automatiquement au fond de la fête du moment</label>
+      <p class="hint" id="festInfo"></p>
       <div class="colors" id="colors"></div>
       <div class="inline"><button class="btn" id="resetColors" type="button">Couleurs par défaut</button></div>
       <p class="hint">Laissez la phrase vide pour ne rien afficher. Cliquez « Enregistrer et afficher » pour envoyer les changements à la TV.</p>
@@ -335,22 +419,19 @@ body{margin:0}
         <button class="btn" id="addPreset">Ajouter une grille</button>
       </div>
     </div>
-  <div class="panel" id="hhPanel">
-    <h2>Happy hour</h2>
-    <div class="inline">
-      <div class="field" style="width:130px"><label for="setStart">Début</label><input type="time" id="setStart" step="300"></div>
-      <div class="field" style="width:130px"><label for="setEnd">Fin</label><input type="time" id="setEnd" step="300"></div>
-      <div class="field"><span class="lbl" id="daysLbl">Jours</span><div class="chips" id="hhDays" role="group" aria-labelledby="daysLbl"></div></div>
-    </div>
-    <div class="inline">
-      <div class="field" style="width:180px"><label for="setDisc">Remise par verre €</label><input type="number" step="0.5" min="0" id="setDisc"></div>
-      <div class="field" style="width:180px"><label for="setHHColor">Couleur des prix HH</label><input type="color" id="setHHColor" value="#e8582a"></div>
-      <button class="btn" id="applyDisc">Appliquer la remise aux bières happy hour</button>
-    </div>
-  <p class="hint" id="hhSummary"></p>
-</div>
-    <p class="hint" id="hhSummary"></p>
-  </div>
+    <div class="panel" id="hhPanel">
+      <h2>Happy hour</h2>
+      <div class="inline">
+        <div class="field" style="width:130px"><label for="setStart">Début</label><input type="time" id="setStart" step="300"></div>
+        <div class="field" style="width:130px"><label for="setEnd">Fin</label><input type="time" id="setEnd" step="300"></div>
+        <div class="field"><span class="lbl" id="daysLbl">Jours</span><div class="chips" id="hhDays" role="group" aria-labelledby="daysLbl"></div></div>
+      </div>
+      <div class="inline">
+        <div class="field" style="width:180px"><label for="setDisc">Remise par verre €</label><input type="number" step="0.5" min="0" id="setDisc"></div>
+        <button class="btn" id="applyDisc">Appliquer la remise aux bières happy hour</button>
+      </div>
+      <p class="hint" id="hhSummary"></p>
+      <p class="hint">Les couleurs des prix normaux et happy hour se règlent dans le panneau « Écran ».</p>
     </div>
     <div id="tapsHost" class="taps"></div>
     <details class="panel" id="ghPanel" style="margin-top:18px">
@@ -425,22 +506,33 @@ const CHARS=[
  {w:7, svg:`<svg viewBox="0 0 70 240"><path d="M28 0h14v14h-4v40c20 18 26 50 26 80v106H6V134c0-30 6-62 26-80V14h-4z" fill="#3a8f8b"/>${EYE(35,110,7)}</svg>`},
  {w:9, svg:`<svg viewBox="0 0 90 180"><path d="M36 0h18v36c22 6 32 26 32 50v94H4V86c0-24 10-44 32-50z" fill="#f6c11e"/><rect x="34" y="0" width="22" height="12" fill="#e8582a"/>${EYE(46,78,7)}<path d="M20 100h50v16H20z" fill="#e8582a"/></svg>`},
 ];
+/* ===== Fonds animés ===== */
+const BG_THEMES=["default","disco","bubbles","stars","waves"];
+const BG_CHOICES=[...BG_THEMES,"random"];  // complété plus bas par les fêtes
+const BG_NAMES={default:"Classique",disco:"Soirée disco",bubbles:"Mousse",stars:"Nuit étoilée",waves:"Vagues de Lattes"};
+const rnd=(i,k)=>{const x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x)};   // pseudo-aléatoire stable
+const waveSVG=(c,h)=>`url(&quot;data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'><path d='M0 ${h} C 33 ${h-14}, 67 ${h+14}, 100 ${h} S 167 ${h-14}, 200 ${h} V40 H0Z' fill='${c}'/></svg>`).replace(/'/g,"%27")}&quot;)`;
 function buildBg(theme){
-  if(!theme || theme === 'random') {
-    const themes = ['default', 'disco', 'bubbles', 'stars', 'waves'];
-    theme = themes[Math.floor(Math.random() * themes.length)];
+  if(FEST[theme])return buildFest(theme);
+  if(theme==="disco"){
+    let h=`<div class="beams"></div><div class="ball"></div>`;
+    [["var(--teal)",8,20],["var(--orange)",62,10],["var(--gold)",30,55],["#d6336c",75,58]].forEach(([c,x,y],i)=>h+=`<div class="spot" style="background:${c};left:${x}%;top:${y}%;animation-delay:${-i*3.5}s;animation-duration:${12+i*2}s"></div>`);
+    for(let i=0;i<22;i++)h+=`<span class="glint" style="left:${(rnd(i,1)*100).toFixed(1)}%;top:${(rnd(i,2)*90).toFixed(1)}%;animation-delay:${-(rnd(i,3)*2.6).toFixed(2)}s;animation-duration:${(1.8+rnd(i,4)*2).toFixed(2)}s"></span>`;
+    return h;
   }
-  if (theme === 'disco') return `<div class="bg-disco"></div>`;
-  if (theme === 'waves') return `<div class="bg-waves"></div>`;
-  if (theme === 'bubbles') {
-    let h = '<div class="bg-bubbles-only">';
-    for(let i=0; i<30; i++) { const sz = 0.5 + Math.random()*2; h += `<span class="bub" style="left:${Math.random()*100}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${5+Math.random()*10}s;animation-delay:-${Math.random()*10}s"></span>`; }
-    return h + '</div>';
+  if(theme==="bubbles"){
+    let h=`<div class="amber"></div>`;
+    for(let i=0;i<34;i++){const sz=(.5+rnd(i,1)*1.8).toFixed(2);h+=`<span class="fbub" style="left:${(rnd(i,2)*100).toFixed(1)}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${(9+rnd(i,3)*10).toFixed(1)}s;animation-delay:${-(rnd(i,4)*18).toFixed(1)}s"></span>`;}
+    return h+`<div class="foam"></div>`;
   }
-  if (theme === 'stars') {
-    let h = '<div class="bg-stars-only">';
-    for(let i=0; i<60; i++) { const sz = 0.1 + Math.random()*0.3; h += `<span class="s" style="left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${2+Math.random()*4}s;animation-delay:-${Math.random()*5}s"></span>`; }
-    return h + '</div>';
+  if(theme==="stars"){
+    let h=`<div class="sky"></div><div class="moon"></div>`;
+    for(let i=0;i<70;i++){const sz=(.12+rnd(i,1)*.32).toFixed(2);h+=`<span class="dot" style="left:${(rnd(i,2)*100).toFixed(1)}%;top:${(rnd(i,3)*100).toFixed(1)}%;width:${sz}cqw;height:${sz}cqw;animation-delay:${-(rnd(i,4)*4).toFixed(2)}s;animation-duration:${(2.5+rnd(i,5)*4).toFixed(1)}s"></span>`;}
+    [[70,10,0],[35,6,4.5],[90,22,7]].forEach(([x,y,d])=>h+=`<span class="shoot" style="left:${x}%;top:${y}%;animation-delay:${d}s"></span>`);
+    return h;
+  }
+  if(theme==="waves"){
+    return`<div class="sun"></div><div class="wave w1" style="background-image:${waveSVG("#3a8f8b",18)}"></div><div class="wave w2" style="background-image:${waveSVG("#e8582a",22)}"></div><div class="wave w3" style="background-image:${waveSVG("#f6c11e",26)}"></div>`;
   }
   let h=`<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="strokes"></div>`;
   const pos=[2,11,20,77,86,94];
@@ -449,9 +541,180 @@ function buildBg(theme){
   [[8,22],[48,8],[92,40],[60,60],[30,48]].forEach(([x,y],i)=>h+=`<span class="star" style="left:${x}%;top:${y}%;animation-delay:${-i*0.9}s">✦</span>`);
   return h;
 }
+/* ===== Fêtes : formes (viewBox 0 0 100 100) ===== */
+const SH={
+  heart:c=>`<path d="M50 86C20 64 6 46 18 30 28 16 44 20 50 32 56 20 72 16 82 30 94 46 80 64 50 86Z" fill="${c}"/>`,
+  star:c=>`<polygon points="50,6 61,38 95,38 67,58 78,92 50,72 22,92 33,58 5,38 39,38" fill="${c}"/>`,
+  snow:c=>`<g stroke="${c}" stroke-width="6" stroke-linecap="round" fill="none"><path d="M50 8V92M14 29L86 71M14 71L86 29"/><path d="M40 14L50 24 60 14M40 86L50 76 60 86M12 42L25 38 22 25M88 58L75 62 78 75M12 58L25 62 22 75M88 42L75 38 78 25"/></g>`,
+  confetti:c=>`<rect x="34" y="18" width="32" height="64" rx="5" fill="${c}"/>`,
+  dot:c=>`<circle cx="50" cy="50" r="30" fill="${c}"/>`,
+  ring:c=>`<circle cx="50" cy="50" r="30" fill="none" stroke="${c}" stroke-width="7"/>`,
+  egg:c=>`<ellipse cx="50" cy="54" rx="30" ry="40" fill="${c}"/><path d="M21 50L31 42 41 50 51 42 61 50 71 42 80 49" stroke="#fff" stroke-width="5" fill="none" opacity=".7"/><path d="M24 66L76 66" stroke="#fff" stroke-width="4" stroke-dasharray="3 7" opacity=".7"/>`,
+  bell:c=>`<path d="M50 10C70 10 76 30 76 48 76 64 84 70 88 76H12C16 70 24 64 24 48 24 30 30 10 50 10Z" fill="${c}"/><circle cx="50" cy="84" r="8" fill="${c}"/><path d="M40 8Q50 -2 60 8" stroke="#e8582a" stroke-width="5" fill="none"/>`,
+  flower:c=>`<g fill="${c}"><circle cx="50" cy="26" r="16"/><circle cx="73" cy="43" r="16"/><circle cx="64" cy="70" r="16"/><circle cx="36" cy="70" r="16"/><circle cx="27" cy="43" r="16"/></g><circle cx="50" cy="50" r="12" fill="#f6c11e"/>`,
+  fish:c=>`<ellipse cx="44" cy="50" rx="32" ry="20" fill="${c}"/><polygon points="70,50 96,30 96,70" fill="${c}"/><circle cx="26" cy="45" r="4" fill="#1c1512"/><path d="M40 36Q50 50 40 64" stroke="#fff" stroke-width="3" fill="none" opacity=".6"/>`,
+  tie:c=>`<polygon points="40,8 60,8 64,20 56,27 68,80 50,95 32,80 44,27 36,20" fill="${c}"/><path d="M46 40L58 52M44 58L60 72" stroke="#fff" stroke-width="4" opacity=".55"/>`,
+  mustache:c=>`<path d="M50 44C44 34 30 34 22 44 16 52 8 52 4 46 6 60 20 66 32 60 40 56 46 52 50 50 54 52 60 56 68 60 80 66 94 60 96 46 92 52 84 52 78 44 70 34 56 34 50 44Z" fill="${c}"/>`,
+  note:c=>`<circle cx="34" cy="76" r="14" fill="${c}"/><rect x="44" y="14" width="7" height="62" fill="${c}"/><path d="M51 14C70 22 82 30 74 52 72 40 62 34 51 34Z" fill="${c}"/>`,
+  notes:c=>`<circle cx="26" cy="78" r="12" fill="${c}"/><circle cx="72" cy="70" r="12" fill="${c}"/><rect x="33" y="22" width="6" height="56" fill="${c}"/><rect x="79" y="14" width="6" height="56" fill="${c}"/><polygon points="33,22 85,14 85,28 33,36" fill="${c}"/>`,
+  pumpkin:c=>`<g fill="${c}"><ellipse cx="32" cy="58" rx="22" ry="30"/><ellipse cx="68" cy="58" rx="22" ry="30"/><ellipse cx="50" cy="58" rx="24" ry="32"/></g><rect x="46" y="18" width="8" height="14" rx="3" fill="#3a8f8b"/><g fill="#1c1512"><polygon points="34,50 42,40 46,52"/><polygon points="66,50 58,40 54,52"/><path d="M30 66Q50 84 70 66L62 70 56 64 50 70 44 64 38 70Z"/></g>`,
+  bat:c=>`<path d="M50 40C44 30 36 30 30 36 24 28 12 28 4 36 12 40 16 48 18 56 24 50 32 50 38 56 42 50 46 48 50 52 54 48 58 50 62 56 68 50 76 50 82 56 84 48 88 40 96 36 88 28 76 28 70 36 64 30 56 30 50 40Z" fill="${c}"/>`,
+  ghost:c=>`<path d="M20 92V46A30 30 0 0 1 80 46V92L70 82 60 92 50 82 40 92 30 82Z" fill="${c}"/><ellipse cx="40" cy="46" rx="5" ry="8" fill="#1c1512"/><ellipse cx="60" cy="46" rx="5" ry="8" fill="#1c1512"/>`,
+  leaf:c=>`<path d="M50 92C20 70 14 36 50 8 86 36 80 70 50 92Z" fill="${c}"/><path d="M50 92V20M50 50L34 38M50 64L66 52" stroke="#1c1512" stroke-width="3" opacity=".35" fill="none"/>`,
+  grape:c=>`<g fill="${c}"><circle cx="38" cy="34" r="12"/><circle cx="62" cy="34" r="12"/><circle cx="50" cy="52" r="12"/><circle cx="28" cy="52" r="11"/><circle cx="72" cy="52" r="11"/><circle cx="40" cy="70" r="11"/><circle cx="60" cy="70" r="11"/><circle cx="50" cy="86" r="10"/></g><path d="M50 22C50 12 56 6 66 4" stroke="#3a8f8b" stroke-width="4" fill="none"/><path d="M52 16C62 4 80 6 84 14 72 20 60 20 52 16Z" fill="#3a8f8b"/>`,
+  wine:c=>`<path d="M28 8H72C74 40 64 54 50 54 36 54 26 40 28 8Z" fill="none" stroke="${c}" stroke-width="5"/><path d="M30 28H70C68 44 60 52 50 52 40 52 32 44 30 28Z" fill="#8e1b3e"/><rect x="47" y="54" width="6" height="28" fill="${c}"/><ellipse cx="50" cy="88" rx="20" ry="5" fill="${c}"/>`,
+  flute:c=>`<path d="M38 6H62C62 40 58 56 50 56 42 56 38 40 38 6Z" fill="${c}" opacity=".9"/><g fill="#fff" opacity=".8"><circle cx="47" cy="40" r="2.5"/><circle cx="53" cy="28" r="2"/><circle cx="48" cy="18" r="1.8"/></g><rect x="48" y="56" width="4" height="28" fill="${c}"/><ellipse cx="50" cy="90" rx="16" ry="4" fill="${c}"/>`,
+  shamrock:c=>`<g fill="${c}" transform="translate(50 50)"><g><path d="M0 -2C-14 -12 -22 -26 -12 -34 -6 -38 0 -34 0 -28 0 -34 6 -38 12 -34 22 -26 14 -12 0 -2Z"/></g><path transform="rotate(120)" d="M0 -2C-14 -12 -22 -26 -12 -34 -6 -38 0 -34 0 -28 0 -34 6 -38 12 -34 22 -26 14 -12 0 -2Z"/><path transform="rotate(240)" d="M0 -2C-14 -12 -22 -26 -12 -34 -6 -38 0 -34 0 -28 0 -34 6 -38 12 -34 22 -26 14 -12 0 -2Z"/></g><path d="M52 54Q60 76 54 94" stroke="${c}" stroke-width="5" fill="none"/>`,
+  hat:c=>`<rect x="30" y="18" width="40" height="44" fill="${c}"/><rect x="14" y="60" width="72" height="10" rx="4" fill="${c}"/><rect x="30" y="48" width="40" height="8" fill="#1c1512"/><rect x="44" y="46" width="12" height="12" fill="none" stroke="#f6c11e" stroke-width="3"/>`,
+  coin:c=>`<circle cx="50" cy="50" r="30" fill="${c}"/><circle cx="50" cy="50" r="22" fill="none" stroke="#fff" stroke-width="3" opacity=".5"/>`,
+  cocktail:c=>`<polygon points="14,14 86,14 50,54" fill="${c}"/><rect x="47" y="54" width="6" height="28" fill="${c}"/><ellipse cx="50" cy="88" rx="18" ry="5" fill="${c}"/><line x1="36" y1="4" x2="60" y2="36" stroke="#fbeedd" stroke-width="3"/><circle cx="58" cy="32" r="7" fill="#3a8f8b"/><path d="M70 14A14 14 0 0 1 84 0" stroke="#f6c11e" stroke-width="5" fill="none"/>`,
+  mug:c=>`<rect x="20" y="30" width="48" height="58" rx="5" fill="${c}"/><path d="M68 42H80Q90 42 90 54V64Q90 76 80 76H68" stroke="${c}" stroke-width="7" fill="none"/><g fill="#fbeedd"><circle cx="26" cy="30" r="10"/><circle cx="40" cy="24" r="12"/><circle cx="56" cy="26" r="11"/><circle cx="66" cy="32" r="8"/></g><rect x="30" y="42" width="5" height="38" rx="2" fill="#fff" opacity=".35"/>`,
+  olive:c=>`<ellipse cx="50" cy="50" rx="24" ry="18" fill="${c}"/><circle cx="62" cy="46" r="6" fill="#e8582a"/>`,
+  ball:c=>`<circle cx="50" cy="50" r="40" fill="#fff"/><polygon points="50,34 64,44 59,60 41,60 36,44" fill="#1c1512"/><g stroke="#1c1512" stroke-width="3"><path d="M50 34V12M64 44L84 36M59 60L72 78M41 60L28 78M36 44L16 36"/></g><circle cx="50" cy="50" r="40" fill="none" stroke="${c}" stroke-width="3"/>`,
+  trophy:c=>`<path d="M28 12H72V36C72 54 62 62 50 62 38 62 28 54 28 36Z" fill="${c}"/><path d="M28 18H14Q14 42 32 46M72 18H86Q86 42 68 46" stroke="${c}" stroke-width="5" fill="none"/><rect x="45" y="62" width="10" height="14" fill="${c}"/><rect x="30" y="76" width="40" height="12" rx="2" fill="${c}"/><polygon points="50,24 54,34 64,34 56,40 59,50 50,44 41,50 44,40 36,34 46,34" fill="#fff" opacity=".6"/>`,
+  bike:c=>`<g fill="none" stroke="${c}" stroke-width="5"><circle cx="24" cy="64" r="18"/><circle cx="78" cy="64" r="18"/><path d="M24 64L42 36H70L78 64M42 36L54 64H24M54 64L70 36M38 28H50M66 26L70 36"/></g>`,
+  jersey:c=>`<path d="M32 10L14 22 22 40 30 36V90H70V36L78 40 86 22 68 10C64 18 58 22 50 22 42 22 36 18 32 10Z" fill="${c}"/>`,
+  pois:c=>`<path d="M32 10L14 22 22 40 30 36V90H70V36L78 40 86 22 68 10C64 18 58 22 50 22 42 22 36 18 32 10Z" fill="#fff"/><g fill="${c}"><circle cx="40" cy="44" r="5"/><circle cx="60" cy="44" r="5"/><circle cx="50" cy="60" r="5"/><circle cx="38" cy="76" r="5"/><circle cx="62" cy="76" r="5"/></g>`,
+  pretzel:c=>`<path d="M50 80C22 82 8 60 18 40 28 20 52 26 50 48 48 26 72 20 82 40 92 60 78 82 50 80ZM30 70L70 40M70 70L30 40" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff" opacity=".8"><circle cx="24" cy="50" r="2"/><circle cx="76" cy="50" r="2"/><circle cx="50" cy="74" r="2"/></g>`,
+  tree:c=>`<polygon points="50,8 76,44 62,44 84,72 16,72 38,44 24,44" fill="${c}"/><rect x="44" y="72" width="12" height="16" fill="#8b5a2b"/><polygon points="50,0 53,8 61,8 55,13 57,21 50,16 43,21 45,13 39,8 47,8" fill="#f6c11e"/><g fill="#e8582a"><circle cx="40" cy="58" r="3"/><circle cx="62" cy="62" r="3"/><circle cx="52" cy="36" r="3"/></g>`,
+  gift:c=>`<rect x="16" y="38" width="68" height="52" fill="${c}"/><rect x="12" y="28" width="76" height="14" fill="${c}"/><rect x="45" y="28" width="10" height="62" fill="#f6c11e"/><path d="M50 28C40 10 24 14 30 24 34 30 46 28 50 28 54 28 66 30 70 24 76 14 60 10 50 28Z" fill="#f6c11e"/>`,
+  flagFR:c=>`<g><rect x="6" y="20" width="30" height="60" fill="#002395"/><rect x="36" y="20" width="30" height="60" fill="#fff"/><rect x="66" y="20" width="30" height="60" fill="#ED2939"/></g>`,
+  rocket:c=>`<path d="M50 8C64 22 66 46 60 66H40C34 46 36 22 50 8Z" fill="${c}"/><circle cx="50" cy="36" r="7" fill="#1c1512"/><polygon points="40,52 26,70 40,66" fill="${c}"/><polygon points="60,52 74,70 60,66" fill="${c}"/><polygon points="42,66 58,66 50,90" fill="#f6c11e"/>`,
+};
+const svgShape=(k,c)=>`<svg viewBox="0 0 100 100" aria-hidden="true">${SH[k](c)}</svg>`;
+const fwSVG=c=>`<svg viewBox="-50 -50 100 100" aria-hidden="true"><g stroke="${c}" stroke-width="2.6" stroke-linecap="round">${Array.from({length:14},(_,k)=>`<line x1="0" y1="-12" x2="0" y2="-46" transform="rotate(${k*360/14})"/>`).join("")}</g><g fill="${c}">${Array.from({length:14},(_,k)=>`<circle cx="0" cy="-48" r="2.6" transform="rotate(${k*360/14+12})"/>`).join("")}</g></svg>`;
+const C={gold:"#f6c11e",orange:"#e8582a",teal:"#3a8f8b",cream:"#fbeedd",white:"#ffffff",pink:"#ff7aa8",rasp:"#d6336c",red:"#e63946",blue:"#3d6fd6",sky:"#7cc8f0",green:"#169b62",lgreen:"#5fc48a",purple:"#7a4fd6",wine:"#8e1b3e",brown:"#8b5a2b",dark:"#2b2b2b"};
+/* Chaque fête : tint = lueurs de couleur, parts = particules [forme, couleurs, nombre, mouvement, taille cqw],
+   heroes = grands motifs en bas à gauche / à droite, fw = feux d'artifice, pat = motif de fond */
+const FEST={
+  newyear:{name:"Réveillon du Nouvel An",tint:[C.gold,C.teal],parts:[["confetti",[C.gold,C.white,C.teal,C.orange],34,"fall",1.1],["star",[C.gold,C.white],10,"float",1.6],["ring",[C.gold],10,"rise",1]],heroes:["flute","flute"],heroC:C.gold,fw:[C.gold,C.white,C.orange,C.sky]},
+  valentine:{name:"Saint-Valentin",tint:[C.rasp,C.pink],parts:[["heart",[C.rasp,C.pink,C.red,C.white],30,"rise",1.9]],heroes:["heart","heart"],heroC:C.rasp},
+  easter:{name:"Pâques",tint:[C.lgreen,C.gold],parts:[["egg",[C.pink,C.sky,C.gold,C.lgreen,C.orange,C.purple],20,"fall",2.4],["flower",[C.white,C.pink,C.sky],10,"float",2]],heroes:["bell","egg"],heroC:C.gold},
+  july14:{name:"14 juillet – Fête nationale",tint:[C.blue,C.red],parts:[["confetti",["#002395",C.white,"#ED2939"],42,"fall",1.1],["star",[C.white],8,"float",1.4]],heroes:["flagFR","flagFR"],heroC:C.white,fw:["#3d6fd6",C.white,"#ED2939"]},
+  christmas:{name:"Noël",tint:[C.teal,C.red],parts:[["snow",[C.white,C.cream,C.sky],46,"fall",1.6],["star",[C.gold],8,"float",1.4]],heroes:["tree","gift"],heroC:C.teal,heroC2:C.red},
+  aprilfish:{name:"Poisson d'avril",tint:[C.sky,C.teal],parts:[["fish",[C.orange,C.gold,C.sky,C.pink,C.lgreen],14,"swim",3.2],["ring",[C.white,C.sky],22,"rise",.9]],heroes:["fish","fish"],heroC:C.orange},
+  mothers:{name:"Fête des Mères",tint:[C.pink,C.gold],parts:[["flower",[C.pink,C.rasp,C.white,C.gold],22,"fall",2.2],["heart",[C.pink,C.rasp],14,"rise",1.5]],heroes:["flower","heart"],heroC:C.pink},
+  fathers:{name:"Fête des Pères",tint:[C.blue,C.teal],parts:[["tie",[C.blue,C.teal,C.orange,C.gold],16,"fall",2.2],["mustache",[C.cream],8,"float",3],["star",[C.gold],8,"float",1.3]],heroes:["tie","mug"],heroC:C.blue,heroC2:C.gold},
+  music:{name:"Fête de la Musique",tint:[C.purple,C.teal],parts:[["note",[C.gold,C.orange,C.sky,C.pink,C.white],18,"rise",2.4],["notes",[C.gold,C.sky,C.white],10,"rise",2.8]],heroes:["notes","note"],heroC:C.gold,eq:1},
+  halloween:{name:"Halloween",tint:[C.orange,C.purple],parts:[["bat",[C.dark,"#3b2a4d"],14,"swim",3.4],["leaf",[C.orange,C.gold,C.brown],18,"fall",1.8],["ghost",[C.white],6,"rise",3.4]],heroes:["pumpkin","pumpkin"],heroC:C.orange},
+  beaujolais:{name:"Beaujolais Nouveau",tint:[C.wine,C.gold],parts:[["grape",[C.purple,C.wine,"#5b2a86"],14,"fall",2.6],["leaf",[C.orange,C.gold,C.brown,C.wine],18,"fall",1.8]],heroes:["wine","grape"],heroC:C.cream,heroC2:C.purple},
+  patrick:{name:"Saint-Patrick",tint:[C.green,C.lgreen],parts:[["shamrock",[C.green,C.lgreen,"#0f7a47"],30,"fall",2.1],["coin",[C.gold],10,"rise",1.3]],heroes:["hat","mug"],heroC:C.green,heroC2:C.gold},
+  apero:{name:"Fête de l'Apéro",tint:[C.orange,C.gold],parts:[["cocktail",[C.orange,C.rasp,C.gold],10,"float",3.2],["olive",[C.lgreen],14,"fall",1.4],["ring",[C.gold,C.white],22,"rise",.9]],heroes:["cocktail","mug"],heroC:C.orange,heroC2:C.gold},
+  football:{name:"Football – Euro / Coupe du monde",tint:[C.green,C.blue],parts:[["ball",[C.white],10,"fall",2.8],["confetti",["#002395",C.white,"#ED2939",C.gold],30,"fall",1],["star",[C.gold],8,"float",1.4]],heroes:["trophy","ball"],heroC:C.gold,heroC2:C.white,pat:"stripes",fw:[C.gold,C.white]},
+  tour:{name:"Tour de France",tint:[C.gold,C.green],parts:[["bike",[C.gold,C.white,C.lgreen,C.rasp],6,"swim",4.5],["jersey",[C.gold],8,"fall",2.2],["pois",[C.red],5,"fall",2.2],["dot",[C.red],16,"float",.8]],heroes:["jersey","bike"],heroC:C.gold,heroC2:C.cream},
+  oktoberfest:{name:"Oktoberfest",tint:[C.blue,C.gold],parts:[["pretzel",["#b5651d",C.brown],14,"fall",2.6],["mug",[C.gold],8,"float",2.8],["ring",[C.white,C.gold],16,"rise",.9]],heroes:["mug","pretzel"],heroC:C.gold,heroC2:"#b5651d",pat:"rauten"},
+};
+function buildFest(key){
+  const f=FEST[key];let h=`<div class="ft">`;
+  // lueurs
+  h+=`<div class="glow g1" style="background:${f.tint[0]};opacity:.24"></div><div class="glow g2" style="background:${f.tint[1]};opacity:.22"></div>`;
+  if(f.pat==="rauten")h+=`<div class="pat slide" style="opacity:.07;background:repeating-linear-gradient(45deg,#3d6fd6 0 2.5cqw,transparent 2.5cqw 5cqw),repeating-linear-gradient(-45deg,#ffffff 0 2.5cqw,transparent 2.5cqw 5cqw)"></div>`;
+  if(f.pat==="stripes")h+=`<div class="pat" style="opacity:.06;background:repeating-linear-gradient(90deg,${C.green} 0 6cqw,transparent 6cqw 12cqw)"></div>`;
+  if(f.eq)h+=`<div class="eq">${Array.from({length:28},(_,k)=>`<i style="height:${(30+rnd(k,9)*70).toFixed(0)}%;animation-delay:${-(rnd(k,7)*.9).toFixed(2)}s;animation-duration:${(.5+rnd(k,8)*.7).toFixed(2)}s"></i>`).join("")}</div>`;
+  // feux d'artifice
+  (f.fw?Array.from({length:6}):[]).forEach((_,k)=>{const sz=(9+rnd(k,11)*8).toFixed(1);
+    h+=`<div class="fw" style="left:${(8+rnd(k,12)*80).toFixed(1)}%;top:${(4+rnd(k,13)*34).toFixed(1)}%;width:${sz}cqw;height:${sz}cqw;animation-duration:${(3.2+rnd(k,14)*1.6).toFixed(2)}s;animation-delay:${-(rnd(k,15)*4).toFixed(2)}s">${fwSVG(f.fw[k%f.fw.length])}</div>`;});
+  // particules
+  let n=0;
+  f.parts.forEach(([shape,cols,count,mode,size],pi)=>{
+    for(let k=0;k<count;k++,n++){
+      const r=a=>rnd(n+pi*97,a),sz=(size*(.7+r(1)*.6)).toFixed(2),c=cols[k%cols.length];
+      const dur=mode==="swim"?(18+r(2)*16):mode==="float"?(5+r(2)*5):(10+r(2)*12);
+      let pos=`left:${(r(3)*100).toFixed(1)}%;`;
+      if(mode==="swim")pos=`left:0;top:${(6+r(3)*40).toFixed(1)}cqw;`;
+      if(mode==="float")pos=`left:${(r(3)*96).toFixed(1)}%;top:${(r(4)*50).toFixed(1)}cqw;`;
+      const vars=`--sx:${((r(5)-.5)*8).toFixed(1)}cqw;--sy:${((r(6)-.5)*6).toFixed(1)}cqw;--rt:${shape==="snow"||shape==="confetti"||shape==="leaf"||shape==="ball"?Math.round(180+r(7)*360):Math.round((r(7)-.5)*60)}deg;`;
+      h+=`<span class="fp m-${mode}" style="${pos}width:${sz}cqw;height:${sz}cqw;${vars}animation-duration:${dur.toFixed(1)}s;animation-delay:${-(r(8)*dur).toFixed(1)}s">${svgShape(shape,c)}</span>`;
+    }
+  });
+  // grands motifs
+  f.heroes.forEach((hk,k)=>{const c=k?(f.heroC2||f.heroC):f.heroC;
+    h+=`<div class="fh" style="${k?"right":"left"}:2.5cqw;width:11cqw;height:11cqw;animation-delay:${-k*1.7}s">${svgShape(hk,c)}</div>`;});
+  return h+`</div>`;
+}
+
+/* ===== Calendrier des fêtes (heure locale de la TV) ===== */
+function easterSunday(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da);}
+const dAdd=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const nthDow=(y,m,dow,n)=>{const d=new Date(y,m,1);const off=(dow-d.getDay()+7)%7;return new Date(y,m,1+off+(n-1)*7);};
+const lastDow=(y,m,dow)=>{const d=new Date(y,m+1,0);return new Date(y,m,d.getDate()-((d.getDay()-dow+7)%7));};
+function festWindows(y){
+  const easter=easterSunday(y),pentecost=dAdd(easter,49);
+  let mothers=lastDow(y,4,0);if(+mothers===+pentecost)mothers=nthDow(y,5,0,1);   // dernier dimanche de mai, ou 1er dimanche de juin si Pentecôte
+  const fathers=nthDow(y,5,0,3);                                                     // 3e dimanche de juin
+  const beaujolais=nthDow(y,10,4,3);                                                 // 3e jeudi de novembre
+  const oktSun=nthDow(y,9,0,1);                                                     // 1er dimanche d'octobre
+  const oktStart=dAdd(oktSun,-15),oktEnd=oktSun.getDate()<3?new Date(y,9,3):oktSun; // début le samedi 15 jours avant, prolongée au 3 octobre
+  return[
+    ["newyear",new Date(y-1,11,30),new Date(y,0,1)],
+    ["valentine",new Date(y,1,10),new Date(y,1,14)],
+    ["patrick",new Date(y,2,14),new Date(y,2,17)],
+    ["aprilfish",new Date(y,3,1),new Date(y,3,1)],
+    ["easter",dAdd(easter,-3),dAdd(easter,1)],
+    ["mothers",dAdd(mothers,-3),mothers],
+    ["fathers",dAdd(fathers,-3),fathers],
+    ["music",new Date(y,5,20),new Date(y,5,21)],
+    ["july14",new Date(y,6,12),new Date(y,6,14)],
+    ["oktoberfest",oktStart,oktEnd],
+    ["halloween",new Date(y,9,25),new Date(y,9,31)],
+    ["beaujolais",beaujolais,dAdd(beaujolais,3)],
+    ["christmas",new Date(y,11,1),new Date(y,11,26)],
+    ["newyear",new Date(y,11,30),new Date(y+1,0,1)],
+  ];
+}
+function festOn(date=new Date()){
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  for(const y of [d.getFullYear(),d.getFullYear()+1])for(const [k,a,b] of festWindows(y))if(d>=a&&d<=b)return k;
+  return null;
+}
+function nextFest(date=new Date()){
+  const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  const all=[...festWindows(d.getFullYear()),...festWindows(d.getFullYear()+1)].filter(([,a])=>a>d).sort((x,y)=>x[1]-y[1]);
+  return all[0];
+}
+const fmtD=d=>d.toLocaleDateString("fr-FR",{day:"numeric",month:"long"});
+
+let bgKey="",bgTheme="",bgTimer=null;
+function setBgTheme(theme){
+  if(theme===bgTheme)return;
+  bgTheme=theme;
+  const host=document.getElementById("bg");
+  const layer=document.createElement("div");
+  layer.className="bg-layer";layer.dataset.theme=theme;layer.innerHTML=buildBg(theme);
+  const old=[...host.children];
+  host.appendChild(layer);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>layer.classList.add("on")));
+  setTimeout(()=>old.forEach(o=>o.remove()),1800);
+}
+Object.keys(FEST).forEach(k=>{BG_CHOICES.push(k);BG_NAMES[k]=FEST[k].name;});
+function pickRandomBg(){const pool=BG_THEMES.filter(t=>t!==bgTheme);return pool[Math.floor(Math.random()*pool.length)];}
+function applyBg(cfg){
+  const fest=cfg.bgFest?festOn():null;
+  const key=cfg.bgAnim+"|"+cfg.bgEvery+"|"+fest;
+  if(key===bgKey)return;
+  bgKey=key;clearInterval(bgTimer);
+  if(fest){setBgTheme(fest);return;}
+  if(cfg.bgAnim==="random"){
+    setBgTheme(pickRandomBg());
+    bgTimer=setInterval(()=>setBgTheme(pickRandomBg()),cfg.bgEvery*60000);
+  }else setBgTheme(cfg.bgAnim);
+}
 
 /* ===== Catalogue (vandb.fr/biere + carte actuelle). n=nom, b=brasserie, c=pays, s=style, a=degré, d=description, p=[33cl,50cl] ===== */
 const CATALOGUE=[
+ /* carte actuelle du bar (noms corrects) */
+ {n: "Paulaner Oktoberfest", b: "", c: "DE", s: "Blonde", a: 6, d: "Notes maltées, miellées, touches herbacées", p: [4.5, 4.5]},
+ {n: "Jipernel", b: "", c: "FR", s: "Lager", a: 4.7, d: "Bière blonde · brasserie V and B", p: [4.5, 5.5]},
+ {n: "Val Dieu Triple", b: "", c: "BE", s: "Triple", a: 9, d: "Bière blonde · brasserie Val Dieu", p: [7, 9]},
+ {n: "Le Coup de Cloche Blanche", b: "", c: "BE", s: "Blanche", a: 5.4, d: "Douce, onctueuse, saveurs d'agrumes, blé", p: [4, 5]},
+ {n: "Vault City – Monsieur Froid", b: "", c: "SCT", s: "Modern Sour à la framboise", a: 5, d: "Sour douce et facile à boire, brassée pour les 25 ans de V and B", p: [9, 11]},
+ {n: "Le Coup de Cloche Rousse", b: "", c: "BE", s: "Amber Ale", a: 7, d: "Caramel, malt toasté, légère douceur", p: [5, 7]},
+ {n: "Les Intenables – Mama Whipa", b: "", c: "FR", s: "White IPA", a: 6, d: "Touches de pamplemousse et de fruits exotiques", p: [8, 10]},
+ {n: "Fauve – Mariage à Vegas", b: "", c: "FR", s: "Double NEIPA", a: 8, d: "Notes intenses de fruits tropicaux et d'agrumes", p: [8, 10]},
+ {n: "Mont Hardi West Coast IPA", b: "", c: "FR", s: "IPA", a: 5.5, d: "Légère et désaltérante", p: [6, 8]},
+ {n: "La Débauche – NEIPA", b: "", c: "FR", s: "NEIPA", a: 6, d: "Fruits tropicaux et pêche, tout en rondeur", p: [5, 7]},
+ {n: "Levrette Cerise", b: "", c: "BE", s: "Aromatisée-fruitée", a: 3.5, d: "Bière rouge · brasserie Haacht", p: [5, 7]},
+ {n: "Domaine La Clausade - Etincelles", b: "", c: "FR", s: "Mauguio, souvignier gris", a: 7, d: "Vin pétillant de raisin bio faiblement alcoolisé", p: [3, 8]},
  {n:"Paulaner Oktoberfest Bier",b:"Paulaner",c:"DE",s:"Blonde",a:6,d:"Notes maltées, miellées, touches herbacées",p:[4.5,5.5]},
  {n:"Hacker-Pschorr Oktoberfest Bier",b:"Hacker-Pschorr",c:"DE",s:"Blonde",a:6,d:"Arômes riches de malt, de caramel",p:[4.5,5.5]},
  {n:"Delirium Tremens",b:"Huyghe",c:"BE",s:"Triple",a:8.5,d:"Puissante et chaleureuse, riche, épicée",p:[6,9]},
@@ -521,8 +784,12 @@ let saved=null;    // dernière version enregistrée
 let draft=null;    // version en cours d'édition
 let hhPreview="auto";
 
-const blankTap=()=>({name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:"",numColor:"",nameColor:"",descColor:"",priceColor:"",hhPriceColor:""});
-const TAP_COLORS=[["numColor","--num","Numéro"],["nameColor","--c-name","Nom"],["descColor","--c-desc","Description"],["priceColor","--c-price","Prix"],["hhPriceColor","--c-hhprice","Prix HH"]];
+const blankTap=()=>({vol1:"",vol2:"",name:"",country:"FR",style:"",abv:"",desc:"",p33:"",p50:"",hh:false,hh33:"",hh50:"",numColor:"",nameColor:"",descColor:"",priceColor:"",hhPriceColor:""});
+const TAP_COLORS=[["numColor","--num","Numéro"],["nameColor","--c-name","Nom"],["descColor","--c-desc","Description"],["priceColor","--c-price","Prix"],["hhPriceColor","--c-hhprice","Prix happy hour"]];
+const vol=(t,k)=>{const v=String(t[k]??"").replace(",",".").trim();return v!==""&&+v>0?+v:(k==="vol1"?33:50)};
+const volTxt=v=>(Number.isInteger(v)?v:String(v).replace(".",","))+"CL";
+const volFr=v=>String(v).replace(".",",");
+const customVol=t=>vol(t,"vol1")!==33||vol(t,"vol2")!==50;
 const okColor=v=>/^#[0-9a-f]{6}$/i.test(v||"");
 const tapVars=t=>TAP_COLORS.filter(([k])=>okColor(t[k])).map(([k,v])=>`${v}:${t[k]}`).join(";");
 const clone=o=>JSON.parse(JSON.stringify(o));
@@ -537,14 +804,21 @@ const COLOR_FIELDS=[
   {k:"descColor",v:"--c-desc",label:"Description",def:"#f6c11e",cls:"desc",prev:"Notes maltées, miellées"},
   {k:"headColor",v:"--c-head",label:"33cl / 50cl",def:"#3a8f8b",cls:"head",prev:"33CL&nbsp;&nbsp;50CL"},
   {k:"lineColor",v:"--c-line",label:"Ligne sous 33cl",def:"#3a8f8b",cls:"line",prev:""},
-  {k:"priceColor",v:"--c-price",label:"Couleur des prix",def:"#fbeedd",cls:"num",prev:"5,50€"},
-  {k:"hhPriceColor",v:"--c-hhprice",label:"Couleur prix HH",def:"#e8582a",cls:"num",prev:"4,00€"}
+  {k:"priceColor",v:"--c-price",label:"Prix",def:"#fbeedd",cls:"price",prev:"5,5€"},
+  {k:"hhPriceColor",v:"--c-hhprice",label:"Prix happy hour",def:"#e8582a",cls:"price",prev:"4,5€"},
 ];
 const PALETTE=[["#ffffff","Blanc"],["#fbeedd","Crème"],["#f6c11e","Jaune"],["#e8582a","Orange"],["#d6336c","Framboise"],["#7cc8f0","Bleu ciel"],["#3a8f8b","Sarcelle"]];
 function normalize(d){
-  const o={updatedAt:+d?.updatedAt||0,title:d?.title||"Bières pression",subtitle:d?.subtitle??"",bgAnim:d?.bgAnim||"default",hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
+  const o={updatedAt:+d?.updatedAt||0,title:d?.title||"Bières pression",subtitle:d?.subtitle??"",bgAnim:BG_CHOICES.includes(d?.bgAnim)?d.bgAnim:"default",bgEvery:Math.min(120,Math.max(1,+d?.bgEvery||10)),bgFest:d?.bgFest!==false,hhStart:d?.hhStart||"17:00",hhEnd:d?.hhEnd||"19:00",hhDays:Array.isArray(d?.hhDays)?d.hhDays:[1,2,3,4,5,6,0],...Object.fromEntries(COLOR_FIELDS.map(f=>[f.k,/^#[0-9a-f]{6}$/i.test(d?.[f.k]||"")?d[f.k]:f.def])),
     hhDiscount:d?.hhDiscount??1,presets:Array.isArray(d?.presets)&&d.presets.length?d.presets:clone(DEFAULT_PRESETS),taps:[]};
-  for(let i=0;i<12;i++)o.taps.push({...blankTap(),...(d?.taps?.[i]||{})});
+  for(let i=0;i<12;i++){
+    const t={...blankTap(),...(d?.taps?.[i]||{})};
+    // anciennes cartes : contenances enregistrées sous cl33 / cl50
+    if((t.vol1===""||t.vol1==null)&&t.cl33!=null&&+t.cl33>0&&+t.cl33!==33)t.vol1=String(t.cl33);
+    if((t.vol2===""||t.vol2==null)&&t.cl50!=null&&+t.cl50>0&&+t.cl50!==50)t.vol2=String(t.cl50);
+    delete t.cl33;delete t.cl50;
+    o.taps.push(t);
+  }
   return o;
 }
 function hhActive(cfg){
@@ -579,13 +853,18 @@ function renderScreen(){
   const active=hhActive(cfg);
   const tapHTML=(t,i)=>{
     const isHH=t.hh&&active;
-    const p=(a,b)=>isHH&&b!==""?`${a!==""?`<s>${euro(a)}</s>`:""}<span>${euro(b)}</span>`:euro(a);
+    // un prix n'est « happy hour » que s'il change vraiment ; sinon il garde la couleur des prix normaux
+    const down=(a,b)=>isHH&&b!==""&&!(a!==""&&+a===+b);
+    const p=(a,b)=>down(a,b)?`${a!==""?`<s>${euro(a)}</s>`:""}<span>${euro(b)}</span>`:euro(a);
+    const pc=(a,b,extra="")=>`price${extra}${down(a,b)?" hhp":""}`;
     if(!t.name)return`<div class="tap empty"><div class="wflag none"></div><div class="num">${i+1}</div><div class="info"><div class="bname">Bientôt</div><div class="bdesc">Nouvelle bière en préparation</div></div><div></div><div></div></div>`;
     const meta=[t.style,t.abv!==""?`Alc. ${String(t.abv).replace(".",",")}%`:""].filter(Boolean).join(", ");
     return`<div class="tap${isHH?" is-hh":""}"${tapVars(t)?` style="${tapVars(t)}"`:""}>${flagWave(t.country,i)}<div class="num">${i+1}</div>
       <div class="info"><div class="bname">${esc(t.name)}</div>
       <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
-      <div class="price">${p(t.p33,t.hh33)}</div><div class="price">${p(t.p50,t.hh50)}</div></div>`;
+      ${customVol(t)
+        ?`<div class="${pc(t.p33,t.hh33," cv")}"><span class="vlab">${volTxt(vol(t,"vol1"))}</span><span class="pv">${p(t.p33,t.hh33)}</span></div><div class="${pc(t.p50,t.hh50," cv")}"><span class="vlab">${volTxt(vol(t,"vol2"))}</span><span class="pv">${p(t.p50,t.hh50)}</span></div>`
+        :`<div class="${pc(t.p33,t.hh33)}">${p(t.p33,t.hh33)}</div><div class="${pc(t.p50,t.hh50)}">${p(t.p50,t.hh50)}</div>`}</div>`;
   };
   const col=(a,label="")=>`<div class="s-col"><div class="s-colhead">${label?`<span class="hhcol">${label}</span>`:"<span></span>"}<b>33CL</b><b>50CL</b></div>${a}</div>`;
   // pendant le happy hour, les bières en happy hour passent dans la colonne de gauche (numéros de tireuse conservés)
@@ -595,11 +874,11 @@ function renderScreen(){
   const taps=order.map(i=>tapHTML(cfg.taps[i],i));
   const leftLabel=active&&hhIdx.length?"HAPPY HOUR":"";
   COLOR_FIELDS.forEach(f=>document.getElementById("screen").style.setProperty(f.v,cfg[f.k]));
-  document.getElementById("bg").innerHTML = buildBg(cfg.bgAnim);
+  applyBg(cfg);
   el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">${esc(cfg.title)}</h1></div>
     <div class="s-right">${active?`<div class="hh-banner">Happy hour <span>jusqu'à ${fmtH(cfg.hhEnd)}</span></div>`:(cfg.hhDays.length?`<div class="s-sub">Happy hour · ${fmtH(cfg.hhStart)} / ${fmtH(cfg.hhEnd)}</div>`:"")}${cfg.subtitle?`<div class="s-sub" style="font-weight:400;text-transform:none;letter-spacing:.01em;color:var(--muted)">${esc(cfg.subtitle)}</div>`:""}</div></div>
     <div class="s-cols">${col(taps.slice(0,6).join(""),leftLabel)}${col(taps.slice(6).join(""))}</div>
-    <div class="s-foot"><span>${active?`<span class="hl">Prix happy hour en orange</span>`:(cfg.hhDays.length?`<span class="hl">Happy hour</span> ${hhText(cfg)} sur les bières signalées`:"")}</span><span>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</span></div>`;
+    <div class="s-foot"><span>${active?`<span class="hl" style="color:var(--c-hhprice)">Prix happy hour</span> : ancien prix barré`:(cfg.hhDays.length?`<span class="hl">Happy hour</span> ${hhText(cfg)} sur les bières signalées`:"")}</span><span>L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</span></div>`;
   requestAnimationFrame(fitNames);
 }
 
@@ -667,12 +946,22 @@ function setTapColor(card,i,k,v){
   sum.textContent="Couleurs de cette tireuse"+(custom?" (personnalisées)":"");
   refreshBar();
 }
+function renderFestInfo(){
+  const now=festOn(),nx=nextFest();
+  const el=document.getElementById("festInfo");
+  if(!draft.bgFest){el.textContent="Fêtes automatiques désactivées : le fond choisi ci-dessus reste affiché toute l'année.";return;}
+  el.textContent=(now?`En ce moment : ${FEST[now].name}, ce fond est affiché à la place du fond choisi. `:"")+(nx?`Prochaine fête : ${FEST[nx[0]].name}, du ${fmtD(nx[1])} au ${fmtD(nx[2])}. `:"")+"L'Apéro et les événements sportifs se choisissent à la main dans la liste.";
+}
 function renderAdmin(){
   const host=document.getElementById("tapsHost");
   if(!draft){host.innerHTML=`<div class="empty-state"><h2>Chargement…</h2></div>`;return;}
   document.getElementById("setTitle").value=draft.title;
   document.getElementById("setSub").value=draft.subtitle;
   document.getElementById("setBg").value=draft.bgAnim;
+  document.getElementById("setBgEvery").value=draft.bgEvery;
+  document.getElementById("setBgFest").checked=draft.bgFest;
+  renderFestInfo();
+  document.getElementById("bgEveryWrap").hidden=draft.bgAnim!=="random";
   renderColors();
   document.getElementById("setStart").value=draft.hhStart;
   document.getElementById("setEnd").value=draft.hhEnd;
@@ -697,14 +986,19 @@ function renderAdmin(){
     <div class="field"><label for="d${i}">Description (sous le nom)</label><textarea id="d${i}" data-k="desc" rows="2">${esc(t.desc)}</textarea></div>
     <div class="row r4">
       <div class="field"><label for="c${i}">Pays</label><select id="c${i}" data-k="country">${countryOptions(t.country)}</select></div>
-      <div class="field"><label for="p${i}">33 cl €</label><input type="number" step="0.5" min="0" id="p${i}" data-k="p33" value="${esc(t.p33)}"></div>
-      <div class="field"><label for="q50${i}">50 cl €</label><input type="number" step="0.5" min="0" id="q50${i}" data-k="p50" value="${esc(t.p50)}"></div>
+      <div class="field"><label for="p${i}" data-vl="vol1">${volFr(vol(t,"vol1"))} cl €</label><input type="number" step="0.5" min="0" id="p${i}" data-k="p33" value="${esc(t.p33)}"></div>
+      <div class="field"><label for="q50${i}" data-vl="vol2">${volFr(vol(t,"vol2"))} cl €</label><input type="number" step="0.5" min="0" id="q50${i}" data-k="p50" value="${esc(t.p50)}"></div>
       <div class="field" style="justify-content:end"><label class="hhtoggle" for="h${i}"><input type="checkbox" id="h${i}" data-k="hh"${t.hh?" checked":""}>Happy hour</label></div>
+    </div>
+    <div class="row r4 vols">
+      <div class="field"><label for="v1${i}">Verre 1 (cl)</label><input type="number" step="0.5" min="1" id="v1${i}" data-k="vol1" placeholder="33" value="${esc(t.vol1)}"></div>
+      <div class="field"><label for="v2${i}">Verre 2 (cl)</label><input type="number" step="0.5" min="1" id="v2${i}" data-k="vol2" placeholder="50" value="${esc(t.vol2)}"></div>
+      <p class="hint" style="grid-column:span 2;margin:0;align-self:end">Laissez vide pour 33 / 50 cl. Une autre contenance s'affiche au-dessus du prix sur la TV.</p>
     </div>
     <div class="chips"><span class="lbl">Appliquer</span>${draft.presets.map((p,k)=>`<button type="button" class="chip${+t.p33===+p.p33&&+t.p50===+p.p50?" on":""}" data-preset="${k}">${esc(p.label)} ${euro(p.p33)} / ${euro(p.p50)}</button>`).join("")}</div>
     <div class="hhprices"${t.hh?"":" hidden"}>
-      <div class="field"><label for="hp${i}">HH 33 cl €</label><input type="number" step="0.5" min="0" id="hp${i}" data-k="hh33" value="${esc(t.hh33)}"></div>
-      <div class="field"><label for="hq${i}">HH 50 cl €</label><input type="number" step="0.5" min="0" id="hq${i}" data-k="hh50" value="${esc(t.hh50)}"></div>
+      <div class="field"><label for="hp${i}" data-vl="vol1" data-pre="HH ">HH ${volFr(vol(t,"vol1"))} cl €</label><input type="number" step="0.5" min="0" id="hp${i}" data-k="hh33" value="${esc(t.hh33)}"></div>
+      <div class="field"><label for="hq${i}" data-vl="vol2" data-pre="HH ">HH ${volFr(vol(t,"vol2"))} cl €</label><input type="number" step="0.5" min="0" id="hq${i}" data-k="hh50" value="${esc(t.hh50)}"></div>
     </div>
     ${tapColorsHTML(t,i)}
     <div class="card-actions"><button class="link" data-clear>Vider la tireuse</button></div>
@@ -746,8 +1040,9 @@ function search(q,max=20){
 }
 const beerLine=b=>esc([b.s,b.a!==""&&b.a!=null?b.a+" %":"",b.b].filter(Boolean).join(" · "));
 function setCatalogue(list){
-  CAT=CATALOGUE.slice();
-  const seen=new Set(CAT.map(b=>fold(b.n)));
+  // une seule entrée par nom : la carte du bar d'abord, puis le reste du catalogue intégré, puis vandb.fr
+  CAT=[];const seen=new Set();
+  for(const b of CATALOGUE){const k=fold(b.n);if(seen.has(k))continue;seen.add(k);b._k=fold(`${b.n} ${b.b} ${b.s} ${FLAGS[b.c]?.n||""}`);CAT.push(b);}
   for(const b of (Array.isArray(list)?list:[])){const k=fold(b.n);if(!b.n||seen.has(k))continue;seen.add(k);b._k=fold(`${b.n} ${b.b} ${b.s} ${FLAGS[b.c]?.n||""}`);CAT.push(b);}
   document.getElementById("catInfo").textContent=`${CAT.length} bières dans le catalogue (vandb.fr). Une bière absente se saisit à la main dans la tireuse.`;
 }
@@ -779,6 +1074,7 @@ host.addEventListener("input",e=>{
     card.querySelector(".hhprices").hidden=!t.hh;
     card.querySelector("[data-k=hh33]").value=t.hh33;card.querySelector("[data-k=hh50]").value=t.hh50;
   }else t[k]=e.target.value;
+  if(k==="vol1"||k==="vol2")card.querySelectorAll(`[data-vl="${k}"]`).forEach(l=>l.textContent=`${l.dataset.pre||""}${volFr(vol(t,k))} cl €`);
   updateHead(card,t);refreshBar();
 });
 host.addEventListener("focusin",e=>{if(e.target.matches("[data-q]"))e.target.dispatchEvent(new Event("input",{bubbles:true}))});
@@ -795,7 +1091,7 @@ host.addEventListener("click",e=>{
 });
 document.addEventListener("click",e=>{if(!e.target.closest(".pick"))document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".sugg").forEach(s=>s.hidden=true)});
-[["setTitle","title"],["setSub","subtitle"],["setBg","bgAnim"],["setStart","hhStart"],["setEnd","hhEnd"]].forEach(([id,k])=>
+[["setTitle","title"],["setSub","subtitle"],["setStart","hhStart"],["setEnd","hhEnd"]].forEach(([id,k])=>
   document.getElementById(id).addEventListener("input",e=>{if(draft){draft[k]=e.target.value;refreshBar();}}));
 
 document.getElementById("revertBtn").onclick=()=>{draft=clone(saved);renderAdmin();};
@@ -835,6 +1131,18 @@ function setColor(k,v){if(!draft)return;draft[k]=v;const row=colorsEl.querySelec
 colorsEl.addEventListener("click",e=>{const b=e.target.closest("[data-col]");if(b)setColor(b.closest(".crow").dataset.ck,b.dataset.col);});
 colorsEl.addEventListener("input",e=>{if(e.target.type==="color")setColor(e.target.closest(".crow").dataset.ck,e.target.value);});
 document.getElementById("resetColors").onclick=()=>{if(!draft)return;COLOR_FIELDS.forEach(f=>draft[f.k]=f.def);renderColors();refreshBar();};
+document.getElementById("festOpts").innerHTML=Object.entries(FEST).map(([k,f])=>`<option value="${k}">${f.name}</option>`).join("");
+document.getElementById("setBgFest").addEventListener("change",e=>{if(!draft)return;draft.bgFest=e.target.checked;renderFestInfo();refreshBar();});
+document.getElementById("setBg").addEventListener("change",e=>{if(!draft)return;draft.bgAnim=e.target.value;document.getElementById("bgEveryWrap").hidden=draft.bgAnim!=="random";refreshBar();});
+document.getElementById("setBgEvery").addEventListener("input",e=>{if(!draft)return;draft.bgEvery=Math.min(120,Math.max(1,+e.target.value||10));refreshBar();});
+document.getElementById("bgPreview").onclick=()=>{
+  if(!draft)return;
+  const v=draft.bgAnim;
+  show("ecran");                       // affiche l'écran (fond enregistré)…
+  clearInterval(bgTimer);             // …puis remplace le fond par l'aperçu
+  setBgTheme(v==="random"?pickRandomBg():v);
+  toast(v==="random"?`Aperçu : ${BG_NAMES[bgTheme]} (en aléatoire, le fond changera toutes les ${draft.bgEvery} min)`:`Aperçu : ${BG_NAMES[v]}. Cliquez « Enregistrer et afficher » pour l'envoyer à la TV.`);
+};
 document.getElementById("hhDays").addEventListener("click",e=>{
   const b=e.target.closest("[data-day]");if(!b)return;const v=+b.dataset.day;
   draft.hhDays=draft.hhDays.includes(v)?draft.hhDays.filter(x=>x!==v):[...draft.hhDays,v];
@@ -1116,44 +1424,22 @@ document.getElementById("dlJson").onclick=()=>{
 
 /* ===== Démarrage ===== */
 document.getElementById("loginLogo").src=LOGO_SRC;
-document.getElementById("bg").innerHTML=buildBg();
 renderScreen();renderAdmin();
 loadCatalogue();
-// 1. Affiche la gestion par défaut sur ordi/téléphone (sauf si on précise #ecran pour la TV)
-if(location.hash !== "#ecran") {
-    show("gestion");
+// La TV ouvre le lien terminé par #ecran ; les autres appareils arrivent sur la gestion.
+show(location.hash==="#ecran"?"ecran":"gestion");
+// Sur la TV : plein écran et écran toujours allumé au premier clic
+if(location.hash==="#ecran"){
+  document.body.addEventListener("click",async()=>{
+    if(document.fullscreenElement||document.getElementById("view-ecran").hidden)return;
+    try{await document.getElementById("screen").requestFullscreen();}catch(e){}
+    try{wake=await navigator.wakeLock?.request("screen");}catch(e){}
+  },{once:true});
 }
-
-// 2. Sur la TV (lien terminant par #ecran), active le plein écran au premier clic
-if(location.hash === "#ecran") {
-    document.body.addEventListener('click', async () => {
-        if (!document.fullscreenElement && document.getElementById("view-ecran").hidden === false) {
-            try {
-                await document.getElementById("screen").requestFullscreen();
-                await navigator.wakeLock?.request("screen");
-            } catch(e) {}
-        }
-    }, { once: true });
-}
-
 refreshAuthUI();
 refresh();
 setInterval(refresh,5000);
-
-// 1. Redirection automatique vers la gestion sur téléphone (écran < 800px)
-if (window.innerWidth <= 800 && location.hash !== "#ecran") {
-    show("gestion");
-}
-
-// 2. Plein écran automatique au premier clic n'importe où sur la TV
-document.body.addEventListener('click', async () => {
-    if (!document.fullscreenElement && document.getElementById("view-ecran").hidden === false) {
-        try {
-            await document.getElementById("screen").requestFullscreen();
-            await navigator.wakeLock?.request("screen");
-        } catch(e) {}
-    }
-}, { once: true }); // Le { once: true } permet de ne déclencher ceci qu'une seule fois
+setInterval(()=>{if(saved)applyBg(saved);},60000);   // passage automatique d'une fête à l'autre
 </script>
 </body>
 </html>

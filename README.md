@@ -11,7 +11,8 @@ Affichage dynamique des 12 tireuses du V and B Montpellier Lattes, hébergé sur
    Source : **Deploy from a branch**, branche `main`, dossier `/ (root)`. Enregistrez.
 2. Au bout d'une minute, le site est à l'adresse
    `https://<votre-compte>.github.io/<nom-du-depot>/`.
-3. **Sur la TV** : ouvrez cette adresse, puis le bouton **Plein écran (TV)**.
+3. **Sur la TV** : ouvrez cette adresse **en ajoutant `#ecran` à la fin** (ex. `https://<compte>.github.io/<depot>/#ecran`), puis cliquez une fois n'importe où pour passer en plein écran.
+   Sans `#ecran`, le site s'ouvre sur la Gestion (téléphone, ordinateur du bar).
    La TV relit la carte chaque minute, aucun compte n'est nécessaire.
 
 ## Accès staff
@@ -40,6 +41,30 @@ Ensuite, n'importe quel appareil se connecte avec l'identifiant et le mot de pas
 Quand le jeton expire, refaites les étapes 1 à 5 avec un nouveau jeton.
 
 Sans jeton, le bouton **Télécharger carte.json** donne le fichier à déposer à la main dans `data/` sur GitHub.
+
+## Fonds animés et fêtes
+
+Dans **Gestion › Écran › Fond animé** : 5 fonds habituels (Classique, Soirée disco, Mousse, Nuit étoilée, Vagues de Lattes), un mode **Aléatoire**, et 16 fonds de fêtes.
+
+Avec la case **« Passer automatiquement au fond de la fête du moment »** (cochée par défaut), la TV affiche seule le fond de la fête aux dates suivantes, puis revient au fond choisi :
+
+| Fête | Période affichée |
+|---|---|
+| Réveillon du Nouvel An | 30 décembre → 1er janvier |
+| Saint-Valentin | 10 → 14 février |
+| Saint-Patrick | 14 → 17 mars |
+| Poisson d'avril | 1er avril |
+| Pâques | jeudi → lundi de Pâques (calculé chaque année) |
+| Fête des Mères | 3 jours avant → dernier dimanche de mai (1er dimanche de juin si Pentecôte) |
+| Fête des Pères | 3 jours avant → 3e dimanche de juin |
+| Fête de la Musique | 20 → 21 juin |
+| 14 juillet | 12 → 14 juillet |
+| Oktoberfest | dates de Munich (mi-septembre → début octobre) |
+| Halloween | 25 → 31 octobre |
+| Beaujolais Nouveau | 3e jeudi de novembre → dimanche |
+| Noël | 1er → 26 décembre |
+
+**Fête de l'Apéro**, **Football (Euro / Coupe du monde)** et **Tour de France** n'ont pas de date fixe : choisissez-les dans la liste pendant l'événement.
 
 ## Catalogue des bières
 
