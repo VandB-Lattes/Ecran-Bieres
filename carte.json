@@ -13,7 +13,6 @@
     6,
     0
   ],
-
   "numColor": "#f6c11e",
   "nameColor": "#ffffff",
   "metaColor": "#7cc8f0",
@@ -59,7 +58,11 @@
       "hh50": 4.5,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Hacker-Pschorr Oktoberfest Bier",
@@ -74,7 +77,11 @@
       "hh50": 4.5,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Delirium Tremens",
@@ -89,7 +96,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Le Coup de Cloche Blanche",
@@ -104,7 +115,11 @@
       "hh50": 4,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Vault City – Monsieur Froid",
@@ -119,7 +134,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Bush de Noël",
@@ -134,7 +153,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Les Intenables – Mama Whipa",
@@ -149,7 +172,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Fauve – Mariage à Vegas",
@@ -164,7 +191,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Mont Hardi West Coast IPA",
@@ -179,7 +210,11 @@
       "hh50": 7,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "La Débauche – NEIPA",
@@ -194,7 +229,11 @@
       "hh50": 6,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Chouffe Cherry",
@@ -209,7 +248,11 @@
       "hh50": "",
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     },
     {
       "name": "Cidre – Dan Kelly's Draught Cider",
@@ -224,7 +267,11 @@
       "hh50": 6,
       "numColor": "",
       "nameColor": "",
-      "descColor": ""
+      "descColor": "",
+      "cl33": 33,
+      "cl50": 50,
+      "priceColor": "",
+      "hhPriceColor": ""
     }
   ]
 }
