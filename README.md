@@ -22,6 +22,20 @@ Chaque appareil retient ensuite son mode :
 
 Pour repasser un appareil en Gestion, ouvrez-y le lien avec `#gestion` à la fin.
 
+## Envoyer la carte sur la TV
+
+Trois façons, dans **Gestion › Écran › Envoyer sur la TV** :
+
+1. **Caster sur la TV** — envoie la carte sur un Chromecast, une Android TV ou une TV compatible du même wifi. Le bouton n'apparaît que si un écran est détecté. Une fois castée, la carte se met à jour toute seule : le téléphone peut être rangé.
+2. **Copier le lien TV** — pour le coller dans le navigateur de la TV, d'un boîtier ou d'une clé HDMI.
+3. **Ouvrir dans un onglet** — pour un écran branché sur l'ordinateur du bar.
+
+Si le bouton Caster est absent, le navigateur ne sait pas caster lui-même : utilisez son propre menu (Chrome : ⋮ › **Caster**), qui proposera directement la carte.
+
+## Compatibilité des navigateurs de TV
+
+Les navigateurs intégrés aux TV sont souvent anciens. L'écran est dimensionné par un calcul JavaScript plutôt que par les unités `cqw` (requêtes de conteneur, apparues fin 2022), afin de s'afficher correctement aussi sur ces navigateurs. Testé de 1366×768 à 1920×1080.
+
 ## Accès staff
 
 L'onglet **Gestion** est protégé par un identifiant et un mot de passe.
