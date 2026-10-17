@@ -53,6 +53,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 .dot.warn{background:var(--amber)}
 
 main{max-width:1280px;margin:0 auto}
+/* Mode TV (#ecran) : uniquement la carte, aucun élément de connexion */
+body.tv{padding:0}
+body.tv>header,body.tv .screen-tools,body.tv #view-login,body.tv #view-gestion{display:none!important}
+body.tv main{max-width:none}
+body.tv .screen{aspect-ratio:auto;height:100vh;height:100dvh;border:0;border-radius:0}
 
 /* ---------- ÉCRAN ---------- */
 .screen-wrap{position:relative}
@@ -117,9 +122,7 @@ main{max-width:1280px;margin:0 auto}
 .bname{font-family:var(--heavy);font-weight:900;font-size:calc(1.8cqw*var(--ts,1));line-height:1.05;color:var(--c-name);overflow-wrap:anywhere;text-transform:uppercase;letter-spacing:.01em}
 .bmeta{font-family:var(--heavy);font-weight:700;font-size:calc(1.3cqw*var(--ts,1));color:var(--c-meta)}
 .bdesc{font-family:var(--cond);font-weight:500;font-size:calc(1.35cqw*var(--ts,1));line-height:1.1;color:var(--c-desc);overflow-wrap:anywhere}
-.price{display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:.15cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
-.price .clbadge{font-size:.95cqw;font-weight:700;letter-spacing:.04em;color:var(--gold);line-height:1;opacity:.95}
-.price .clbadge.std{display:none}
+.price{display:flex;justify-content:flex-end;align-items:baseline;gap:.35cqw;white-space:nowrap;font-family:var(--heavy);font-weight:900;font-size:2.05cqw;text-align:right;font-variant-numeric:tabular-nums;line-height:1;color:var(--c-price, var(--chalk))}
 .price s{font-size:1.1cqw;font-weight:700;color:var(--muted);text-decoration-thickness:.14cqw;text-decoration-color:var(--orange)}
 .price.cv{flex-direction:column;align-items:flex-end;justify-content:center;gap:.25cqw}
 .price .vlab{font-size:1.2cqw;font-weight:900;letter-spacing:.06em;color:var(--ink);background:var(--c-head);padding:.15cqw .5cqw;border-radius:.3cqw;line-height:1.15}
@@ -804,7 +807,7 @@ const COLOR_FIELDS=[
   {k:"nameColor",v:"--c-name",label:"Nom de la bière",def:"#ffffff",cls:"name",prev:"Paulaner Oktoberfest"},
   {k:"metaColor",v:"--c-meta",label:"Style et degré",def:"#7cc8f0",cls:"meta",prev:"Blonde, Alc. 6%"},
   {k:"descColor",v:"--c-desc",label:"Description",def:"#f6c11e",cls:"desc",prev:"Notes maltées, miellées"},
-  {k:"headColor",v:"--c-head",label:"Volumes (en-têtes)",def:"#3a8f8b",cls:"head",prev:"33CL&nbsp;&nbsp;50CL"},
+  {k:"headColor",v:"--c-head",label:"33cl / 50cl",def:"#3a8f8b",cls:"head",prev:"33CL&nbsp;&nbsp;50CL"},
   {k:"lineColor",v:"--c-line",label:"Ligne sous 33cl",def:"#3a8f8b",cls:"line",prev:""},
   {k:"priceColor",v:"--c-price",label:"Prix",def:"#fbeedd",cls:"price",prev:"5,5€"},
   {k:"hhPriceColor",v:"--c-hhprice",label:"Prix happy hour",def:"#e8582a",cls:"price",prev:"4,5€"},
@@ -861,9 +864,6 @@ function renderScreen(){
     const pc=(a,b,extra="")=>`price${extra}${down(a,b)?" hhp":""}`;
     if(!t.name)return`<div class="tap empty"><div class="wflag none"></div><div class="num">${i+1}</div><div class="info"><div class="bname">Bientôt</div><div class="bdesc">Nouvelle bière en préparation</div></div><div></div><div></div></div>`;
     const meta=[t.style,t.abv!==""?`Alc. ${String(t.abv).replace(".",",")}%`:""].filter(Boolean).join(", ");
-    const cl1=+t.cl33||33, cl2=+t.cl50||50;
-    // badge volume au-dessus du prix si différent de 33 / 50
-    const badge=(cl,std)=>`<span class="clbadge${cl===std?" std":""}">${cl}CL</span>`;
     return`<div class="tap${isHH?" is-hh":""}"${tapVars(t)?` style="${tapVars(t)}"`:""}>${flagWave(t.country,i)}<div class="num">${i+1}</div>
       <div class="info"><div class="bname">${esc(t.name)}</div>
       <div class="bmeta">${esc(meta)}${t.hh?`<span class="hhtag${active?"":" off"}">HAPPY HOUR</span>`:""}</div><div class="bdesc">${esc(t.desc)}</div></div>
@@ -871,16 +871,13 @@ function renderScreen(){
         ?`<div class="${pc(t.p33,t.hh33," cv")}"><span class="vlab">${volTxt(vol(t,"vol1"))}</span><span class="pv">${p(t.p33,t.hh33)}</span></div><div class="${pc(t.p50,t.hh50," cv")}"><span class="vlab">${volTxt(vol(t,"vol2"))}</span><span class="pv">${p(t.p50,t.hh50)}</span></div>`
         :`<div class="${pc(t.p33,t.hh33)}">${p(t.p33,t.hh33)}</div><div class="${pc(t.p50,t.hh50)}">${p(t.p50,t.hh50)}</div>`}</div>`;
   };
-  const col=(a,label="",cl1=33,cl2=50)=>`<div class="s-col"><div class="s-colhead">${label?`<span class="hhcol">${label}</span>`:"<span></span>"}<b>${cl1}CL</b><b>${cl2}CL</b></div>${a}</div>`;
+  const col=(a,label="")=>`<div class="s-col"><div class="s-colhead">${label?`<span class="hhcol">${label}</span>`:"<span></span>"}<b>33CL</b><b>50CL</b></div>${a}</div>`;
   // pendant le happy hour, les bières en happy hour passent dans la colonne de gauche (numéros de tireuse conservés)
   let order=cfg.taps.map((t,i)=>i);
   const hhIdx=order.filter(i=>cfg.taps[i].hh&&cfg.taps[i].name);
   if(active&&hhIdx.length)order=[...hhIdx,...order.filter(i=>!hhIdx.includes(i))];
   const taps=order.map(i=>tapHTML(cfg.taps[i],i));
   const leftLabel=active&&hhIdx.length?"HAPPY HOUR":"";
-  const getCl=(idxs,key,def)=>{for(const i of idxs){const v=+cfg.taps[i][key];if(v>0)return v;}return def;};
-  const leftCl1=getCl(order.slice(0,6),"cl33",33),leftCl2=getCl(order.slice(0,6),"cl50",50);
-  const rightCl1=getCl(order.slice(6),"cl33",33),rightCl2=getCl(order.slice(6),"cl50",50);
   COLOR_FIELDS.forEach(f=>document.getElementById("screen").style.setProperty(f.v,cfg[f.k]));
   applyBg(cfg);
   el.innerHTML=`<div class="s-head"><div class="s-left">${LOGO}<h1 class="s-title">${esc(cfg.title)}</h1></div>
@@ -1164,7 +1161,21 @@ document.getElementById("applyDisc").onclick=()=>{
 };
 
 /* ===== Navigation, plein écran, horloge ===== */
+/* Mode d'affichage mémorisé par appareil :
+   lien #ecran -> la TV n'affiche que la carte, et s'en souvient même si le lien perd son #ecran ;
+   lien #gestion -> repasse l'appareil en gestion ; sans rien, on reprend le dernier mode de cet appareil
+   (par défaut la gestion, pour les téléphones et ordinateurs). */
+const LS_TV="vandb.tv";
+const TV=(()=>{
+  const h=location.hash;
+  try{
+    if(h==="#ecran"){localStorage.setItem(LS_TV,"1");return true;}
+    if(h==="#gestion"){localStorage.removeItem(LS_TV);return false;}
+    return localStorage.getItem(LS_TV)==="1";
+  }catch(e){return h==="#ecran";}
+})();
 function show(view){
+  if(TV)view="ecran";                      // sur la TV, rien d'autre que la carte
   const locked=view==="gestion"&&!auth;
   document.getElementById("view-ecran").hidden=view!=="ecran";
   document.getElementById("view-gestion").hidden=view!=="gestion"||locked;
@@ -1435,9 +1446,11 @@ document.getElementById("loginLogo").src=LOGO_SRC;
 renderScreen();renderAdmin();
 loadCatalogue();
 // La TV ouvre le lien terminé par #ecran ; les autres appareils arrivent sur la gestion.
-show(location.hash==="#ecran"?"ecran":"gestion");
+addEventListener("hashchange",()=>location.reload());   // #ecran / #gestion tapé dans la barre d'adresse
+if(TV)document.body.classList.add("tv");
+show(TV?"ecran":"gestion");
 // Sur la TV : plein écran et écran toujours allumé au premier clic
-if(location.hash==="#ecran"){
+if(TV){
   document.body.addEventListener("click",async()=>{
     if(document.fullscreenElement||document.getElementById("view-ecran").hidden)return;
     try{await document.getElementById("screen").requestFullscreen();}catch(e){}

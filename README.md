@@ -12,35 +12,46 @@ Affichage dynamique des 12 tireuses du V and B Montpellier Lattes, hébergé sur
 2. Au bout d'une minute, le site est à l'adresse
    `https://<votre-compte>.github.io/<nom-du-depot>/`.
 3. **Sur la TV** : ouvrez cette adresse **en ajoutant `#ecran` à la fin** (ex. `https://<compte>.github.io/<depot>/#ecran`), puis cliquez une fois n'importe où pour passer en plein écran.
-   Sans `#ecran`, le site s'ouvre sur la Gestion (téléphone, ordinateur du bar).
-   La TV relit la carte chaque minute, aucun compte n'est nécessaire.
+
+Chaque appareil retient ensuite son mode :
+
+| Appareil | Ce qui s'ouvre |
+|---|---|
+| TV (ouverte une fois avec `#ecran`) | la carte seule, plein écran, sans onglet ni connexion — même si le lien perd son `#ecran` |
+| Téléphone, ordinateur | la Gestion (connexion demandée) |
+
+Pour repasser un appareil en Gestion, ouvrez-y le lien avec `#gestion` à la fin.
 
 ## Accès staff
 
-L'onglet **Gestion** est protégé par un identifiant et un mot de passe :
+L'onglet **Gestion** est protégé par un identifiant et un mot de passe.
 
 | Identifiant | Mot de passe |
 |---|---|
-| `staff` | `HappyHour-17h19` |
+| `staff` | transmis au responsable, hors de ce fichier |
 
 Cochez « Rester connecté sur cet appareil » sur le téléphone ou l'ordinateur du bar pour ne pas le retaper.
 Le mot de passe se change dans **Gestion › Accès staff et GitHub** (en bas de la page).
 
-## Configuration une seule fois (responsable)
+**La TV n'a aucun identifiant à saisir** : elle ouvre le lien terminé par `#ecran` et n'affiche que la carte.
 
-Pour que la Gestion puisse envoyer la carte à la TV, il faut un jeton GitHub. Il est enregistré **chiffré avec le mot de passe staff** dans `data/acces.json` : le staff n'a jamais besoin de le connaître.
+## Jeton GitHub
+
+Le jeton qui permet d'envoyer la carte à la TV est déjà enregistré, **chiffré avec le mot de passe staff**, dans `data/acces.json`. Le staff n'a donc jamais à le connaître ni à le saisir : il se connecte simplement avec l'identifiant et le mot de passe, depuis n'importe quel appareil.
+
+> **Important** : ce dépôt est public (GitHub Pages l'exige). Le jeton n'est lisible qu'avec le mot de passe staff, donc **ce mot de passe ne doit jamais être écrit dans ce dépôt**, ni dans ce README, ni dans un commit.
+
+Quand le jeton expire, ou pour le remplacer :
 
 1. GitHub › photo de profil › **Settings › Developer settings › Personal access tokens › Fine-grained tokens › Generate new token**.
 2. *Repository access* : **Only select repositories** › ce dépôt.
-3. *Permissions* › **Contents : Read and write** et **Actions : Read and write** (pour le bouton de mise à jour du catalogue). Choisissez une date d'expiration, puis générez.
-4. Sur le site : **Gestion**, connectez-vous (`staff` / `HappyHour-17h19`), ouvrez **Accès staff et GitHub** en bas de la page.
-5. Saisissez le mot de passe actuel, collez le jeton, et si vous voulez un nouveau mot de passe, tapez-le deux fois. Cliquez **Enregistrer l'accès**.
+3. *Permissions* › **Contents : Read and write** et **Actions : Read and write** (pour le bouton de mise à jour du catalogue).
+4. Sur le site : **Gestion**, connectez-vous, ouvrez **Accès staff et GitHub** en bas de la page.
+5. Saisissez le mot de passe actuel, collez le nouveau jeton, puis cliquez **Enregistrer l'accès**.
 
-Ensuite, n'importe quel appareil se connecte avec l'identifiant et le mot de passe, sans jeton. **Enregistrer et afficher** met la TV à jour en 1 à 2 minutes (le temps que GitHub Pages republie).
+**Enregistrer et afficher** met la TV à jour en 1 à 2 minutes (le temps que GitHub Pages republie).
 
-Quand le jeton expire, refaites les étapes 1 à 5 avec un nouveau jeton.
-
-Sans jeton, le bouton **Télécharger carte.json** donne le fichier à déposer à la main dans `data/` sur GitHub.
+Sans jeton valide, le bouton **Télécharger carte.json** donne le fichier à déposer à la main dans `data/` sur GitHub.
 
 ## Fonds animés et fêtes
 
