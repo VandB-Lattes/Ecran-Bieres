@@ -1189,9 +1189,13 @@ document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.datase
 document.querySelectorAll("#hhPreview button").forEach(b=>b.onclick=()=>{
   hhPreview=b.dataset.v;document.querySelectorAll("#hhPreview button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderScreen();});
 let wake=null;
+async function keepAwake(){
+  if(wake&&!wake.released)return;
+  try{wake=await navigator.wakeLock?.request("screen");wake?.addEventListener?.("release",()=>{wake=null;});}catch(e){}
+}
 document.getElementById("fsBtn").onclick=async()=>{
   try{await document.getElementById("screen").requestFullscreen();}catch(e){toast("Plein écran indisponible ici : utilisez celui du navigateur (F11)");}
-  try{wake=await navigator.wakeLock?.request("screen");}catch(e){}
+  keepAwake();
 };
 let lastState="";
 setInterval(()=>{if(!saved)return;const s=String(hhActive(saved))+JSON.stringify([saved.hhStart,saved.hhEnd,saved.hhDays]);if(s!==lastState){lastState=s;renderScreen();}},5000);
@@ -1451,11 +1455,19 @@ if(TV)document.body.classList.add("tv");
 show(TV?"ecran":"gestion");
 // Sur la TV : plein écran et écran toujours allumé au premier clic
 if(TV){
-  document.body.addEventListener("click",async()=>{
-    if(document.fullscreenElement||document.getElementById("view-ecran").hidden)return;
-    try{await document.getElementById("screen").requestFullscreen();}catch(e){}
-    try{wake=await navigator.wakeLock?.request("screen");}catch(e){}
-  },{once:true});
+  // n'importe quel clic (ou touche) met la carte en plein écran, à chaque fois :
+  // si quelqu'un quitte le plein écran, le clic suivant y revient.
+  const goFull=async()=>{
+    if(!document.fullscreenElement){
+      const el=document.getElementById("screen");
+      try{await (el.requestFullscreen?.({navigationUI:"hide"})??el.webkitRequestFullscreen?.());}catch(e){}
+    }
+    keepAwake();
+  };
+  ["click","keydown"].forEach(ev=>document.body.addEventListener(ev,goFull));
+  keepAwake();
+  // l'écran peut se rendormir après une mise en veille de l'onglet : on reprend la main
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)keepAwake();});
 }
 refreshAuthUI();
 refresh();

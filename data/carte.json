@@ -1,10 +1,8 @@
 {
-  "updatedAt": 1792216034027,
+  "updatedAt": 1792166266829,
   "title": "Bières pression",
   "subtitle": "Possibilité de prendre des crafts côté magasin (droit de bouchon de 2€)",
   "bgAnim": "default",
-  "bgEvery": 10,
-  "bgFest": true,
   "hhStart": "17:00",
   "hhEnd": "19:00",
   "hhDays": [
@@ -49,8 +47,6 @@
   ],
   "taps": [
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Paulaner Oktoberfest",
       "country": "DE",
       "style": "Blonde",
@@ -58,6 +54,8 @@
       "desc": "Notes maltées, miellées, touches herbacées",
       "p33": 4.5,
       "p50": "4.5",
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "4.5",
       "hh50": "4.5",
@@ -68,8 +66,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Jipernel",
       "country": "FR",
       "style": "Lager",
@@ -77,6 +73,8 @@
       "desc": "Bière blonde · brasserie V and B",
       "p33": "4.5",
       "p50": 5.5,
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "4.5",
       "hh50": 4.5,
@@ -87,8 +85,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Val Dieu Triple",
       "country": "BE",
       "style": "Triple",
@@ -96,6 +92,8 @@
       "desc": "Bière blonde · brasserie Val Dieu",
       "p33": "7",
       "p50": "9",
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "7",
       "hh50": 8,
@@ -106,8 +104,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Le Coup de Cloche Blanche",
       "country": "BE",
       "style": "Blanche",
@@ -115,6 +111,8 @@
       "desc": "Douce, onctueuse, saveurs d'agrumes, blé",
       "p33": 4,
       "p50": 5,
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "4",
       "hh50": 4,
@@ -125,8 +123,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Vault City – Monsieur Froid",
       "country": "SCT",
       "style": "Modern Sour à la framboise",
@@ -134,6 +130,8 @@
       "desc": "Sour douce et facile à boire, brassée pour les 25 ans de V and B",
       "p33": 9,
       "p50": 11,
+      "cl33": 33,
+      "cl50": 50,
       "hh": false,
       "hh33": "",
       "hh50": "",
@@ -144,8 +142,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Le Coup de Cloche Rousse",
       "country": "BE",
       "style": "Amber Ale",
@@ -153,6 +149,8 @@
       "desc": "Caramel, malt toasté, légère douceur",
       "p33": "5",
       "p50": "7",
+      "cl33": 33,
+      "cl50": 50,
       "hh": false,
       "hh33": "",
       "hh50": "",
@@ -163,8 +161,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Les Intenables – Mama Whipa",
       "country": "FR",
       "style": "White IPA",
@@ -172,6 +168,8 @@
       "desc": "Touches de pamplemousse et de fruits exotiques",
       "p33": 8,
       "p50": 10,
+      "cl33": 33,
+      "cl50": 50,
       "hh": false,
       "hh33": "",
       "hh50": "",
@@ -182,8 +180,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Fauve – Mariage à Vegas",
       "country": "FR",
       "style": "Double NEIPA",
@@ -191,6 +187,8 @@
       "desc": "Notes intenses de fruits tropicaux et d'agrumes",
       "p33": 8,
       "p50": 10,
+      "cl33": 33,
+      "cl50": 50,
       "hh": false,
       "hh33": "",
       "hh50": "",
@@ -201,8 +199,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Mont Hardi West Coast IPA",
       "country": "FR",
       "style": "IPA",
@@ -210,6 +206,8 @@
       "desc": "Légère et désaltérante",
       "p33": 6,
       "p50": 8,
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "6",
       "hh50": 7,
@@ -220,8 +218,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "La Débauche – NEIPA",
       "country": "FR",
       "style": "NEIPA",
@@ -229,6 +225,8 @@
       "desc": "Fruits tropicaux et pêche, tout en rondeur",
       "p33": 5,
       "p50": 7,
+      "cl33": 33,
+      "cl50": 50,
       "hh": false,
       "hh33": 4,
       "hh50": 6,
@@ -239,8 +237,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "",
-      "vol2": "",
       "name": "Levrette Cerise",
       "country": "BE",
       "style": "Aromatisée-fruitée",
@@ -248,6 +244,8 @@
       "desc": "Bière rouge · brasserie Haacht",
       "p33": "5",
       "p50": "7",
+      "cl33": 33,
+      "cl50": 50,
       "hh": true,
       "hh33": "5",
       "hh50": 6,
@@ -258,8 +256,6 @@
       "hhPriceColor": ""
     },
     {
-      "vol1": "12",
-      "vol2": "33",
       "name": "Domaine La Clausade - Etincelles",
       "country": "FR",
       "style": "Mauguio, souvignier gris",
@@ -267,6 +263,8 @@
       "desc": "Vin pétillant de raisin bio faiblement alcoolisé ",
       "p33": "3",
       "p50": "8",
+      "cl33": 12,
+      "cl50": 33,
       "hh": false,
       "hh33": 4,
       "hh50": 6,

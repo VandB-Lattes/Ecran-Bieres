@@ -11,7 +11,7 @@ Affichage dynamique des 12 tireuses du V and B Montpellier Lattes, hébergé sur
    Source : **Deploy from a branch**, branche `main`, dossier `/ (root)`. Enregistrez.
 2. Au bout d'une minute, le site est à l'adresse
    `https://<votre-compte>.github.io/<nom-du-depot>/`.
-3. **Sur la TV** : ouvrez cette adresse **en ajoutant `#ecran` à la fin** (ex. `https://<compte>.github.io/<depot>/#ecran`), puis cliquez une fois n'importe où pour passer en plein écran.
+3. **Sur la TV** : ouvrez cette adresse **en ajoutant `#ecran` à la fin** (ex. `https://<compte>.github.io/<depot>/#ecran`). Un clic n'importe où sur l'écran passe en plein écran ; si quelqu'un en sort, le clic suivant y revient.
 
 Chaque appareil retient ensuite son mode :
 
