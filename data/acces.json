@@ -2,15 +2,15 @@
   "users": [
     {
       "login": "staff",
-      "salt": "gjrnUQrPtasy5dgTpNK05w==",
+      "salt": "DeDKo/CqTLt4iOcnymEsfg==",
       "iter": 310000,
       "check": {
-        "iv": "zoL2ghVN6MaxML/L",
-        "ct": "cPnvFyO9u2+4fyMVCi+H2uJPcezkFuPBRv6adA=="
+        "iv": "tpxLuvFx5e/kK8wU",
+        "ct": "/PfDzirYmUGGieyOyf5DeBrn5tckTCbamZ45NQ=="
       },
       "token": {
-        "iv": "on3u6ZwtnPXzOHMp",
-        "ct": "SzybdqOP6oJpoprXfHZUUzoXrgiGeeYexaxXM6p1XpkXIXFxsRDuOlIFN3DqAES4QJPnEmZEfyZqOJqL6/aGBfGODHrUVb34r6m5/iXjhe0kZBx3p9bV9hseEcoo1XbaBIelQTZnZCLkE8Vz6Q=="
+        "iv": "OYamQ8Ypq6Rcz/TA",
+        "ct": "oPayquT682tRRaDJfbQKJBLWCntaIp7BFKvbtuc3BnhP9eh8zMAFfCIbR9VVUwUxmrw8VvWepz0Xgn0XCzsimyd6DUg6EXf1R0ALoE7i6faETSUvKc6XSU7/MP88G4+bVFJ83xwUX0wJFyXoZA=="
       }
     }
   ]
