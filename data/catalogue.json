@@ -1107,6 +1107,15 @@
   "u": "https://www.vandb.fr/eshop/biere/chimay-doree-33-cl"
  },
  {
+  "n": "Chimay Jaune",
+  "b": "Chimay",
+  "c": "BE",
+  "s": "Belgian Pale Ale",
+  "a": 6.5,
+  "d": "Bière blonde · brasserie Chimay",
+  "u": "https://www.vandb.fr/eshop/biere/chimay-jaune-33-cl"
+ },
+ {
   "n": "Chimay Rouge",
   "b": "Chimay",
   "c": "BE",
@@ -1215,15 +1224,6 @@
   "u": "https://www.vandb.fr/eshop/biere/coco-katana-33-cl"
  },
  {
-  "n": "Cognac Barrel",
-  "b": "La Débauche",
-  "c": "FR",
-  "s": "Barley Wine",
-  "a": 9.5,
-  "d": "Bière ambrée · brasserie La Débauche",
-  "u": "https://www.vandb.fr/eshop/biere/cognac-barrel-75-cl"
- },
- {
   "n": "Colette",
   "b": "Great Divide",
   "c": "US",
@@ -1285,6 +1285,15 @@
   "a": 8.5,
   "d": "Bière blonde · brasserie Hoorn",
   "u": "https://www.vandb.fr/eshop/biere/cornet-oaked-33cl"
+ },
+ {
+  "n": "Corsendonk Agnus",
+  "b": "Corsendonk",
+  "c": "BE",
+  "s": "Triple",
+  "a": 7.5,
+  "d": "Bière blonde · brasserie Corsendonk",
+  "u": "https://www.vandb.fr/eshop/biere/corsendonk-agnus-33cl"
  },
  {
   "n": "Corsendonk Apple white",
@@ -1492,6 +1501,15 @@
   "a": 8.5,
   "d": "Bière brune · brasserie Huyghe",
   "u": "https://www.vandb.fr/eshop/biere/delirium-nocturnum-33-cl"
+ },
+ {
+  "n": "Delirium Red",
+  "b": "Huyghe",
+  "c": "BE",
+  "s": "Aromatisée-fruitée",
+  "a": 8,
+  "d": "Bière rouge · brasserie Huyghe",
+  "u": "https://www.vandb.fr/eshop/biere/delirium-red-33-cl"
  },
  {
   "n": "Delirium Tremens",
@@ -2079,15 +2097,6 @@
   "u": "https://www.vandb.fr/eshop/biere/gewurztraminer-tilquin-a-lancienne-75-cl"
  },
  {
-  "n": "Golgoth",
-  "b": "Brasserie Iron",
-  "c": "FR",
-  "s": "Imperial Stout",
-  "a": 9,
-  "d": "Bière noire · brasserie Brasserie Iron",
-  "u": "https://www.vandb.fr/eshop/biere/golgoth-33cl"
- },
- {
   "n": "Goliath Ambrée",
   "b": "des Légendes",
   "c": "BE",
@@ -2320,6 +2329,15 @@
   "a": 5.5,
   "d": "Bière blonde · brasserie Hacker-Pschorr",
   "u": "https://www.vandb.fr/eshop/biere/hacker-pschorr-kellerbier-50-cl"
+ },
+ {
+  "n": "Hacker Pschorr Munchner Hell",
+  "b": "Hacker-Pschorr",
+  "c": "DE",
+  "s": "Helles",
+  "a": 5,
+  "d": "Bière blonde · brasserie Hacker-Pschorr",
+  "u": "https://www.vandb.fr/eshop/biere/hacker-pschorr-munchner-hell-50-cl"
  },
  {
   "n": "Hacker Pschorr Oktoberfest",
@@ -2736,6 +2754,15 @@
   "u": "https://www.vandb.fr/eshop/biere/kasteel-rouge-75-cl"
  },
  {
+  "n": "Kasteel Rubus",
+  "b": "Van Honsebrouck",
+  "c": "BE",
+  "s": "Aromatisée-fruitée",
+  "a": 7,
+  "d": "Bière rouge · brasserie Van Honsebrouck",
+  "u": "https://www.vandb.fr/eshop/biere/kasteel-rubus-33-cl"
+ },
+ {
   "n": "Kasteel Triple",
   "b": "Van Honsebrouck",
   "c": "BE",
@@ -2878,6 +2905,15 @@
   "a": 5.1,
   "d": "Bière blonde · brasserie Krombacher",
   "u": "https://www.vandb.fr/eshop/biere/krombacher-kellerbier-33-cl"
+ },
+ {
+  "n": "Krombacher Pils",
+  "b": "Krombacher",
+  "c": "DE",
+  "s": "Pils",
+  "a": 4.8,
+  "d": "Bière blonde · brasserie Krombacher",
+  "u": "https://www.vandb.fr/eshop/biere/krombacher-pils-50-cl"
  },
  {
   "n": "Krombacher Weizen",
@@ -4149,6 +4185,15 @@
   "u": "https://www.vandb.fr/eshop/biere/mont-des-cats-33-cl"
  },
  {
+  "n": "Mont Hardi - Pomona",
+  "b": "Mont Hardi",
+  "c": "FR",
+  "s": "Sour",
+  "a": 4.7,
+  "d": "Bière blonde · brasserie Mont Hardi",
+  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-pomona-33-cl"
+ },
+ {
   "n": "Mont Hardi - Sirona",
   "b": "Mont Hardi",
   "c": "FR",
@@ -4545,15 +4590,6 @@
   "u": "https://www.vandb.fr/eshop/biere/orange-velvet-33cl"
  },
  {
-  "n": "Orval",
-  "b": "Orval",
-  "c": "BE",
-  "s": "Amber Ale",
-  "a": 6.2,
-  "d": "Bière ambrée · brasserie Orval",
-  "u": "https://www.vandb.fr/eshop/biere/orval-33cl"
- },
- {
   "n": "Osiris",
   "b": "Mont Hardi",
   "c": "FR",
@@ -4707,6 +4743,15 @@
   "u": "https://www.vandb.fr/eshop/biere/paulaner-munchner-urtyp-50-cl"
  },
  {
+  "n": "Paulaner Salvator",
+  "b": "Paulaner",
+  "c": "DE",
+  "s": "Dopple Bock",
+  "a": 7.9,
+  "d": "Bière ambrée · brasserie Paulaner",
+  "u": "https://www.vandb.fr/eshop/biere/paulaner-salvator-50-cl"
+ },
+ {
   "n": "Paulaner Weissbier Dunkel",
   "b": "Paulaner",
   "c": "DE",
@@ -4732,6 +4777,15 @@
   "a": 5.5,
   "d": "Bière blanche · brasserie Paulaner",
   "u": "https://www.vandb.fr/eshop/biere/paulaner-weissbier-naturtrub-33-cl"
+ },
+ {
+  "n": "Pêche Mel Bush",
+  "b": "Dubuisson",
+  "c": "BE",
+  "s": "Aromatisée-fruitée",
+  "a": 8.5,
+  "d": "Bière blonde · brasserie Dubuisson",
+  "u": "https://www.vandb.fr/eshop/biere/peche-mel-bush-33-cl"
  },
  {
   "n": "Pêcheresse Lindemans",
@@ -5119,6 +5173,15 @@
   "a": 6.4,
   "d": "Bière blonde · brasserie Tilquin",
   "u": "https://www.vandb.fr/eshop/biere/quetsche-tilquin-a-lancienne-75-cl"
+ },
+ {
+  "n": "Queue de Charrue Ambrée",
+  "b": "Queue de Charrue",
+  "c": "BE",
+  "s": "Amber Ale",
+  "a": 5.5,
+  "d": "Bière ambrée · brasserie Queue de Charrue",
+  "u": "https://www.vandb.fr/eshop/biere/queue-de-charrue-ambree-33-cl"
  },
  {
   "n": "Queue de Charrue Blonde",
@@ -5616,6 +5679,15 @@
   "u": "https://www.vandb.fr/eshop/biere/smoke-on-the-water-33cl"
  },
  {
+  "n": "Soft Power",
+  "b": "Sainte Cru",
+  "c": "FR",
+  "s": "Neipa - Hazy IPA",
+  "a": 6.5,
+  "d": "Bière blonde · brasserie Sainte Cru",
+  "u": "https://www.vandb.fr/eshop/biere/soft-power-44-cl"
+ },
+ {
   "n": "Sonpoi Neipa",
   "b": "La Ptite Maiz",
   "c": "FR",
@@ -5902,15 +5974,6 @@
   "a": 6,
   "d": "Bière blonde · brasserie Haacht",
   "u": "https://www.vandb.fr/eshop/biere/super-8-ipa-33-cl"
- },
- {
-  "n": "Super 8 Rouge",
-  "b": "Haacht",
-  "c": "BE",
-  "s": "Aromatisée-fruitée",
-  "a": 7.5,
-  "d": "Bière rouge · brasserie Haacht",
-  "u": "https://www.vandb.fr/eshop/biere/super-8-rouge-33-cl"
  },
  {
   "n": "Super Santa",
@@ -6291,6 +6354,15 @@
   "u": "https://www.vandb.fr/eshop/biere/ursa-major-50-cl"
  },
  {
+  "n": "Val Dieu Blonde",
+  "b": "Val Dieu",
+  "c": "BE",
+  "s": "Belgian Pale Ale",
+  "a": 6,
+  "d": "Bière blonde · brasserie Val Dieu",
+  "u": "https://www.vandb.fr/eshop/biere/val-dieu-blonde-33cl"
+ },
+ {
   "n": "Val Dieu Brune",
   "b": "Val Dieu",
   "c": "BE",
@@ -6513,7 +6585,7 @@
   "s": "Weissbier",
   "a": 5.4,
   "d": "Bière blanche · brasserie Weihenstephan",
-  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-hefeweissbier-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-hefeweissbier-50-cl"
  },
  {
   "n": "Weihenstephaner Helles",
@@ -6522,7 +6594,7 @@
   "s": "Helles",
   "a": 4.8,
   "d": "Bière blonde · brasserie Weihenstephan",
-  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-helles-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-helles-50cl"
  },
  {
   "n": "Weihenstephaner Kellerbier 1516",
