@@ -405,15 +405,6 @@
   "u": "https://www.vandb.fr/eshop/biere/baptist-ipa-33-cl"
  },
  {
-  "n": "Barbar",
-  "b": "Lefebvre",
-  "c": "BE",
-  "s": "Strong Ale",
-  "a": 8,
-  "d": "Bière blonde · brasserie Lefebvre",
-  "u": "https://www.vandb.fr/eshop/biere/barbar-33cl"
- },
- {
   "n": "Barbar Rouge",
   "b": "Lefebvre",
   "c": "BE",
@@ -864,6 +855,15 @@
   "u": "https://www.vandb.fr/eshop/biere/brewdog-planet-pale-33-cl"
  },
  {
+  "n": "Brewdog Wingman",
+  "b": "Brewdog",
+  "c": "SCT",
+  "s": "Session IPA",
+  "a": 4.3,
+  "d": "Bière blonde · brasserie Brewdog",
+  "u": "https://www.vandb.fr/eshop/biere/brewdog-wingman-33-cl"
+ },
+ {
   "n": "Brigand",
   "b": "Van Honsebrouck",
   "c": "BE",
@@ -951,7 +951,7 @@
   "s": "Neipa - Hazy IPA",
   "a": 6.5,
   "d": "Bière blonde · brasserie Brasserie du Grand Paris",
-  "u": "https://www.vandb.fr/eshop/biere/burning-clouds-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/burning-clouds-75-cl"
  },
  {
   "n": "Bush Caractère",
@@ -1258,6 +1258,15 @@
   "a": 8.5,
   "d": "Bière blonde · brasserie Senses Brewing",
   "u": "https://www.vandb.fr/eshop/biere/coco-katana-33-cl"
+ },
+ {
+  "n": "Cognac Imperial Stout Barrel Aged",
+  "b": "Brasserie du Grand Paris",
+  "c": "FR",
+  "s": "Imperial Stout",
+  "a": 12.2,
+  "d": "Bière noire · brasserie Brasserie du Grand Paris",
+  "u": "https://www.vandb.fr/eshop/biere/cognac-imperial-stout-barrel-aged-33-cl"
  },
  {
   "n": "Colette",
@@ -1680,7 +1689,7 @@
   "s": "Strong Ale",
   "a": 8.5,
   "d": "Bière blonde · brasserie Duvel",
-  "u": "https://www.vandb.fr/eshop/biere/duvel-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/duvel-75-cl"
  },
  {
   "n": "Duvel 6,66 %",
@@ -1888,6 +1897,15 @@
   "a": 7.6,
   "d": "Bière blonde · brasserie Fauve",
   "u": "https://www.vandb.fr/eshop/biere/fauve-mariage-a-vegas-44-cl"
+ },
+ {
+  "n": "Fauve - Rejaillir Le Feu",
+  "b": "Fauve",
+  "c": "FR",
+  "s": "Neipa - Hazy IPA",
+  "a": 6.2,
+  "d": "Bière blonde · brasserie Fauve",
+  "u": "https://www.vandb.fr/eshop/biere/rejaillir-le-feu-44cl"
  },
  {
   "n": "Fénix",
@@ -2637,6 +2655,15 @@
   "u": "https://www.vandb.fr/eshop/biere/io-33-cl"
  },
  {
+  "n": "IPA Citra Galactique",
+  "b": "Brasserie du Grand Paris",
+  "c": "FR",
+  "s": "IPA",
+  "a": 6.5,
+  "d": "Bière blonde · brasserie Brasserie du Grand Paris",
+  "u": "https://www.vandb.fr/eshop/biere/ipa-citra-galactique-33-cl"
+ },
+ {
   "n": "Iron IPA DDH",
   "b": "Brasserie Iron",
   "c": "FR",
@@ -2725,6 +2752,15 @@
   "a": 7.8,
   "d": "Bière brune · brasserie Leroy",
   "u": "https://www.vandb.fr/eshop/biere/kapittel-winter-33-cl"
+ },
+ {
+  "n": "Karaté La Bière",
+  "b": "Mont Hardi",
+  "c": "FR",
+  "s": "Helles",
+  "a": 5,
+  "d": "Bière blonde · brasserie Mont Hardi",
+  "u": "https://www.vandb.fr/eshop/biere/karate-la-biere-33-cl"
  },
  {
   "n": "Kartäuser Weissbier",
@@ -3033,6 +3069,15 @@
   "u": "https://www.vandb.fr/eshop/biere/la-debauche-ipa-75cl"
  },
  {
+  "n": "La Débauche NEIPA",
+  "b": "La Débauche",
+  "c": "FR",
+  "s": "Neipa - Hazy IPA",
+  "a": 6,
+  "d": "Bière blonde · brasserie La Débauche",
+  "u": "https://www.vandb.fr/eshop/biere/la-debauche-neipa-33-cl"
+ },
+ {
   "n": "La Dilettante - La Bringue",
   "b": "La Dilettante",
   "c": "FR",
@@ -3202,15 +3247,6 @@
   "a": 8.8,
   "d": "Bière blonde · brasserie Omer Vander Ghinste",
   "u": "https://www.vandb.fr/eshop/biere/lefort-triple-33-cl"
- },
- {
-  "n": "Legends Harmony",
-  "b": "des Légendes",
-  "c": "BE",
-  "s": "Belgian Pale Ale",
-  "a": 5.7,
-  "d": "Bière blonde · brasserie des Légendes",
-  "u": "https://www.vandb.fr/eshop/biere/legends-harmony-33-cl"
  },
  {
   "n": "Leroy Stout",
@@ -3627,6 +3663,15 @@
   "u": "https://www.vandb.fr/eshop/biere/malheur-8-33-cl"
  },
  {
+  "n": "Mandragore",
+  "b": "Melusine",
+  "c": "FR",
+  "s": "Pale Ale",
+  "a": 4.8,
+  "d": "Bière blonde · brasserie Melusine",
+  "u": "https://www.vandb.fr/eshop/biere/mandragore-75-cl"
+ },
+ {
   "n": "Maneblusser",
   "b": "Het Anker",
   "c": "BE",
@@ -4023,6 +4068,15 @@
   "u": "https://www.vandb.fr/eshop/biere/mini-fut-paulaner-munchner-hell-5l"
  },
  {
+  "n": "Mini-fût Stella 5+1",
+  "b": "AB Inbev",
+  "c": "BE",
+  "s": "Lager",
+  "a": 5.2,
+  "d": "Bière blonde · brasserie AB Inbev",
+  "u": "https://www.vandb.fr/eshop/biere/mini-fut-stella-5-1-6l"
+ },
+ {
   "n": "Mini-fût Tripel Karmeliet 5+1",
   "b": "Bosteels",
   "c": "BE",
@@ -4057,15 +4111,6 @@
   "a": 8,
   "d": "Bière blonde · brasserie Cambier",
   "u": "https://www.vandb.fr/eshop/biere/mongy-triple-33-cl"
- },
- {
-  "n": "Monsieur Froid",
-  "b": "Vault City",
-  "c": "GB",
-  "s": "Sour",
-  "a": 5,
-  "d": "Bière bleue · brasserie Vault City",
-  "u": "https://www.vandb.fr/eshop/biere/monsieur-froid-44-cl"
  },
  {
   "n": "Mont Blanc - La Violette",
@@ -4227,7 +4272,7 @@
   "s": "Triple",
   "a": 8,
   "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-triple-75-cl"
+  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-triple-33-cl"
  },
  {
   "n": "Mr Green",
@@ -4402,12 +4447,12 @@
  },
  {
   "n": "Nouveauté",
-  "b": "Hoppy Road",
-  "c": "FR",
-  "s": "West Coast IPA",
-  "a": 7.1,
-  "d": "Bière blonde · brasserie Hoppy Road",
-  "u": "https://www.vandb.fr/eshop/biere/pow-wow-33-cl"
+  "b": "Saint Feuillien",
+  "c": "BE",
+  "s": "Strong Ale",
+  "a": 9.5,
+  "d": "Bière blonde · brasserie Saint Feuillien",
+  "u": "https://www.vandb.fr/eshop/biere/magnum-st-feuillien-grand-cru-2026-1-5-l"
  },
  {
   "n": "Nova",
@@ -4507,6 +4552,15 @@
   "a": 12,
   "d": "Bière noire · brasserie Grimm",
   "u": "https://www.vandb.fr/eshop/biere/onement-heaven-hill-50-cl"
+ },
+ {
+  "n": "Ooga Chaka",
+  "b": "Sainte Cru",
+  "c": "FR",
+  "s": "Double NEIPA",
+  "a": 8,
+  "d": "Bière blonde · brasserie Sainte Cru",
+  "u": "https://www.vandb.fr/eshop/biere/ooga-chaka-44-cl"
  },
  {
   "n": "Open Work : Three Two One",
@@ -4626,15 +4680,6 @@
   "u": "https://www.vandb.fr/eshop/biere/paix-dieu-75-cl"
  },
  {
-  "n": "Paix Dieu 25 ans",
-  "b": "Caulier",
-  "c": "BE",
-  "s": "Triple",
-  "a": 10,
-  "d": "Bière blonde · brasserie Caulier",
-  "u": "https://www.vandb.fr/eshop/biere/paix-dieu-25-ans-33cl"
- },
- {
   "n": "Paix Dieu Nova",
   "b": "Caulier",
   "c": "BE",
@@ -4740,7 +4785,7 @@
   "s": "Aromatisée-fruitée",
   "a": 8.5,
   "d": "Bière blonde · brasserie Dubuisson",
-  "u": "https://www.vandb.fr/eshop/biere/peche-mel-bush-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/peche-mel-bush-75-cl"
  },
  {
   "n": "Pêcheresse Lindemans",
@@ -4912,6 +4957,15 @@
   "a": 6,
   "d": "Bière blonde · brasserie Pietra",
   "u": "https://www.vandb.fr/eshop/biere/pietra-corsican-ipa-33-cl"
+ },
+ {
+  "n": "Piggy Brewing - Calibre 8",
+  "b": "The Piggy Brewing Company",
+  "c": "FR",
+  "s": "Double IPA",
+  "a": 8,
+  "d": "Bière orange · brasserie The Piggy Brewing Company",
+  "u": "https://www.vandb.fr/eshop/biere/piggy-brewing-calibre-8-33-cl"
  },
  {
   "n": "Pils Saaz",
@@ -5515,15 +5569,6 @@
   "a": 9.5,
   "d": "Bière noire · brasserie Sainte Cru",
   "u": "https://www.vandb.fr/eshop/biere/santa-cruz-imperial-stout-banane-33cl"
- },
- {
-  "n": "Santa Cruz Imperial Stout Cacao",
-  "b": "Sainte Cru",
-  "c": "FR",
-  "s": "Imperial Stout",
-  "a": 9.5,
-  "d": "Bière noire · brasserie Sainte Cru",
-  "u": "https://www.vandb.fr/eshop/biere/santa-cruz-imperial-stout-cacao-33cl"
  },
  {
   "n": "Santa's Hop Sack",
@@ -6360,7 +6405,7 @@
   "s": "Belgian Pale Ale",
   "a": 6,
   "d": "Bière blonde · brasserie Val Dieu",
-  "u": "https://www.vandb.fr/eshop/biere/val-dieu-blonde-33cl"
+  "u": "https://www.vandb.fr/eshop/biere/val-dieu-blonde-75-cl"
  },
  {
   "n": "Val Dieu Brune",
@@ -6649,6 +6694,15 @@
   "a": 5.8,
   "d": "Bière blonde · brasserie Weihenstephan",
   "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-winterfestbier-50cl"
+ },
+ {
+  "n": "West Coast Pilsner Centennial / Krush",
+  "b": "Popihn",
+  "c": "FR",
+  "s": "Pils",
+  "a": 5.5,
+  "d": "Bière blonde · brasserie Popihn",
+  "u": "https://www.vandb.fr/eshop/biere/west-coast-pilsner-centennial-krush-44-cl"
  },
  {
   "n": "Westmalle Double",
