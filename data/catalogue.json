@@ -559,12 +559,12 @@
  },
  {
   "n": "Bio",
-  "b": "Saint Feuillien",
+  "b": "Dupont",
   "c": "BE",
-  "s": "Triple",
-  "a": 8,
-  "d": "Bière blonde · brasserie Saint Feuillien",
-  "u": "https://www.vandb.fr/eshop/biere/grisette-triple-bio-sans-gluten-33cl"
+  "s": "Belgian Pale Ale",
+  "a": 6.7,
+  "d": "Bière blonde · brasserie Dupont",
+  "u": "https://www.vandb.fr/eshop/biere/fomo-bio-sans-gluten-33-cl"
  },
  {
   "n": "Bitburger",
@@ -1854,15 +1854,6 @@
   "u": "https://www.vandb.fr/eshop/biere/etoile-du-nord-33-cl"
  },
  {
-  "n": "Europa",
-  "b": "Mont Hardi",
-  "c": "FR",
-  "s": "IPA",
-  "a": 6.6,
-  "d": "Bière ambrée · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/europa-33-cl"
- },
- {
   "n": "Eveil des Sens",
   "b": "Fauve",
   "c": "FR",
@@ -2844,15 +2835,6 @@
   "u": "https://www.vandb.fr/eshop/biere/kasteel-xtra-33-cl"
  },
  {
-  "n": "Keltoï",
-  "b": "Mont Hardi",
-  "c": "FR",
-  "s": "Ale",
-  "a": 4.8,
-  "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/keltoi-33-cl"
- },
- {
   "n": "Kings Of Oil Peated Whisky",
   "b": "La Débauche",
   "c": "FR",
@@ -3247,6 +3229,15 @@
   "a": 8.8,
   "d": "Bière blonde · brasserie Omer Vander Ghinste",
   "u": "https://www.vandb.fr/eshop/biere/lefort-triple-33-cl"
+ },
+ {
+  "n": "Legends Harmony",
+  "b": "des Légendes",
+  "c": "BE",
+  "s": "Belgian Pale Ale",
+  "a": 5.7,
+  "d": "Bière blonde · brasserie des Légendes",
+  "u": "https://www.vandb.fr/eshop/biere/legends-harmony-33-cl"
  },
  {
   "n": "Leroy Stout",
@@ -4131,6 +4122,15 @@
   "u": "https://www.vandb.fr/eshop/biere/mont-blanc-blanche-33-cl"
  },
  {
+  "n": "Mont Blanc Bleue",
+  "b": "Mont Blanc",
+  "c": "FR",
+  "s": "Aromatisée-fruitée",
+  "a": 5.8,
+  "d": "Bière rouge · brasserie Mont Blanc",
+  "u": "https://www.vandb.fr/eshop/biere/mont-blanc-bleue-33-cl"
+ },
+ {
   "n": "Mont Blanc Blonde",
   "b": "Mont Blanc",
   "c": "FR",
@@ -4237,6 +4237,15 @@
   "a": 5.5,
   "d": "Bière blanche · brasserie Mont Hardi",
   "u": "https://www.vandb.fr/eshop/biere/mont-hardi-ete-33-cl"
+ },
+ {
+  "n": "Mont Hardi Grisette",
+  "b": "Mont Hardi",
+  "c": "FR",
+  "s": "Saison",
+  "a": 4,
+  "d": "Bière blanche · brasserie Mont Hardi",
+  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-grisette-33-cl"
  },
  {
   "n": "Mont Hardi Hiver",
@@ -4590,6 +4599,15 @@
   "u": "https://www.vandb.fr/eshop/biere/orange-velvet-33cl"
  },
  {
+  "n": "Orval",
+  "b": "Orval",
+  "c": "BE",
+  "s": "Amber Ale",
+  "a": 6.2,
+  "d": "Bière ambrée · brasserie Orval",
+  "u": "https://www.vandb.fr/eshop/biere/orval-33cl"
+ },
+ {
   "n": "Osiris",
   "b": "Mont Hardi",
   "c": "FR",
@@ -4741,6 +4759,15 @@
   "a": 5.5,
   "d": "Bière blonde · brasserie Paulaner",
   "u": "https://www.vandb.fr/eshop/biere/paulaner-munchner-urtyp-50-cl"
+ },
+ {
+  "n": "Paulaner Oktoberfest",
+  "b": "Paulaner",
+  "c": "DE",
+  "s": "Lager",
+  "a": 6,
+  "d": "Bière blonde · brasserie Paulaner",
+  "u": "https://www.vandb.fr/eshop/biere/paulaner-oktoberfest-50-cl"
  },
  {
   "n": "Paulaner Salvator",
@@ -5508,15 +5535,6 @@
   "u": "https://www.vandb.fr/eshop/biere/sacred-heart-xii-33-cl"
  },
  {
-  "n": "Saint Graal Rousse",
-  "b": "Saint Graal",
-  "c": "FR",
-  "s": "Double",
-  "a": 6.5,
-  "d": "Bière ambrée · brasserie Saint Graal",
-  "u": "https://www.vandb.fr/eshop/biere/saint-graal-rousse-75-cl"
- },
- {
   "n": "Saison 1900",
   "b": "Lefebvre",
   "c": "BE",
@@ -5560,15 +5578,6 @@
   "a": 6,
   "d": "Bière blonde · brasserie Sainte Cru",
   "u": "https://www.vandb.fr/eshop/biere/santa-crue-sour-mangue-passion-33cl"
- },
- {
-  "n": "Santa Cruz Imperial Stout Banane",
-  "b": "Sainte Cru",
-  "c": "FR",
-  "s": "Imperial Stout",
-  "a": 9.5,
-  "d": "Bière noire · brasserie Sainte Cru",
-  "u": "https://www.vandb.fr/eshop/biere/santa-cruz-imperial-stout-banane-33cl"
  },
  {
   "n": "Santa's Hop Sack",
@@ -5722,6 +5731,15 @@
   "a": 5.2,
   "d": "Bière blonde · brasserie Spaten-Franziskaner",
   "u": "https://www.vandb.fr/eshop/biere/spaten-hell-50-cl"
+ },
+ {
+  "n": "Spaten Oktoberfestbier",
+  "b": "Spaten-Franziskaner",
+  "c": "DE",
+  "s": "Lager",
+  "a": 5.9,
+  "d": "Bière blonde · brasserie Spaten-Franziskaner",
+  "u": "https://www.vandb.fr/eshop/biere/spaten-oktoberfestbier-50cl"
  },
  {
   "n": "St Bernardus Abt 12",
@@ -6282,15 +6300,6 @@
   "u": "https://www.vandb.fr/eshop/biere/tongerlo-blonde-75-cl"
  },
  {
-  "n": "Tongerlo Christmas",
-  "b": "Haacht",
-  "c": "BE",
-  "s": "Amber Ale",
-  "a": 7,
-  "d": "Bière ambrée · brasserie Haacht",
-  "u": "https://www.vandb.fr/eshop/biere/tongerlo-christmas-33-cl"
- },
- {
   "n": "Tongerlo Lux",
   "b": "Haacht",
   "c": "BE",
@@ -6559,15 +6568,6 @@
   "a": 7.7,
   "d": "Bière blanche · brasserie Weihenstephan",
   "u": "https://www.vandb.fr/eshop/biere/vitus-33-cl"
- },
- {
-  "n": "Walk Of Death",
-  "b": "Sainte Cru",
-  "c": "FR",
-  "s": "Strong Ale",
-  "a": 8,
-  "d": "Bière blonde · brasserie Sainte Cru",
-  "u": "https://www.vandb.fr/eshop/biere/walk-of-death-44-cl"
  },
  {
   "n": "Warsteiner",
