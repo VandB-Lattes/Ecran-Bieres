@@ -198,15 +198,6 @@
   "u": "https://www.vandb.fr/eshop/biere/aegle-33-cl"
  },
  {
-  "n": "Agni",
-  "b": "Mont Hardi",
-  "c": "FR",
-  "s": "Sour",
-  "a": 5,
-  "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/agni-33-cl"
- },
- {
   "n": "All I Want for Christmas is Kloug Tarte de Linz",
   "b": "Sainte Cru",
   "c": "FR",
@@ -447,7 +438,7 @@
   "s": "Pils",
   "a": 4.9,
   "d": "Bière blonde · brasserie Beck's",
-  "u": "https://www.vandb.fr/eshop/biere/becks-50cl"
+  "u": "https://www.vandb.fr/eshop/biere/becks-33cl"
  },
  {
   "n": "Beck's Lemon",
@@ -574,6 +565,15 @@
   "a": 4.8,
   "d": "Bière blonde · brasserie Bitburger",
   "u": "https://www.vandb.fr/eshop/biere/bitburger-50-cl"
+ },
+ {
+  "n": "Bixi",
+  "b": "Gross",
+  "c": "ES",
+  "s": "Pale Ale",
+  "a": 4.5,
+  "d": "Bière blonde · brasserie Gross",
+  "u": "https://www.vandb.fr/eshop/biere/bixi-44-cl"
  },
  {
   "n": "Blanche Combawa",
@@ -771,7 +771,7 @@
   "s": "Triple",
   "a": 9,
   "d": "Bière blonde · brasserie Caulier",
-  "u": "https://www.vandb.fr/eshop/biere/bonsecours-prestige-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/bonsecours-prestige-75-cl"
  },
  {
   "n": "Bon secours Tradition",
@@ -781,6 +781,15 @@
   "a": 8,
   "d": "Bière blonde · brasserie Caulier",
   "u": "https://www.vandb.fr/eshop/biere/bonsecours-tradition-2l"
+ },
+ {
+  "n": "Bon secours Triple",
+  "b": "Caulier",
+  "c": "BE",
+  "s": "Triple",
+  "a": 9,
+  "d": "Bière blonde · brasserie Caulier",
+  "u": "https://www.vandb.fr/eshop/biere/bonsecours-prestige-33-cl"
  },
  {
   "n": "Bons Voeux",
@@ -1032,7 +1041,7 @@
   "s": "Dark Ale",
   "a": 8.5,
   "d": "Bière brune · brasserie Het Anker",
-  "u": "https://www.vandb.fr/eshop/biere/carolus-classic-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/carolus-classic-75-cl"
  },
  {
   "n": "Carolus Tripel",
@@ -1431,15 +1440,6 @@
   "u": "https://www.vandb.fr/eshop/biere/crank-the-spring-44-cl"
  },
  {
-  "n": "Crew Republic Jackpot",
-  "b": "Crew Republic",
-  "c": "DE",
-  "s": "Neipa - Hazy IPA",
-  "a": 5,
-  "d": "Bière blonde · brasserie Crew Republic",
-  "u": "https://www.vandb.fr/eshop/biere/crew-republic-jackpot-33-cl"
- },
- {
   "n": "Cruisin'",
   "b": "La Ptite Maiz",
   "c": "FR",
@@ -1600,6 +1600,15 @@
   "a": 8,
   "d": "Bière blonde · brasserie Brewski",
   "u": "https://www.vandb.fr/eshop/biere/det-ar-sa-har-nu-33-cl"
+ },
+ {
+  "n": "Deus Brut Des Flandres",
+  "b": "Bosteels",
+  "c": "BE",
+  "s": "Strong Ale",
+  "a": 11.5,
+  "d": "Bière blonde · brasserie Bosteels",
+  "u": "https://www.vandb.fr/eshop/biere/deus-brut-des-flandres-75cl"
  },
  {
   "n": "Dionysos",
@@ -1816,15 +1825,6 @@
   "a": 5.3,
   "d": "Bière blanche · brasserie Erdinger",
   "u": "https://www.vandb.fr/eshop/biere/erdinger-hefe-weissbier-50-cl"
- },
- {
-  "n": "Erdinger Kristall",
-  "b": "Erdinger",
-  "c": "DE",
-  "s": "Kristall Weisse",
-  "a": 5.3,
-  "d": "Bière blanche · brasserie Erdinger",
-  "u": "https://www.vandb.fr/eshop/biere/erdinger-kristall-50-cl"
  },
  {
   "n": "Erdinger Pikantus",
@@ -2241,15 +2241,6 @@
   "u": "https://www.vandb.fr/eshop/biere/gueuze-tilquin-a-lancienne-75-cl"
  },
  {
-  "n": "Guinness Extra Stout",
-  "b": "Saint James Gate",
-  "c": "IE",
-  "s": "Stout",
-  "a": 4.1,
-  "d": "Bière noire · brasserie Saint James Gate",
-  "u": "https://www.vandb.fr/eshop/biere/guinness-extra-stout-33-cl"
- },
- {
   "n": "Guinness Hop House 13 -",
   "b": "Saint James Gate",
   "c": "IE",
@@ -2518,6 +2509,15 @@
   "a": 5,
   "d": "Bière blonde · brasserie Tahiti",
   "u": "https://www.vandb.fr/eshop/biere/hinano-33cl"
+ },
+ {
+  "n": "Hinepukohurangi",
+  "b": "Mont Hardi",
+  "c": "FR",
+  "s": "Neipa - Hazy IPA",
+  "a": 6,
+  "d": "Bière blonde · brasserie Mont Hardi",
+  "u": "https://www.vandb.fr/eshop/biere/hinepukohurangi-33-cl"
  },
  {
   "n": "Hofbrau Munchner Weisse",
@@ -4176,15 +4176,6 @@
   "u": "https://www.vandb.fr/eshop/biere/mont-des-cats-33-cl"
  },
  {
-  "n": "Mont Hardi - Pomona",
-  "b": "Mont Hardi",
-  "c": "FR",
-  "s": "Sour",
-  "a": 4.7,
-  "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-pomona-33-cl"
- },
- {
   "n": "Mont Hardi - Sirona",
   "b": "Mont Hardi",
   "c": "FR",
@@ -4263,7 +4254,7 @@
   "s": "IPA",
   "a": 6,
   "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-ipa-75-cl"
+  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-ipa-33-cl"
  },
  {
   "n": "Mont Hardi Okto",
@@ -4281,7 +4272,7 @@
   "s": "Triple",
   "a": 8,
   "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-triple-33-cl"
+  "u": "https://www.vandb.fr/eshop/biere/mont-hardi-triple-75-cl"
  },
  {
   "n": "Mr Green",
@@ -4518,15 +4509,6 @@
   "u": "https://www.vandb.fr/eshop/biere/oettinger-helles-50-cl"
  },
  {
-  "n": "Oettinger Pils",
-  "b": "Oettinger",
-  "c": "DE",
-  "s": "Pils",
-  "a": 4.7,
-  "d": "Bière blonde · brasserie Oettinger",
-  "u": "https://www.vandb.fr/eshop/biere/oettinger-pils-50-cl"
- },
- {
   "n": "Ogou",
   "b": "Mont Hardi",
   "c": "FR",
@@ -4759,15 +4741,6 @@
   "a": 5.5,
   "d": "Bière blonde · brasserie Paulaner",
   "u": "https://www.vandb.fr/eshop/biere/paulaner-munchner-urtyp-50-cl"
- },
- {
-  "n": "Paulaner Oktoberfest",
-  "b": "Paulaner",
-  "c": "DE",
-  "s": "Lager",
-  "a": 6,
-  "d": "Bière blonde · brasserie Paulaner",
-  "u": "https://www.vandb.fr/eshop/biere/paulaner-oktoberfest-50-cl"
  },
  {
   "n": "Paulaner Salvator",
@@ -5076,15 +5049,6 @@
   "u": "https://www.vandb.fr/eshop/biere/piraat-triple-hop-33cl"
  },
  {
-  "n": "Plutonium",
-  "b": "Dogma",
-  "c": "RS",
-  "s": "Double IPA",
-  "a": 7.5,
-  "d": "Bière ambrée · brasserie Dogma",
-  "u": "https://www.vandb.fr/eshop/biere/plutonium-33-cl"
- },
- {
   "n": "Pohazy IPA",
   "b": "Nepo",
   "c": "FR",
@@ -5164,6 +5128,15 @@
   "a": 4.8,
   "d": "Bière blanche · brasserie Primator",
   "u": "https://www.vandb.fr/eshop/biere/primator-weizen-50cl"
+ },
+ {
+  "n": "Printemps Perpetuel",
+  "b": "Fauve",
+  "c": "FR",
+  "s": "West Coast IPA",
+  "a": 6,
+  "d": "Bière blonde · brasserie Fauve",
+  "u": "https://www.vandb.fr/eshop/biere/printemps-perpetuel-44-cl"
  },
  {
   "n": "Proper Job",
@@ -5463,15 +5436,6 @@
   "u": "https://www.vandb.fr/eshop/biere/rodenbach-fruitage-25-cl"
  },
  {
-  "n": "Rola Bola",
-  "b": "Dogma",
-  "c": "RS",
-  "s": "Neipa - Hazy IPA",
-  "a": 8,
-  "d": "Bière blonde · brasserie Dogma",
-  "u": "https://www.vandb.fr/eshop/biere/rola-bola-33-cl"
- },
- {
   "n": "Rollover",
   "b": "Whiplash",
   "c": "IE",
@@ -5542,15 +5506,6 @@
   "a": 5.4,
   "d": "Bière blonde · brasserie Lefebvre",
   "u": "https://www.vandb.fr/eshop/biere/saison-1900-33-cl"
- },
- {
-  "n": "Saison 53",
-  "b": "Mont Hardi",
-  "c": "FR",
-  "s": "Saison",
-  "a": 3.5,
-  "d": "Bière blonde · brasserie Mont Hardi",
-  "u": "https://www.vandb.fr/eshop/biere/saison-53-33-cl"
  },
  {
   "n": "Saison Dupont",
@@ -5706,15 +5661,6 @@
   "u": "https://www.vandb.fr/eshop/biere/smoke-on-the-water-33cl"
  },
  {
-  "n": "Soft Power",
-  "b": "Sainte Cru",
-  "c": "FR",
-  "s": "Neipa - Hazy IPA",
-  "a": 6.5,
-  "d": "Bière blonde · brasserie Sainte Cru",
-  "u": "https://www.vandb.fr/eshop/biere/soft-power-44-cl"
- },
- {
   "n": "Sonpoi Neipa",
   "b": "La Ptite Maiz",
   "c": "FR",
@@ -5731,15 +5677,6 @@
   "a": 5.2,
   "d": "Bière blonde · brasserie Spaten-Franziskaner",
   "u": "https://www.vandb.fr/eshop/biere/spaten-hell-50-cl"
- },
- {
-  "n": "Spaten Oktoberfestbier",
-  "b": "Spaten-Franziskaner",
-  "c": "DE",
-  "s": "Lager",
-  "a": 5.9,
-  "d": "Bière blonde · brasserie Spaten-Franziskaner",
-  "u": "https://www.vandb.fr/eshop/biere/spaten-oktoberfestbier-50cl"
  },
  {
   "n": "St Bernardus Abt 12",
@@ -6019,6 +5956,15 @@
   "a": 6,
   "d": "Bière blonde · brasserie Haacht",
   "u": "https://www.vandb.fr/eshop/biere/super-8-ipa-33-cl"
+ },
+ {
+  "n": "Super 8 Rouge",
+  "b": "Haacht",
+  "c": "BE",
+  "s": "Aromatisée-fruitée",
+  "a": 7.5,
+  "d": "Bière rouge · brasserie Haacht",
+  "u": "https://www.vandb.fr/eshop/biere/super-8-rouge-33-cl"
  },
  {
   "n": "Super Santa",
@@ -6639,7 +6585,7 @@
   "s": "Helles",
   "a": 4.8,
   "d": "Bière blonde · brasserie Weihenstephan",
-  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-helles-50cl"
+  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-helles-33-cl"
  },
  {
   "n": "Weihenstephaner Kellerbier 1516",
@@ -6649,15 +6595,6 @@
   "a": 5.6,
   "d": "Bière ambrée · brasserie Weihenstephan",
   "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-kellerbier-1516-50-cl"
- },
- {
-  "n": "Weihenstephaner Kristal Weissbier",
-  "b": "Weihenstephan",
-  "c": "DE",
-  "s": "Kristall Weisse",
-  "a": 5.4,
-  "d": "Bière blonde · brasserie Weihenstephan",
-  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-kristal-weissbier-50-cl"
  },
  {
   "n": "Weihenstephaner Original",
@@ -6685,15 +6622,6 @@
   "a": 7.7,
   "d": "Bière blanche · brasserie Weihenstephan",
   "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-vitus-50-cl"
- },
- {
-  "n": "Weihenstephaner WinterFestbier",
-  "b": "Weihenstephan",
-  "c": "DE",
-  "s": "Lager",
-  "a": 5.8,
-  "d": "Bière blonde · brasserie Weihenstephan",
-  "u": "https://www.vandb.fr/eshop/biere/weihenstephaner-winterfestbier-50cl"
  },
  {
   "n": "West Coast Pilsner Centennial / Krush",
@@ -6793,15 +6721,6 @@
   "a": 7.8,
   "d": "Bière blanche · brasserie Mont Hardi",
   "u": "https://www.vandb.fr/eshop/biere/wolpertinger-33-cl"
- },
- {
-  "n": "Wunder Lager",
-  "b": "Brussels Beer Project",
-  "c": "BE",
-  "s": "Lager",
-  "a": 3.8,
-  "d": "Bière blonde · brasserie Brussels Beer Project",
-  "u": "https://www.vandb.fr/eshop/biere/wunder-lager-33cl"
  },
  {
   "n": "Yankee Trouble",
